@@ -18,10 +18,8 @@ Measurements:
 | 4       | 1    |
 | 8 | 340 |
 |12 | 290 |
-|18 | 230 
+|18 | 230 |
 
-: Demonstration of pipe table syntax
-Engineers need a predictive model to estimate future temperatures and evaluate safety margins.
 
 A large prediction error could affect cooling procedures and operational decisions.
 
