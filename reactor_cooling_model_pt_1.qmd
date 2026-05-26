@@ -1,0 +1,56 @@
+---
+title: "reactor_cooling_model_pt_1"
+format: html
+---
+
+Follow the 8-step modeling process as you brainstorm with your team.  When you write up your final report be sure to use section headers, well developed paragraphs, well labeled graphs, clear explanations of the mathematics, etc. Unit 03 Report will be a Team Report.  For this assignment (U03 Modeling Process and Collaboration Part I) turn in your brainstorming for steps 1-4 of the process.
+
+Option B: Reactor Cooling / Engineering Safety Model
+Scenario: Cooling Performance During Reactor Shutdown
+Engineers are studying how quickly reactor components cool following shutdown.
+
+Measurements:
+
+| Time after Shutdown (hr) | Temperature $(^\circ C)$|
+|---------|:-----|
+| 1      | 12   |
+| 2    | 123  | 
+| 4       | 1    |
+| 8 | 340 |
+|12 | 290 |
+|18 | 230 
+
+: Demonstration of pipe table syntax
+Engineers need a predictive model to estimate future temperatures and evaluate safety margins.
+
+A large prediction error could affect cooling procedures and operational decisions.
+
+Your team has been asked to recommend the best model and fitting strategy.
+
+Step 1: Identify the problem
+What is the real-world question?
+
+
+
+Step 2: Assumptions
+
+1. bulk cooling rate/single substance component
+2. constant external temperature
+3. No other heat sources
+4. Reactor isn't operated until cooling is complete
+
+Step 3: Variables
+$T$ 
+
+
+Step 4: Build a model
+image.png
+Test:
+
+Linear
+
+Power
+
+Exponential decay:
+
+Transform as needed
