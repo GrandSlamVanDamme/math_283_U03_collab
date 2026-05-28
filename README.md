@@ -1,4 +1,5 @@
 # math_283_U03_collab
+Parker Lee and Corey Silver
 
 U03 reactor cooling model
 
