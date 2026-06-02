@@ -7,5 +7,12 @@ This is the homepage for the U03 reactor cooling model project. Use the director
 
 
 This repo will store python code and a modeling report for 
-the unit 3 project
+the unit 3 project.
+
+
+## Navigation
+* [Home](README.md)
+* [Test](test.md)
+* [Code Repo](model.md)
+* [Modelling Report (wip)](report.md)
 
