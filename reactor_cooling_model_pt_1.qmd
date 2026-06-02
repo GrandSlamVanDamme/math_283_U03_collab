@@ -25,9 +25,9 @@ A large prediction error could affect cooling procedures and operational decisio
 
 Your team has been asked to recommend the best model and fitting strategy.
 
+
 Step 1: Identify the problem
 What is the real-world question?
-
 
 
 Step 2: Assumptions
@@ -38,7 +38,14 @@ Step 2: Assumptions
 4. Reactor isn't operated until cooling is complete
 
 Step 3: Variables
-$T$ 
+
+$T_R$ is the reactor temperature.
+
+$T_E$ is the external tremperature
+
+$t$ is the time from shutdown in hours.
+
+
 
 
 Step 4: Build a model
@@ -52,3 +59,9 @@ Power
 Exponential decay:
 
 Transform as needed
+
+Bibliography:
+
+1. Dawkins, Paul. "The Heat Equation." Paul's Online Notes, Lamar University, tutorial.math.lamar.edu/classes/de/theheatequation.aspx. Accessed 26 May 2026.
+
+1.
