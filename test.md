@@ -1,5 +1,5 @@
 layout: page
-title: "Test"
+title: "test"
 permalink: math_283_U03_collab/main/
 
 
