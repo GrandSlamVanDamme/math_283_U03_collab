@@ -1,7 +1,10 @@
-# math_283_U03_collab
-Parker Lee and Corey Silver
+# Unit 3 Project, MATH283 Spring '26
+### v.0.1
 
-U03 reactor cooling model
+##### Site and code authored by P. Lee and C. Silver
+
+This is the homepage for the U03 reactor cooling model project. Use the directory below to navigate to different sections of the project.
+
 
 This repo will store python code and a modeling report for 
 the unit 3 project
