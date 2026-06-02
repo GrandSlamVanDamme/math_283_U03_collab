@@ -1,6 +1,6 @@
 layout: page
 title: "Test"
-permalink: /main/Test.md
+permalink: /main/
 
 
 blah blah blah bada bing bad boom paulie
