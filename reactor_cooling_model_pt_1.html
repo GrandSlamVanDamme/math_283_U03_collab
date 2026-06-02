@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>reactor_cooling_model_pt_1</title>
+<title>Reactor Cooling Model Brainstorm</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -78,7 +78,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">reactor_cooling_model_pt_1</h1>
+<h1 class="title">Reactor Cooling Model Brainstorm</h1>
 </div>
 
 
@@ -96,7 +96,9 @@ window.Quarto = {
 
 
 <p>Follow the 8-step modeling process as you brainstorm with your team. When you write up your final report be sure to use section headers, well developed paragraphs, well labeled graphs, clear explanations of the mathematics, etc. Unit 03 Report will be a Team Report. For this assignment (U03 Modeling Process and Collaboration Part I) turn in your brainstorming for steps 1-4 of the process.</p>
-<p>Option B: Reactor Cooling / Engineering Safety Model Scenario: Cooling Performance During Reactor Shutdown Engineers are studying how quickly reactor components cool following shutdown.</p>
+<p>Option B: Reactor Cooling / Engineering Safety Model</p>
+<p>Scenario: Cooling Performance During Reactor Shutdown</p>
+<p>Engineers are studying how quickly reactor components cool following shutdown.</p>
 <p>Measurements:</p>
 <table class="caption-top table">
 <thead>
@@ -134,7 +136,8 @@ window.Quarto = {
 </table>
 <p>A large prediction error could affect cooling procedures and operational decisions.</p>
 <p>Your team has been asked to recommend the best model and fitting strategy.</p>
-<p>Step 1: Identify the problem What is the real-world question?</p>
+<p>Step 1: Identify the problem</p>
+<p>We need to reliably predict the temperature of the reactor (in K) from the time passed since shutoff (in minutes).</p>
 <p>Step 2: Assumptions</p>
 <ol type="1">
 <li>bulk cooling rate/single substance component</li>
@@ -146,12 +149,20 @@ window.Quarto = {
 <p><span class="math inline">\(T_R\)</span> is the reactor temperature.</p>
 <p><span class="math inline">\(T_E\)</span> is the external tremperature</p>
 <p><span class="math inline">\(t\)</span> is the time from shutdown in hours.</p>
-<p>Step 4: Build a model image.png Test:</p>
-<p>Linear</p>
-<p>Power</p>
-<p>Exponential decay:</p>
-<p>Transform as needed</p>
-<p>Bibliography:</p>
+<p>Step 4: Build a model image.png We’ll test optimized Chebyshev, Least-Squares, and Absolute-Deviation fits of the following models: 1. Linear</p>
+<p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
+<ol type="1">
+<li>Power</li>
+</ol>
+<p>Of form <span class="math inline">\(T(t)=c_1t^n + c_2t^{n-1} +...+c_kt^0\)</span>.</p>
+<p>We’ll limit <span class="math inline">\(n\)</span> and <span class="math inline">\(k\)</span> to three or four, at most, since we don’t want to overfit.</p>
+<ol type="1">
+<li>Exponential decay:</li>
+</ol>
+<p>Of form <span class="math inline">\(T(t) = (c_2)e^{c_1t}\)</span> (<span class="math inline">\(c_2\)</span> is negative).</p>
+<p>We’ll linearize this so that it can be optimized with linear programming. taking the natural log of both sides give us</p>
+<p><span class="math inline">\(\ln[T(t)]=c_1t+c_2\)</span></p>
+<p>Bibliography (wip):</p>
 <ol type="1">
 <li><p>Dawkins, Paul. “The Heat Equation.” Paul’s Online Notes, Lamar University, tutorial.math.lamar.edu/classes/de/theheatequation.aspx. Accessed 26 May 2026.</p></li>
 <li></li>
