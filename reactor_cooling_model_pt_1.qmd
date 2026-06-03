@@ -1,7 +1,5 @@
 ---
 title: "Reactor Cooling Model Brainstorm"
-format: html
-permalink: math_283_U03_collab/docs/
 ---
 
 Follow the 8-step modeling process as you brainstorm with your team.  When you write up your final report be sure to use section headers, well developed paragraphs, well labeled graphs, clear explanations of the mathematics, etc. Unit 03 Report will be a Team Report.  For this assignment (U03 Modeling Process and Collaboration Part I) turn in your brainstorming for steps 1-4 of the process.
