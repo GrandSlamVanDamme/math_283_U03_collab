@@ -10,12 +10,4 @@ This repo will store python code and a modeling report for
 the unit 3 project.
 
 
-## Navigation
-* [Home](index.html)
-* [Test](test.md)
-* [Brainstorm 1-4](reactor_cooling_model_pt_1.html)
-* [Code Repo](model.md)
-* [Modelling Report (wip)](report.md)
-* [README](README.md)
-
 
