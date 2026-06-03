@@ -1,5 +1,6 @@
 /* Override modern fonts with 1998 defaults */
-/* Generated with google gemini, no copyright on anything, open-source everything forever */
+/* Generated with google gemini, no copyright on anything, opensource everything forever */
+
 body, h1, h2, h3, h4, p, div {
     font-family: "Times New Roman", Times, serif !important;
     background-color: #c0c0c0 !important; /* Classic Windows gray background */
