@@ -1,0 +1,12 @@
+project:
+  type: default
+  output-dir: docs 
+
+website:
+  title: "MATH283 Project Three Collab"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
