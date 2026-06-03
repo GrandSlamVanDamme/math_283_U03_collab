@@ -1,0 +1,32 @@
+/* Override modern fonts with 1998 defaults */
+/* Generated with google gemini */
+/*
+body, h1, h2, h3, h4, p, div {
+    font-family: "Times New Roman", Times, serif !important;
+    background-color: #c0c0c0 !important; /* Classic Windows gray background */
+    color: #000000 !important;
+}
+
+/* Authentic Web 1.0 Hyperlinks */
+a {
+    color: #0000ee !important;
+    text-decoration: underline !important;
+}
+a:visited {
+    color: #551a8b !important; /* The classic purple visited link */
+}
+
+/* Chunky, archaic navigation bar */
+.navbar {
+    background-color: #000080 !important; /* Navy blue */
+    border-bottom: 4px ridge #ffffff !important;
+}
+.navbar a {
+    color: #ffffff !important;
+}
+
+/* Harsh, unrounded image borders */
+img {
+    border: 3px solid #0000ee !important;
+    border-radius: 0px !important; 
+}
