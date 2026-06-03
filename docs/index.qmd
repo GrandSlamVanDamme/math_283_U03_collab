@@ -11,9 +11,9 @@ the unit 3 project.
 
 
 ## Navigation
-* [Home](index.qmd)
+* [Home](index.html)
 * [Test](test.md)
-* [Brainstorm 1-4](docs/reactor_cooling_model_pt_1.qmd)
+* [Brainstorm 1-4](docs/reactor_cooling_model_pt_1.html)
 * [Code Repo](model.md)
 * [Modelling Report (wip)](report.md)
 * [README](README.md)
