@@ -10,7 +10,7 @@ Scenario: Cooling Performance During Reactor Shutdown
 
 Engineers are studying how quickly reactor components cool following shutdown.
 
-Measurements:
+# Measurements:
 
 | Time after Shutdown ($\text{hr}$) | Temperature $(^\circ C)$|
 |---------|:-----|
@@ -27,19 +27,19 @@ A large prediction error could affect cooling procedures and operational decisio
 Your team has been asked to recommend the best model and fitting strategy.
 
 
-Step 1: Identify the problem
+# Step 1: Identify the problem
 
 We need to reliably predict the temperature of the reactor (in K) from the time passed since shutoff (in minutes).
 
 
-Step 2: Assumptions
+# Step 2: Assumptions
 
 1. bulk cooling rate/single substance component
 2. constant external temperature
 3. No other heat sources
 4. Reactor isn't operated until cooling is complete
 
-Step 3: Variables
+# Step 3: Variables and Parameters
 
 $T_R$ is the reactor temperature.
 
@@ -50,20 +50,19 @@ $t$ is the time from shutdown in hours.
 
 
 
-Step 4: Build a model
-image.png
+# Step 4: Model Development
 We'll test optimized Chebyshev, Least-Squares, and Absolute-Deviation fits of the following models: 
-1. Linear
+## Linear
 
 Of form $T(t)=c_1\cdot t + c_2$.
 
-1. Power 
+## Power 
 
 Of form $T(t)=c_1t^n + c_2t^{n-1} +...+c_kt^0$. 
 
 We'll limit $n$ and $k$ to three or four, at most, since we don't want to overfit.
 
-1. Exponential decay:
+## Exponential decay:
 
 Of form $T(t) = (c_2)e^{c_1t}$ ($c_2$ is negative).
 
@@ -71,7 +70,7 @@ We'll linearize this so that it can be optimized with linear programming. taking
 
 $\ln[T(t)]=c_1t+c_2$
 
-Bibliography (wip):
+# Bibliography (wip):
 
 1. Dawkins, Paul. "The Heat Equation." Paul's Online Notes, Lamar University, tutorial.math.lamar.edu/classes/de/theheatequation.aspx. Accessed 26 May 2026.
 

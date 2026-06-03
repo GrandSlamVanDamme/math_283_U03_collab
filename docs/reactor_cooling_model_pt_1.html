@@ -167,7 +167,8 @@ window.Quarto = {
 <p>Option B: Reactor Cooling / Engineering Safety Model</p>
 <p>Scenario: Cooling Performance During Reactor Shutdown</p>
 <p>Engineers are studying how quickly reactor components cool following shutdown.</p>
-<p>Measurements:</p>
+<section id="measurements" class="level1">
+<h1>Measurements:</h1>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -204,39 +205,51 @@ window.Quarto = {
 </table>
 <p>A large prediction error could affect cooling procedures and operational decisions.</p>
 <p>Your team has been asked to recommend the best model and fitting strategy.</p>
-<p>Step 1: Identify the problem</p>
+</section>
+<section id="step-1-identify-the-problem" class="level1">
+<h1>Step 1: Identify the problem</h1>
 <p>We need to reliably predict the temperature of the reactor (in K) from the time passed since shutoff (in minutes).</p>
-<p>Step 2: Assumptions</p>
+</section>
+<section id="step-2-assumptions" class="level1">
+<h1>Step 2: Assumptions</h1>
 <ol type="1">
 <li>bulk cooling rate/single substance component</li>
 <li>constant external temperature</li>
 <li>No other heat sources</li>
 <li>Reactor isn’t operated until cooling is complete</li>
 </ol>
-<p>Step 3: Variables</p>
+</section>
+<section id="step-3-variables-and-parameters" class="level1">
+<h1>Step 3: Variables and Parameters</h1>
 <p><span class="math inline">\(T_R\)</span> is the reactor temperature.</p>
 <p><span class="math inline">\(T_E\)</span> is the external tremperature</p>
 <p><span class="math inline">\(t\)</span> is the time from shutdown in hours.</p>
-<p>Step 4: Build a model image.png We’ll test optimized Chebyshev, Least-Squares, and Absolute-Deviation fits of the following models: 1. Linear</p>
+</section>
+<section id="step-4-model-development" class="level1">
+<h1>Step 4: Model Development</h1>
+<p>We’ll test optimized Chebyshev, Least-Squares, and Absolute-Deviation fits of the following models: ## Linear</p>
 <p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
-<ol type="1">
-<li>Power</li>
-</ol>
+<section id="power" class="level2">
+<h2 class="anchored" data-anchor-id="power">Power</h2>
 <p>Of form <span class="math inline">\(T(t)=c_1t^n + c_2t^{n-1} +...+c_kt^0\)</span>.</p>
 <p>We’ll limit <span class="math inline">\(n\)</span> and <span class="math inline">\(k\)</span> to three or four, at most, since we don’t want to overfit.</p>
-<ol type="1">
-<li>Exponential decay:</li>
-</ol>
+</section>
+<section id="exponential-decay" class="level2">
+<h2 class="anchored" data-anchor-id="exponential-decay">Exponential decay:</h2>
 <p>Of form <span class="math inline">\(T(t) = (c_2)e^{c_1t}\)</span> (<span class="math inline">\(c_2\)</span> is negative).</p>
 <p>We’ll linearize this so that it can be optimized with linear programming. taking the natural log of both sides give us</p>
 <p><span class="math inline">\(\ln[T(t)]=c_1t+c_2\)</span></p>
-<p>Bibliography (wip):</p>
+</section>
+</section>
+<section id="bibliography-wip" class="level1">
+<h1>Bibliography (wip):</h1>
 <ol type="1">
 <li><p>Dawkins, Paul. “The Heat Equation.” Paul’s Online Notes, Lamar University, tutorial.math.lamar.edu/classes/de/theheatequation.aspx. Accessed 26 May 2026.</p></li>
 <li></li>
 </ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
