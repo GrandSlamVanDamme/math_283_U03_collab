@@ -12,5 +12,5 @@ website:
         text: Brainstorm 1-4
 format:
   html:
-    theme: none      # This strips out Quarto's default modern themes
+    theme: default      # This strips out Quarto's default modern themes
     css: styles.css  # This injects your retro styling
