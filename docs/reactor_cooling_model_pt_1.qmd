@@ -14,7 +14,7 @@ Engineers are studying how quickly reactor components cool following shutdown.
 
 Measurements:
 
-| Time after Shutdown ($\text{hr}$) | Temperature $(^\circ C)$|
+| Time after Shutdown (hr) | Temperature $(^\circ C)$|
 |---------|:-----|
 | 1      | 12   |
 | 2    | 123  | 

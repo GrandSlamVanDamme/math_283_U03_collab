@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Reactor Cooling Model Brainstorm</title>
+<title>index</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,47 +26,18 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="reactor_cooling_model_pt_1_files/libs/clipboard/clipboard.min.js"></script>
-<script src="reactor_cooling_model_pt_1_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="reactor_cooling_model_pt_1_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="reactor_cooling_model_pt_1_files/libs/quarto-html/popper.min.js"></script>
-<script src="reactor_cooling_model_pt_1_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="reactor_cooling_model_pt_1_files/libs/quarto-html/anchor.min.js"></script>
-<link href="reactor_cooling_model_pt_1_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="reactor_cooling_model_pt_1_files/libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="reactor_cooling_model_pt_1_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="reactor_cooling_model_pt_1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="reactor_cooling_model_pt_1_files/libs/bootstrap/bootstrap-138a6193a3bd40baf1e627da441a4734.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap-138a6193a3bd40baf1e627da441a4734.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -76,97 +47,31 @@ window.Quarto = {
 
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Reactor Cooling Model Brainstorm</h1>
-</div>
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>Follow the 8-step modeling process as you brainstorm with your team. When you write up your final report be sure to use section headers, well developed paragraphs, well labeled graphs, clear explanations of the mathematics, etc. Unit 03 Report will be a Team Report. For this assignment (U03 Modeling Process and Collaboration Part I) turn in your brainstorming for steps 1-4 of the process.</p>
-<p>Option B: Reactor Cooling / Engineering Safety Model</p>
-<p>Scenario: Cooling Performance During Reactor Shutdown</p>
-<p>Engineers are studying how quickly reactor components cool following shutdown.</p>
-<p>Measurements:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Time after Shutdown (hr)</th>
-<th style="text-align: left;">Temperature <span class="math inline">\((^\circ C)\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td style="text-align: left;">12</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td style="text-align: left;">123</td>
-</tr>
-<tr class="odd">
-<td>4</td>
-<td style="text-align: left;">1</td>
-</tr>
-<tr class="even">
-<td>8</td>
-<td style="text-align: left;">340</td>
-</tr>
-<tr class="odd">
-<td>12</td>
-<td style="text-align: left;">290</td>
-</tr>
-<tr class="even">
-<td>18</td>
-<td style="text-align: left;">230</td>
-</tr>
-</tbody>
-</table>
-<p>A large prediction error could affect cooling procedures and operational decisions.</p>
-<p>Your team has been asked to recommend the best model and fitting strategy.</p>
-<p>Step 1: Identify the problem</p>
-<p>We need to reliably predict the temperature of the reactor (in K) from the time passed since shutoff (in minutes).</p>
-<p>Step 2: Assumptions</p>
-<ol type="1">
-<li>bulk cooling rate/single substance component</li>
-<li>constant external temperature</li>
-<li>No other heat sources</li>
-<li>Reactor isn’t operated until cooling is complete</li>
-</ol>
-<p>Step 3: Variables</p>
-<p><span class="math inline">\(T_R\)</span> is the reactor temperature.</p>
-<p><span class="math inline">\(T_E\)</span> is the external tremperature</p>
-<p><span class="math inline">\(t\)</span> is the time from shutdown in hours.</p>
-<p>Step 4: Build a model image.png We’ll test optimized Chebyshev, Least-Squares, and Absolute-Deviation fits of the following models: 1. Linear</p>
-<p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
-<ol type="1">
-<li>Power</li>
-</ol>
-<p>Of form <span class="math inline">\(T(t)=c_1t^n + c_2t^{n-1} +...+c_kt^0\)</span>.</p>
-<p>We’ll limit <span class="math inline">\(n\)</span> and <span class="math inline">\(k\)</span> to three or four, at most, since we don’t want to overfit.</p>
-<ol type="1">
-<li>Exponential decay:</li>
-</ol>
-<p>Of form <span class="math inline">\(T(t) = (c_2)e^{c_1t}\)</span> (<span class="math inline">\(c_2\)</span> is negative).</p>
-<p>We’ll linearize this so that it can be optimized with linear programming. taking the natural log of both sides give us</p>
-<p><span class="math inline">\(\ln[T(t)]=c_1t+c_2\)</span></p>
-<p>Bibliography (wip):</p>
-<ol type="1">
-<li><p>Dawkins, Paul. “The Heat Equation.” Paul’s Online Notes, Lamar University, tutorial.math.lamar.edu/classes/de/theheatequation.aspx. Accessed 26 May 2026.</p></li>
-<li></li>
-</ol>
+<section id="unit-3-project-math283-spring-26" class="level1">
+<h1>Unit 3 Project, MATH283 Spring ’26</h1>
+<section id="v.0.1" class="level3">
+<h3 class="anchored" data-anchor-id="v.0.1">v.0.1</h3>
+<section id="site-and-code-authored-by-p.-lee-and-c.-silver" class="level5">
+<h5 class="anchored" data-anchor-id="site-and-code-authored-by-p.-lee-and-c.-silver">Site and code authored by P. Lee and C. Silver</h5>
+<p>This is the homepage for the U03 reactor cooling model project. Use the directory below to navigate to different sections of the project.</p>
+<p>This repo will store python code and a modeling report for the unit 3 project.</p>
+</section>
+</section>
+<section id="navigation" class="level2">
+<h2 class="anchored" data-anchor-id="navigation">Navigation</h2>
+<ul>
+<li><a href="index.qmd">Home</a></li>
+<li><a href="test.md">Test</a></li>
+<li><a href="reactor_cooling_model_pt_1.qmd">Brainstorm 1-4</a></li>
+<li><a href="model.md">Code Repo</a></li>
+<li><a href="report.md">Modelling Report (wip)</a></li>
+<li><a href="README.md">README</a></li>
+</ul>
+</section>
+</section>
 
 </main>
 <!-- /main column -->
