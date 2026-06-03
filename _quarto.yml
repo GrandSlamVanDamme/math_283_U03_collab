@@ -8,5 +8,5 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: about.qmd
+      - href: reactor_cooling_model_pt_1.qmd
         text: About
