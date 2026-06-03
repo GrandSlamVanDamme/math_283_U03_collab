@@ -1,4 +1,6 @@
-/* Override modern fonts with 1998 defaults (code written by gemini) */
+/* Override modern fonts with 1998 defaults */
+/* Generated with google gemini */
+/*
 body, h1, h2, h3, h4, p, div {
     font-family: "Times New Roman", Times, serif !important;
     background-color: #c0c0c0 !important; /* Classic Windows gray background */
