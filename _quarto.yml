@@ -10,3 +10,7 @@ website:
         text: Home
       - href: reactor_cooling_model_pt_1.qmd
         text: Brainstorm 1-4
+format:
+  html:
+    theme: none      # This strips out Quarto's default modern themes
+    css: styles.css  # This injects your retro styling
