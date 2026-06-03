@@ -13,6 +13,8 @@ the unit 3 project.
 ## Navigation
 * [Home](README.md)
 * [Test](test.md)
+* [Brainstorm 1-4](reactor_cooling_model_pt_1.qmd)
 * [Code Repo](model.md)
 * [Modelling Report (wip)](report.md)
+
 
