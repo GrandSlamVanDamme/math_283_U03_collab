@@ -9,4 +9,4 @@ website:
       - href: index.qmd
         text: Home
       - href: reactor_cooling_model_pt_1.qmd
-        text: About
+        text: Brainstorm 1-4
