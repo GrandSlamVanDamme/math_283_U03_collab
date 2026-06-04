@@ -18,6 +18,7 @@ code-block-bg: "#000000"
 | $y$ | $1$ | $1$ | $2$ | $2$ | $5$ |
 
 ### Models
+
 a. $y = b + ax$ 
 
 a. $y = ax^2$
@@ -63,7 +64,11 @@ plt.scatter(X, Y)
 plt.plot(x, f1)
 plt.scatter(X, Y)
 
-error_analyzer
+F1 = fit1[0]*X**1 + fit1[1]*X**0
+F2 = fit2[0]*X**2 + fit2[1]*X**1 + fit2[2]*X**0
+
+E1 = leastsquerror(Y, F1)
+E2 = leastsquerror(Y, F2)
 
 '''
 polyfit returns an array of n+1 entries 
