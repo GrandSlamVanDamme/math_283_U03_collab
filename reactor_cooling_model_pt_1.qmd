@@ -1,12 +1,10 @@
 ---
-title: "Reactor Cooling Model Brainstorm"
+title: "Reactor Cooling: A Toybox Engineering Safety Model"
 ---
 
 Follow the 8-step modeling process as you brainstorm with your team.  When you write up your final report be sure to use section headers, well developed paragraphs, well labeled graphs, clear explanations of the mathematics, etc. Unit 03 Report will be a Team Report.  For this assignment (U03 Modeling Process and Collaboration Part I) turn in your brainstorming for steps 1-4 of the process.
 
-Option B: Reactor Cooling / Engineering Safety Model
-
-Scenario: Cooling Performance During Reactor Shutdown
+### Scenario: Cooling Performance During Reactor Shutdown
 
 Engineers are studying how quickly reactor components cool following shutdown.
 
@@ -52,11 +50,11 @@ $t$ is the time from shutdown in hours.
 
 # Step 4: Model Development
 We'll test optimized Chebyshev, Least-Squares, and Absolute-Deviation fits of the following models: 
-## Linear
+## Linear:
 
 Of form $T(t)=c_1\cdot t + c_2$.
 
-## Power 
+## Polynomial: 
 
 Of form $T(t)=c_1t^n + c_2t^{n-1} +...+c_kt^0$. 
 
@@ -70,8 +68,8 @@ We'll linearize this so that it can be optimized with linear programming. taking
 
 $\ln[T(t)]=c_1t+c_2$
 
-# Bibliography (wip):
+## Bibliography (wip):
 
 1. Dawkins, Paul. "The Heat Equation." Paul's Online Notes, Lamar University, tutorial.math.lamar.edu/classes/de/theheatequation.aspx. Accessed 26 May 2026.
 
-1."File:Maine Yankee Nuclear Power Plant.jpg." Wikimedia Commons. 12 Dec 2024, 03:31 UTC. <https://commons.wikimedia.org/w/index.php?title=File:Maine_Yankee_Nuclear_Power_Plant.jpg&oldid=969140195> 3 Jun 2026, 05:02. 
+1. "File:Maine Yankee Nuclear Power Plant.jpg." Wikimedia Commons. 12 Dec 2024, 03:31 UTC. <https://commons.wikimedia.org/w/index.php?title=File:Maine_Yankee_Nuclear_Power_Plant.jpg&oldid=969140195> 3 Jun 2026, 05:02. 

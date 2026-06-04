@@ -30,3 +30,11 @@ img {
     border: 3px solid #0000ee !important;
     border-radius: 0px !important; 
 }
+
+/* Eradicate modern grey image captions */
+figcaption, .figure-caption {
+    color: #FFEE22 !important;
+    font-family: "Courier New", Courier, Monospace !important;
+    font-size: 16px !important;
+    font-style: italic !important;
+}

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Reactor Cooling Model Brainstorm – MATH283 Project Three Collab</title>
+<title>Reactor Cooling: A Toybox Engineering Safety Model – MATH283 Project Three Collab</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -146,7 +146,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Reactor Cooling Model Brainstorm</h1>
+<h1 class="title">Reactor Cooling: A Toybox Engineering Safety Model</h1>
 </div>
 
 
@@ -164,9 +164,10 @@ window.Quarto = {
 
 
 <p>Follow the 8-step modeling process as you brainstorm with your team. When you write up your final report be sure to use section headers, well developed paragraphs, well labeled graphs, clear explanations of the mathematics, etc. Unit 03 Report will be a Team Report. For this assignment (U03 Modeling Process and Collaboration Part I) turn in your brainstorming for steps 1-4 of the process.</p>
-<p>Option B: Reactor Cooling / Engineering Safety Model</p>
-<p>Scenario: Cooling Performance During Reactor Shutdown</p>
+<section id="scenario-cooling-performance-during-reactor-shutdown" class="level3">
+<h3 class="anchored" data-anchor-id="scenario-cooling-performance-during-reactor-shutdown">Scenario: Cooling Performance During Reactor Shutdown</h3>
 <p>Engineers are studying how quickly reactor components cool following shutdown.</p>
+</section>
 <section id="measurements" class="level1">
 <h1>Measurements:</h1>
 <table class="caption-top table">
@@ -227,10 +228,10 @@ window.Quarto = {
 </section>
 <section id="step-4-model-development" class="level1">
 <h1>Step 4: Model Development</h1>
-<p>We’ll test optimized Chebyshev, Least-Squares, and Absolute-Deviation fits of the following models: ## Linear</p>
+<p>We’ll test optimized Chebyshev, Least-Squares, and Absolute-Deviation fits of the following models: ## Linear:</p>
 <p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
-<section id="power" class="level2">
-<h2 class="anchored" data-anchor-id="power">Power</h2>
+<section id="polynomial" class="level2">
+<h2 class="anchored" data-anchor-id="polynomial">Polynomial:</h2>
 <p>Of form <span class="math inline">\(T(t)=c_1t^n + c_2t^{n-1} +...+c_kt^0\)</span>.</p>
 <p>We’ll limit <span class="math inline">\(n\)</span> and <span class="math inline">\(k\)</span> to three or four, at most, since we don’t want to overfit.</p>
 </section>
@@ -240,15 +241,15 @@ window.Quarto = {
 <p>We’ll linearize this so that it can be optimized with linear programming. taking the natural log of both sides give us</p>
 <p><span class="math inline">\(\ln[T(t)]=c_1t+c_2\)</span></p>
 </section>
-</section>
-<section id="bibliography-wip" class="level1">
-<h1>Bibliography (wip):</h1>
+<section id="bibliography-wip" class="level2">
+<h2 class="anchored" data-anchor-id="bibliography-wip">Bibliography (wip):</h2>
 <ol type="1">
-<li>Dawkins, Paul. “The Heat Equation.” Paul’s Online Notes, Lamar University, tutorial.math.lamar.edu/classes/de/theheatequation.aspx. Accessed 26 May 2026.</li>
+<li><p>Dawkins, Paul. “The Heat Equation.” Paul’s Online Notes, Lamar University, tutorial.math.lamar.edu/classes/de/theheatequation.aspx. Accessed 26 May 2026.</p></li>
+<li><p>“File:Maine Yankee Nuclear Power Plant.jpg.” Wikimedia Commons. 12 Dec 2024, 03:31 UTC. <a href="https://commons.wikimedia.org/w/index.php?title=File:Maine_Yankee_Nuclear_Power_Plant.jpg&amp;oldid=969140195" class="uri">https://commons.wikimedia.org/w/index.php?title=File:Maine_Yankee_Nuclear_Power_Plant.jpg&amp;oldid=969140195</a> 3 Jun 2026, 05:02.</p></li>
 </ol>
-<p>1.”File:Maine Yankee Nuclear Power Plant.jpg.” Wikimedia Commons. 12 Dec 2024, 03:31 UTC. <a href="https://commons.wikimedia.org/w/index.php?title=File:Maine_Yankee_Nuclear_Power_Plant.jpg&amp;oldid=969140195" class="uri">https://commons.wikimedia.org/w/index.php?title=File:Maine_Yankee_Nuclear_Power_Plant.jpg&amp;oldid=969140195</a> 3 Jun 2026, 05:02.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
