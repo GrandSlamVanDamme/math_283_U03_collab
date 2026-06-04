@@ -1,31 +1,17 @@
 [
   {
-    "objectID": "test.html",
-    "href": "test.html",
-    "title": "MATH283 Project Three Collab",
+    "objectID": "CH_3_PROB_7_example.html",
+    "href": "CH_3_PROB_7_example.html",
+    "title": "CH_3_PROB_7_example",
     "section": "",
-    "text": "layout: page title: “test” permalink: math_283_U03_collab/main/\nblah blah blah bada bing bad boom paulie"
+    "text": "“In Problems 7–10, fit the data with the models given, using least squares.”- the textbook\n\\(x\\) | \\(1\\) | \\(2\\) | \\(3\\) | \\(4\\) | \\(5\\) |\n\\(y\\) | \\(1\\) | \\(1\\) | \\(2\\) | \\(2\\) | \\(5\\) |\n\n\\(y = b + ax\\)\n\\(y = ax^2\\)"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "MATH283 Project Three Collab",
+    "objectID": "CH_3_PROB_7_example.html#problem-3.7",
+    "href": "CH_3_PROB_7_example.html#problem-3.7",
+    "title": "CH_3_PROB_7_example",
     "section": "",
-    "text": "This is the homepage for the U03 project. We’ll be modelling the cooling rate of a nuclear reactor. Use the directory above to navigate to different sections of the project.\n\n\n\nMaine Yankee Nuclear Plant\n\n\nThis site is under construction. Upon completion, it will host open-source python code, relevant data, and a record of the modelling process, and a report summarizing our findings."
-  },
-  {
-    "objectID": "index.html#corey-and-parkers-unit-3-project",
-    "href": "index.html#corey-and-parkers-unit-3-project",
-    "title": "MATH283 Project Three Collab",
-    "section": "",
-    "text": "This is the homepage for the U03 project. We’ll be modelling the cooling rate of a nuclear reactor. Use the directory above to navigate to different sections of the project.\n\n\n\nMaine Yankee Nuclear Plant\n\n\nThis site is under construction. Upon completion, it will host open-source python code, relevant data, and a record of the modelling process, and a report summarizing our findings."
-  },
-  {
-    "objectID": "U03_collab_Parker_Corey.html",
-    "href": "U03_collab_Parker_Corey.html",
-    "title": "MATH283 Project Three Collab",
-    "section": "",
-    "text": "share with mantacid on github"
+    "text": "“In Problems 7–10, fit the data with the models given, using least squares.”- the textbook\n\\(x\\) | \\(1\\) | \\(2\\) | \\(3\\) | \\(4\\) | \\(5\\) |\n\\(y\\) | \\(1\\) | \\(1\\) | \\(2\\) | \\(2\\) | \\(5\\) |\n\n\\(y = b + ax\\)\n\\(y = ax^2\\)"
   },
   {
     "objectID": "reactor_cooling_model_pt_1.html",
@@ -49,10 +35,45 @@
     "text": "Exponential decay:\nOf form \\(T(t) = (c_2)e^{c_1t}\\) (\\(c_2\\) is negative).\nWe’ll linearize this so that it can be optimized with linear programming. taking the natural log of both sides give us\n\\(\\ln[T(t)]=c_1t+c_2\\)"
   },
   {
+    "objectID": "reactor_cooling_model_pt_1.html#step-5-analysis-and-optimization.",
+    "href": "reactor_cooling_model_pt_1.html#step-5-analysis-and-optimization.",
+    "title": "Reactor Cooling: A Toybox Engineering Safety Model",
+    "section": "Step 5: Analysis and Optimization.",
+    "text": "Step 5: Analysis and Optimization."
+  },
+  {
     "objectID": "reactor_cooling_model_pt_1.html#bibliography-wip",
     "href": "reactor_cooling_model_pt_1.html#bibliography-wip",
     "title": "Reactor Cooling: A Toybox Engineering Safety Model",
     "section": "Bibliography (wip):",
     "text": "Bibliography (wip):\n\nDawkins, Paul. “The Heat Equation.” Paul’s Online Notes, Lamar University, tutorial.math.lamar.edu/classes/de/theheatequation.aspx. Accessed 26 May 2026.\n“File:Maine Yankee Nuclear Power Plant.jpg.” Wikimedia Commons. 12 Dec 2024, 03:31 UTC. https://commons.wikimedia.org/w/index.php?title=File:Maine_Yankee_Nuclear_Power_Plant.jpg&oldid=969140195 3 Jun 2026, 05:02."
+  },
+  {
+    "objectID": "U03_collab_Parker_Corey.html",
+    "href": "U03_collab_Parker_Corey.html",
+    "title": "MATH283 Project Three Collab",
+    "section": "",
+    "text": "share with mantacid on github"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "MATH283 Project Three Collab",
+    "section": "",
+    "text": "This is the homepage for the U03 project. We’ll be modelling the cooling rate of a nuclear reactor. Use the directory above to navigate to different sections of the project.\n\n\n\nMaine Yankee Nuclear Plant\n\n\nThis site is under construction. Upon completion, it will host open-source python code, relevant data, and a record of the modelling process, and a report summarizing our findings."
+  },
+  {
+    "objectID": "index.html#corey-and-parkers-unit-3-project",
+    "href": "index.html#corey-and-parkers-unit-3-project",
+    "title": "MATH283 Project Three Collab",
+    "section": "",
+    "text": "This is the homepage for the U03 project. We’ll be modelling the cooling rate of a nuclear reactor. Use the directory above to navigate to different sections of the project.\n\n\n\nMaine Yankee Nuclear Plant\n\n\nThis site is under construction. Upon completion, it will host open-source python code, relevant data, and a record of the modelling process, and a report summarizing our findings."
+  },
+  {
+    "objectID": "test.html",
+    "href": "test.html",
+    "title": "MATH283 Project Three Collab",
+    "section": "",
+    "text": "layout: page title: “test” permalink: math_283_U03_collab/main/\nblah blah blah bada bing bad boom paulie"
   }
 ]

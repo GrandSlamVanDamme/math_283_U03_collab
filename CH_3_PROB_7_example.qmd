@@ -1,0 +1,16 @@
+---
+title: "CH_3_PROB_7_example"
+author: "Corey and Parker"
+format: html
+jupyter: python3
+---
+
+## Problem 3.7
+
+"In Problems 7–10, fit the data with the models given, using least squares."- the textbook
+
+| $x$ | $1$ | $2$ | $3$ | $4$ | $5$ |
+| $y$ | $1$ | $1$ | $2$ | $2$ | $5$ |
+
+a. $y = b + ax$
+b. $y = ax^2$

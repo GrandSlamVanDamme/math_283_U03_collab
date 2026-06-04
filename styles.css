@@ -9,11 +9,11 @@ body, h1, h2, h3, h4, p, div {
 
 /* Authentic Web 1.0 Hyperlinks */
 a {
-    color: #388557 !important;
+    color: #C0C0C0 !important;
     text-decoration: underline !important;
 }
 a:visited {
-    color: #1f2c5c !important; /* The classic purple visited link */
+    color: #388557 !important; /* The classic purple visited link */
 }
 
 /* Chunky, archaic navigation bar */

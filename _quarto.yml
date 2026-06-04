@@ -10,6 +10,8 @@ website:
         text: Home
       - href: reactor_cooling_model_pt_1.qmd
         text: Brainstorm 1-4
+      - href: CH_3_PROB_7_example.qmd
+      - href:(Chapter Three, Problem Seven (Example))
   page-footer: 
     border: true
     left: "Corey Silver and Parker Lee BYU-I 2026©"

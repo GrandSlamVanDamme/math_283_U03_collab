@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Corey and Parker">
 
-<title>MATH283 Project Three Collab</title>
+<title>CH_3_PROB_7_example – MATH283 Project Three Collab</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -71,6 +72,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -93,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -101,7 +131,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Brainstorm 1-4</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./CH_3_PROB_7_example.html"> 
+    <a class="nav-link active" href="./CH_3_PROB_7_example.html" aria-current="page"> 
 <span class="menu-text">CH_3_PROB_7_example</span></a>
   </li>  
   <li class="nav-item">
@@ -122,29 +152,44 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
 
-
-
-
-<section id="corey-and-parkers-unit-3-project" class="level2">
-<h2 class="anchored" data-anchor-id="corey-and-parkers-unit-3-project">Corey and Parker’s Unit 3 Project</h2>
-<section id="math283-spring-26" class="level3">
-<h3 class="anchored" data-anchor-id="math283-spring-26">MATH283 Spring ’26</h3>
-<section id="v.0.2" class="level4">
-<h4 class="anchored" data-anchor-id="v.0.2">v.0.2</h4>
-<p>This is the homepage for the U03 project. We’ll be modelling the cooling rate of a nuclear reactor. Use the directory above to navigate to different sections of the project.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="1280px-Maine_Yankee_Nuclear_Power_Plant.jpg" class="img-fluid figure-img"></p>
-<figcaption>Maine Yankee Nuclear Plant</figcaption>
-</figure>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">CH_3_PROB_7_example</h1>
 </div>
-<p>This site is under construction. Upon completion, it will host open-source python code, relevant data, and a record of the modelling process, and a report summarizing our findings.</p>
 
 
-</section>
-</section>
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Corey and Parker </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="problem-3.7" class="level2">
+<h2 class="anchored" data-anchor-id="problem-3.7">Problem 3.7</h2>
+<p>“In Problems 7–10, fit the data with the models given, using least squares.”- the textbook</p>
+<div class="line-block"><span class="math inline">\(x\)</span> | <span class="math inline">\(1\)</span> | <span class="math inline">\(2\)</span> | <span class="math inline">\(3\)</span> | <span class="math inline">\(4\)</span> | <span class="math inline">\(5\)</span> |<br>
+<span class="math inline">\(y\)</span> | <span class="math inline">\(1\)</span> | <span class="math inline">\(1\)</span> | <span class="math inline">\(2\)</span> | <span class="math inline">\(2\)</span> | <span class="math inline">\(5\)</span> |</div>
+<ol type="a">
+<li><span class="math inline">\(y = b + ax\)</span></li>
+<li><span class="math inline">\(y = ax^2\)</span></li>
+</ol>
+
+
 </section>
 
 </main> <!-- /main -->

@@ -12,9 +12,9 @@ Engineers are studying how quickly reactor components cool following shutdown.
 
 | Time after Shutdown ($\text{hr}$) | Temperature $(^\circ C)$|
 |---------|:-----|
-| 1      | 580   |
-| 2    | 510  | 
-| 4       | 430    |
+| 1 | 580 |
+| 2 | 510 | 
+| 4 | 430 |
 | 8 | 340 |
 |12 | 290 |
 |18 | 230 |
@@ -45,6 +45,7 @@ $T_E$ is the external tremperature
 
 $t$ is the time from shutdown in hours.
 
+That's it! While a high-fidelity model would and could account for the specific heats of individual reactor components, the role of humidity in cooling, and the stochastic nature of thermodynamic processes, this problem is small in scope. We will start, at least, from a basic model of heat transfer. This is most appropriate for the limited data we have on the situation.
 
 
 
@@ -67,6 +68,8 @@ Of form $T(t) = (c_2)e^{c_1t}$ ($c_2$ is negative).
 We'll linearize this so that it can be optimized with linear programming. taking the natural log of both sides give us
 
 $\ln[T(t)]=c_1t+c_2$
+
+## Step 5: Analysis and Optimization.
 
 ## Bibliography (wip):
 
