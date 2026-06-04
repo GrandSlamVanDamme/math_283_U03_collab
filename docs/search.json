@@ -2,16 +2,16 @@
   {
     "objectID": "CH_3_PROB_7_example.html",
     "href": "CH_3_PROB_7_example.html",
-    "title": "CH_3_PROB_7_example",
+    "title": "Problem 3.7: least-squares fitting",
     "section": "",
-    "text": "“In Problems 7–10, fit the data with the models given, using least squares.”- the textbook\n\\(x\\) | \\(1\\) | \\(2\\) | \\(3\\) | \\(4\\) | \\(5\\) |\n\\(y\\) | \\(1\\) | \\(1\\) | \\(2\\) | \\(2\\) | \\(5\\) |\n\n\\(y = b + ax\\)\n\\(y = ax^2\\)"
+    "text": "“In Problems 7–10, fit the data with the models given, using least squares.” - The Textbook\n\n\n\n\n\n\\(x\\)\n\\(1\\)\n\\(2\\)\n\\(3\\)\n\\(4\\)\n\\(5\\)\n\n\n\n\n\\(y\\)\n\\(1\\)\n\\(1\\)\n\\(2\\)\n\\(2\\)\n\\(5\\)\n\n\n\n\n\n\n\n\\(y = b + ax\\)\n\\(y = ax^2\\)\n\n\n\n\n\nFirst, we’ll use the numpy.polyfit() method to produce least-squares optimized fits for each of the models given, because our models are already in polynomial form and that method already uses LS2 minimization to produce fitting functions.\nWe’ll use the leastsquerror() function from the data_fitting.py file (original work copyright 2026) to obtain the cumulative LS2 error. This file is available via public github repo at\nWe’ll plot the original data against the lines of fit for a visual comparison.\n\n\nimport numpy as np"
   },
   {
-    "objectID": "CH_3_PROB_7_example.html#problem-3.7",
-    "href": "CH_3_PROB_7_example.html#problem-3.7",
-    "title": "CH_3_PROB_7_example",
+    "objectID": "CH_3_PROB_7_example.html#objective",
+    "href": "CH_3_PROB_7_example.html#objective",
+    "title": "Problem 3.7: least-squares fitting",
     "section": "",
-    "text": "“In Problems 7–10, fit the data with the models given, using least squares.”- the textbook\n\\(x\\) | \\(1\\) | \\(2\\) | \\(3\\) | \\(4\\) | \\(5\\) |\n\\(y\\) | \\(1\\) | \\(1\\) | \\(2\\) | \\(2\\) | \\(5\\) |\n\n\\(y = b + ax\\)\n\\(y = ax^2\\)"
+    "text": "“In Problems 7–10, fit the data with the models given, using least squares.” - The Textbook\n\n\n\n\n\n\\(x\\)\n\\(1\\)\n\\(2\\)\n\\(3\\)\n\\(4\\)\n\\(5\\)\n\n\n\n\n\\(y\\)\n\\(1\\)\n\\(1\\)\n\\(2\\)\n\\(2\\)\n\\(5\\)\n\n\n\n\n\n\n\n\\(y = b + ax\\)\n\\(y = ax^2\\)\n\n\n\n\n\nFirst, we’ll use the numpy.polyfit() method to produce least-squares optimized fits for each of the models given, because our models are already in polynomial form and that method already uses LS2 minimization to produce fitting functions.\nWe’ll use the leastsquerror() function from the data_fitting.py file (original work copyright 2026) to obtain the cumulative LS2 error. This file is available via public github repo at\nWe’ll plot the original data against the lines of fit for a visual comparison.\n\n\nimport numpy as np"
   },
   {
     "objectID": "reactor_cooling_model_pt_1.html",
@@ -47,6 +47,13 @@
     "title": "Reactor Cooling: A Toybox Engineering Safety Model",
     "section": "Bibliography (wip):",
     "text": "Bibliography (wip):\n\nDawkins, Paul. “The Heat Equation.” Paul’s Online Notes, Lamar University, tutorial.math.lamar.edu/classes/de/theheatequation.aspx. Accessed 26 May 2026.\n“File:Maine Yankee Nuclear Power Plant.jpg.” Wikimedia Commons. 12 Dec 2024, 03:31 UTC. https://commons.wikimedia.org/w/index.php?title=File:Maine_Yankee_Nuclear_Power_Plant.jpg&oldid=969140195 3 Jun 2026, 05:02."
+  },
+  {
+    "objectID": "reactor_cooling.html",
+    "href": "reactor_cooling.html",
+    "title": "MATH283 Project Three Collab",
+    "section": "",
+    "text": "#############################################################################################  \n##      REACTOR COOLING MODEL: OPTIMIZATION AND PLOTS                                      ##       \n##                                                                                         ##\n##      author: Corey Silver                                                               ##\n##      date: 4/6/26                                                                       ##\n## ______________________________________________________________________________________  ##\n##                                                                                         ##\n##                                                                                         ##\n##      This program produces and plots, and then numerically compares                     ##\n##      optimized Chebyshev, LS2, and absolute deviation fits                              ##\n##      used to predict and model the cooling rate of a nuclear reactor.                   ##\n## _______________________________________________________________________________________ ## \n##                                                                                         ##\n##                                                                                         ##\n##      [functions require numpy, scipy, matplotlib, sympy libraries]                      ##\n#############################################################################################\n\nimport numpy             as np\nimport scipy             as sci\nimport sympy             as sym\nimport matplotlib.pyplot as plt\nfrom   data_fitting      import *"
   },
   {
     "objectID": "U03_collab_Parker_Corey.html",

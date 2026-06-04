@@ -1,16 +1,34 @@
 ---
-title: "CH_3_PROB_7_example"
-author: "Corey and Parker"
+title: "Problem 3.7: least-squares fitting"
 format: html
 jupyter: python3
 ---
 
-## Problem 3.7
+## Objective
 
-"In Problems 7–10, fit the data with the models given, using least squares."- the textbook
+"In Problems 7–10, fit the data with the models given, using least squares."
+- The Textbook
+
+### Data
 
 | $x$ | $1$ | $2$ | $3$ | $4$ | $5$ |
+|-----|-----|-----|-----|-----|:----|
 | $y$ | $1$ | $1$ | $2$ | $2$ | $5$ |
 
-a. $y = b + ax$
-b. $y = ax^2$
+### Models
+a. $y = b + ax$ 
+
+a. $y = ax^2$
+
+### Solution
+1. First, we'll use the `numpy.polyfit()` method to 
+produce least-squares optimized fits for each of the models given, because our models are already in polynomial form and that method already uses LS2 minimization to produce fitting functions.
+2. We'll use the `leastsquerror()` function from the `data_fitting.py` file (original work copyright 2026) to obtain the cumulative LS2 error. This file is available via public github repo at 
+3. We'll plot the original data against the lines of fit for a visual comparison.
+
+```{python}
+
+import numpy as np
+
+
+```
