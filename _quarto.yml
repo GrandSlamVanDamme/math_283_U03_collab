@@ -10,6 +10,9 @@ website:
         text: Home
       - href: reactor_cooling_model_pt_1.qmd
         text: Brainstorm 1-4
+  page-footer: 
+    border: true
+    left: "Corey Silver and Parker Lee BYU-I 2026©"
 format:
   html:
     theme: default      # This strips out Quarto's default modern themes
