@@ -39,3 +39,16 @@ figcaption, .figure-caption {
     font-size: 12px !important;
     font-style: italic !important;
 }
+pre {
+  background: #000000!important;
+  color: #00FF00!important;
+  font-family: "Courier", Courier, Monospace !important;
+}
+
+code, pre {
+  background: #000000!important;
+  color: #00FF00!important;
+  font-size: 16px;
+  font-family: "Courier", Courier, Monospace !important;
+  padding: 10px;    
+}

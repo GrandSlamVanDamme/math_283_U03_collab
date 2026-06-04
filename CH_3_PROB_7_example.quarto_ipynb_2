@@ -1,0 +1,89 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Problem 3.7: least-squares fitting\"\n",
+        "format: html\n",
+        "jupyter: python3\n",
+        "highlight-style: default\n",
+        "code-block-bg: \"#000000\"\n",
+        "---\n",
+        "\n",
+        "## Objective\n",
+        "\n",
+        "\"In Problems 7–10, fit the data with the models given, using least squares.\"\n",
+        "- The Textbook\n",
+        "\n",
+        "### Data\n",
+        "\n",
+        "| $x$ | $1$ | $2$ | $3$ | $4$ | $5$ |\n",
+        "|-----|-----|-----|-----|-----|:----|\n",
+        "| $y$ | $1$ | $1$ | $2$ | $2$ | $5$ |\n",
+        "\n",
+        "### Models\n",
+        "a. $y = b + ax$ \n",
+        "\n",
+        "a. $y = ax^2$\n",
+        "\n",
+        "### Solution\n",
+        "1. First, we'll use the `numpy.polyfit()` method to \n",
+        "produce least-squares optimized fits for each of the models given, because our models are already in polynomial form and that method already uses LS2 minimization to produce fitting functions.\n",
+        "2. We'll use the `leastsquerror()` function from the `data_fitting.py` file (original work copyright 2026) to obtain the cumulative LS2 error. This file is available via [public github repo](https://github.com/GrandSlamVanDamme/math_283_U03_collab).\n",
+        "\n",
+        "3. We'll plot the original data against the lines of fit for a visual comparison."
+      ],
+      "id": "79385cae"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# import the packages we need:\n",
+        "\n",
+        "import numpy as np\n",
+        "import matplotlib.pyplot as plt\n",
+        "from data_fitting import leastsquerror\n",
+        "\n",
+        "# make our lists:\n",
+        "\n",
+        "x = np.array([1, 2, 3, 4, 5])\n",
+        "y = np.array([1, 1, 2, 2, 5])\n",
+        "\n",
+        "#############################\n",
+        "## FIRST MODEL: y = b + ax ##\n",
+        "#############################\n",
+        "\n",
+        "fit1 = np.polyfit(x, y, 1)\n",
+        "print(fit1)\n",
+        "\n",
+        "\"\"\"\n",
+        "polyfit returns an array of n+1 entries, \n",
+        "each corresponding to the coefficient of\n",
+        "x^n.\n",
+        "\"\"\"\n",
+        "# make an x array that will give a smooth line\n",
+        "# Note that this is really x^1 and x^0\n",
+        "\n",
+        "\n",
+        "\n",
+        "# now make a y array for the fit line"
+      ],
+      "id": "34dfb3bd",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/Users/grandslamvandamme/opt/anaconda3/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

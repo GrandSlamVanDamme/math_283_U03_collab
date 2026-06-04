@@ -2,85 +2,15 @@
   {
     "objectID": "CH_3_PROB_7_example.html",
     "href": "CH_3_PROB_7_example.html",
-    "title": "Problem 3.7: least-squares fitting",
+    "title": "Problem 3.7: Least-Squares Fitting",
     "section": "",
-    "text": "“In Problems 7–10, fit the data with the models given, using least squares.” - The Textbook\n\n\n\n\n\n\\(x\\)\n\\(1\\)\n\\(2\\)\n\\(3\\)\n\\(4\\)\n\\(5\\)\n\n\n\n\n\\(y\\)\n\\(1\\)\n\\(1\\)\n\\(2\\)\n\\(2\\)\n\\(5\\)\n\n\n\n\n\n\n\n\\(y = b + ax\\)\n\\(y = ax^2\\)\n\n\n\n\n\nFirst, we’ll use the numpy.polyfit() method to produce least-squares optimized fits for each of the models given, because our models are already in polynomial form and that method already uses LS2 minimization to produce fitting functions.\nWe’ll use the leastsquerror() function from the data_fitting.py file (original work copyright 2026) to obtain the cumulative LS2 error. This file is available via public github repo at\nWe’ll plot the original data against the lines of fit for a visual comparison.\n\n\nimport numpy as np"
+    "text": "“In Problems 7–10, fit the data with the models given, using least squares.” - The Textbook\n\n\n\n\n\n\\(x\\)\n\\(1\\)\n\\(2\\)\n\\(3\\)\n\\(4\\)\n\\(5\\)\n\n\n\n\n\\(y\\)\n\\(1\\)\n\\(1\\)\n\\(2\\)\n\\(2\\)\n\\(5\\)\n\n\n\n\n\n\n\n\\(y = b + ax\\)\n\\(y = ax^2\\)\n\n\n\n\n\nFirst, we’ll use the numpy.polyfit() method to produce least-squares optimized fits for each of the models given, because our models are already in polynomial form and that method already uses LS2 minimization to produce fitting functions.\nWe’ll use the leastsquerror() function from the data_fitting.py file (original work copyright 2026) to obtain the cumulative LS2 error. This file is available via public github repo.\nWe’ll plot the original data against the lines of fit for a visual comparison."
   },
   {
     "objectID": "CH_3_PROB_7_example.html#objective",
     "href": "CH_3_PROB_7_example.html#objective",
-    "title": "Problem 3.7: least-squares fitting",
+    "title": "Problem 3.7: Least-Squares Fitting",
     "section": "",
-    "text": "“In Problems 7–10, fit the data with the models given, using least squares.” - The Textbook\n\n\n\n\n\n\\(x\\)\n\\(1\\)\n\\(2\\)\n\\(3\\)\n\\(4\\)\n\\(5\\)\n\n\n\n\n\\(y\\)\n\\(1\\)\n\\(1\\)\n\\(2\\)\n\\(2\\)\n\\(5\\)\n\n\n\n\n\n\n\n\\(y = b + ax\\)\n\\(y = ax^2\\)\n\n\n\n\n\nFirst, we’ll use the numpy.polyfit() method to produce least-squares optimized fits for each of the models given, because our models are already in polynomial form and that method already uses LS2 minimization to produce fitting functions.\nWe’ll use the leastsquerror() function from the data_fitting.py file (original work copyright 2026) to obtain the cumulative LS2 error. This file is available via public github repo at\nWe’ll plot the original data against the lines of fit for a visual comparison.\n\n\nimport numpy as np"
-  },
-  {
-    "objectID": "reactor_cooling_model_pt_1.html",
-    "href": "reactor_cooling_model_pt_1.html",
-    "title": "Reactor Cooling: A Toybox Engineering Safety Model",
-    "section": "",
-    "text": "Follow the 8-step modeling process as you brainstorm with your team. When you write up your final report be sure to use section headers, well developed paragraphs, well labeled graphs, clear explanations of the mathematics, etc. Unit 03 Report will be a Team Report. For this assignment (U03 Modeling Process and Collaboration Part I) turn in your brainstorming for steps 1-4 of the process."
-  },
-  {
-    "objectID": "reactor_cooling_model_pt_1.html#polynomial",
-    "href": "reactor_cooling_model_pt_1.html#polynomial",
-    "title": "Reactor Cooling: A Toybox Engineering Safety Model",
-    "section": "Polynomial:",
-    "text": "Polynomial:\nOf form \\(T(t)=c_1t^n + c_2t^{n-1} +...+c_kt^0\\).\nWe’ll limit \\(n\\) and \\(k\\) to three or four, at most, since we don’t want to overfit."
-  },
-  {
-    "objectID": "reactor_cooling_model_pt_1.html#exponential-decay",
-    "href": "reactor_cooling_model_pt_1.html#exponential-decay",
-    "title": "Reactor Cooling: A Toybox Engineering Safety Model",
-    "section": "Exponential decay:",
-    "text": "Exponential decay:\nOf form \\(T(t) = (c_2)e^{c_1t}\\) (\\(c_2\\) is negative).\nWe’ll linearize this so that it can be optimized with linear programming. taking the natural log of both sides give us\n\\(\\ln[T(t)]=c_1t+c_2\\)"
-  },
-  {
-    "objectID": "reactor_cooling_model_pt_1.html#step-5-analysis-and-optimization.",
-    "href": "reactor_cooling_model_pt_1.html#step-5-analysis-and-optimization.",
-    "title": "Reactor Cooling: A Toybox Engineering Safety Model",
-    "section": "Step 5: Analysis and Optimization.",
-    "text": "Step 5: Analysis and Optimization."
-  },
-  {
-    "objectID": "reactor_cooling_model_pt_1.html#bibliography-wip",
-    "href": "reactor_cooling_model_pt_1.html#bibliography-wip",
-    "title": "Reactor Cooling: A Toybox Engineering Safety Model",
-    "section": "Bibliography (wip):",
-    "text": "Bibliography (wip):\n\nDawkins, Paul. “The Heat Equation.” Paul’s Online Notes, Lamar University, tutorial.math.lamar.edu/classes/de/theheatequation.aspx. Accessed 26 May 2026.\n“File:Maine Yankee Nuclear Power Plant.jpg.” Wikimedia Commons. 12 Dec 2024, 03:31 UTC. https://commons.wikimedia.org/w/index.php?title=File:Maine_Yankee_Nuclear_Power_Plant.jpg&oldid=969140195 3 Jun 2026, 05:02."
-  },
-  {
-    "objectID": "reactor_cooling.html",
-    "href": "reactor_cooling.html",
-    "title": "MATH283 Project Three Collab",
-    "section": "",
-    "text": "#############################################################################################  \n##      REACTOR COOLING MODEL: OPTIMIZATION AND PLOTS                                      ##       \n##                                                                                         ##\n##      author: Corey Silver                                                               ##\n##      date: 4/6/26                                                                       ##\n## ______________________________________________________________________________________  ##\n##                                                                                         ##\n##                                                                                         ##\n##      This program produces and plots, and then numerically compares                     ##\n##      optimized Chebyshev, LS2, and absolute deviation fits                              ##\n##      used to predict and model the cooling rate of a nuclear reactor.                   ##\n## _______________________________________________________________________________________ ## \n##                                                                                         ##\n##                                                                                         ##\n##      [functions require numpy, scipy, matplotlib, sympy libraries]                      ##\n#############################################################################################\n\nimport numpy             as np\nimport scipy             as sci\nimport sympy             as sym\nimport matplotlib.pyplot as plt\nfrom   data_fitting      import *"
-  },
-  {
-    "objectID": "U03_collab_Parker_Corey.html",
-    "href": "U03_collab_Parker_Corey.html",
-    "title": "MATH283 Project Three Collab",
-    "section": "",
-    "text": "share with mantacid on github"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "MATH283 Project Three Collab",
-    "section": "",
-    "text": "This is the homepage for the U03 project. We’ll be modelling the cooling rate of a nuclear reactor. Use the directory above to navigate to different sections of the project.\n\n\n\nMaine Yankee Nuclear Plant\n\n\nThis site is under construction. Upon completion, it will host open-source python code, relevant data, and a record of the modelling process, and a report summarizing our findings."
-  },
-  {
-    "objectID": "index.html#corey-and-parkers-unit-3-project",
-    "href": "index.html#corey-and-parkers-unit-3-project",
-    "title": "MATH283 Project Three Collab",
-    "section": "",
-    "text": "This is the homepage for the U03 project. We’ll be modelling the cooling rate of a nuclear reactor. Use the directory above to navigate to different sections of the project.\n\n\n\nMaine Yankee Nuclear Plant\n\n\nThis site is under construction. Upon completion, it will host open-source python code, relevant data, and a record of the modelling process, and a report summarizing our findings."
-  },
-  {
-    "objectID": "test.html",
-    "href": "test.html",
-    "title": "MATH283 Project Three Collab",
-    "section": "",
-    "text": "layout: page title: “test” permalink: math_283_U03_collab/main/\nblah blah blah bada bing bad boom paulie"
+    "text": "“In Problems 7–10, fit the data with the models given, using least squares.” - The Textbook\n\n\n\n\n\n\\(x\\)\n\\(1\\)\n\\(2\\)\n\\(3\\)\n\\(4\\)\n\\(5\\)\n\n\n\n\n\\(y\\)\n\\(1\\)\n\\(1\\)\n\\(2\\)\n\\(2\\)\n\\(5\\)\n\n\n\n\n\n\n\n\\(y = b + ax\\)\n\\(y = ax^2\\)\n\n\n\n\n\nFirst, we’ll use the numpy.polyfit() method to produce least-squares optimized fits for each of the models given, because our models are already in polynomial form and that method already uses LS2 minimization to produce fitting functions.\nWe’ll use the leastsquerror() function from the data_fitting.py file (original work copyright 2026) to obtain the cumulative LS2 error. This file is available via public github repo.\nWe’ll plot the original data against the lines of fit for a visual comparison."
   }
 ]

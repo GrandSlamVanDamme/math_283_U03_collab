@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[5]:
+# In[6]:
 
 
 """
@@ -19,6 +19,12 @@ import numpy as np
 import scipy as sci
 import sympy as sym
 
+def main(x, Y, n):
+    """
+    The big Huncho Grande Paparoni: fitting, error analysis, plotting.  
+    """
+    
+    chebyshevify(x, Y, n)
 
 def error_analyzer(x, Y, F):
     """
@@ -90,8 +96,7 @@ def residuals(Y, F):
     returns list of residuals
     
     """
-    
-    
+        
     resid = []
     
     for f, y in zip(F, Y):
@@ -111,23 +116,11 @@ def arrayer(x, Y):
     
     return x_array, Y_array
 
-
-
-
-def chebyshevify(X, Y, n):
-    
+def x_lists(X, Y, n):
     """
     Takes two arrays, x = [data 1] and Y = [data 2].
-    Using Chebyshev criteria, fits model function 
     f(x) = c_n*x^n + c_(n-1)x^(n-1)+...c_0x^0 with n parameters
-    such that (max|Yi-Fi|, i ϵ NN) is minimized.
-    returns F(x) as an array
-    
-    ###########################################################################################################
-    ##  https://byui.instructure.com/courses/409534/pages/w07-tuesday-lesson-plans-2?module_item_id=4500264  ##
-    ###########################################################################################################
-    
-    used as guideline and partial template
+    returns objective function f
     """
     
     mat_x = []
@@ -165,13 +158,92 @@ def chebyshevify(X, Y, n):
     bounds[-1] = (0, None)
     objective.append(1)
     
+    return objective, mat_x, mast_y, bounds, x_list
+
+def chebyshevify(X, Y, n):
+    
+    """
+    Takes two arrays, x = [data 1] and Y = [data 2].
+    Using Chebyshev criteria, fits model function 
+    f(x) = c_n*x^n + c_(n-1)x^(n-1)+...c_0x^0 with n parameters
+    such that (max|Yi-Fi|, i ϵ NN) is minimized.
+    returns F(x) as an array of coefficients, the last being the max error E
+    
+    ###########################################################################################################
+    ##  https://byui.instructure.com/courses/409534/pages/w07-tuesday-lesson-plans-2?module_item_id=4500264  ##
+    ###########################################################################################################
+    
+    used as guideline and partial template
+    """
+    
+    """
+    mat_x = []
+    mat_y = []
+    
+    objective = []
+    
+    x = sym.symbol("x")
+    
+    for xi, Yi in zip(X, Y):
+        
+        rightrow = []
+        leftrow = []
+        bounds = []
+        x_list = []
+        
+        while n > -1:
+            
+            rightrow.append(xi**n)
+            leftrow.append(-(xi**n))
+            x_list.append(x**n)
+            
+            bounds.append((None, None))
+            objective.append(0)
+            
+            n -= 1
+        
+        rightrow.append(-1)
+        leftrow.append(-1)
+        mat_x.append(rightrow)
+        mat_x.append(leftrow)
+        mat_y.append(Yi)
+        mat_y.append(-Yi)
+    
+    bounds[-1] = (0, None)
+    objective.append(1)
+    """
+    
+    barry = x_lists(X, Y, n)
+    
     result = linprog(objective, A_ub=mat_x, b_ub=mat_y, bounds=bounds, method="highs")
+
+    cheb_fit = np.dot(barry[-1], result.x)
+        
+    return cheb_fit
+
+def absdev_fit(X, Y, n):
     
-    fit = np.dot(x_list, result.x)
+    """
+    Takes two arrays, x = [data 1] and Y = [data 2].
+    Using fits model function 
+    f(x) = c_n*x^n + c_(n-1)x^(n-1)+...c_0x^0 with n parameters
+    such that (sum|Yi-Fi|, i ϵ NN) is minimized.
+    returns F(x) as an array
+    """
+    
+    absdev = x_lists(X, Y, n)
         
         
+            
+        
     
+def conspiracy(x, Y, F):
+    """
+    Plots fit function 
+    """
     
+    sym.plot(x,Y)
+    sym.plot(F, ())
     
  
 
