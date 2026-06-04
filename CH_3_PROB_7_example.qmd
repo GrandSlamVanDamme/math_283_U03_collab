@@ -31,49 +31,42 @@ produce least-squares optimized fits for each of the models given, because our m
 
 ```{python}
 
-# import the packages we need:
-    
-    import numpy as np
-    import matplotlib.pyplot as plt
-    from data_fitting import *
-    
-    # make our lists:
-    
-    x = np.array([1 2 3 4 5])
-    y = np.array([1 1 2 2 5])
-    
-    #############################
-    ##  1. WRITE FUNCTIONS     ##
-    #############################
-    
-    def main():
-      
-      liszt = x_lists(x y n)[-1] # last index of x_lists 
-      f = np.do
-      t(x_lists fit)
-      
-    def fitfit(x y n):
-      
-      fit = np.polyfit(x y n)
-      
-      return fit
+ # import the packages we need:
+import numpy as np
+import matplotlib.pyplot as plt
+from data_fitting import *
 
-    
-    #############################
-    ##   2. WRITE MODELS       ##
-    #############################
+# make our lists:
 
-    
-    '''
-    polyfit returns an array of n+1 entries 
-    each corresponding to the coefficient of
-    x**n.
-    '''
-    
-    # make an x array that will give a smooth line
-    # Note that this is really x^1 and x^0
-    
-    
-    
-    # now make a y array for the fit line
+X = np.array([1,2, 3, 4, 5])
+Y = np.array([1, 1, 2, 2, 5])
 
+#############################
+##  1. WRITE FUNCTIONS     ##
+#############################
+
+fit2 = np.polyfit(X, Y, 2)
+fit1 = np.polyfit(X, Y, 1)
+
+x = np.linspace(0, 6, 1000)
+
+f2 = fit2[0]*x**2 + fit2[1]*x**1 + fit2[2]*x**0
+f1 = fit1[0]*x**1 + fit1[1]*x**0 
+
+#############################
+##   2. WRITE MODELS       ##
+#############################
+
+plt.plot(x, f2)
+plt.scatter(X, Y)
+
+plt.plot(x, f1)
+plt.scatter(X, Y)
+
+error_
+
+'''
+polyfit returns an array of n+1 entries 
+each corresponding to the coefficient of
+x**n.
+'''

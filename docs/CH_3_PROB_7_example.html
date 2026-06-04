@@ -208,55 +208,39 @@ window.Quarto = {
 <li><p>We’ll use the <code>leastsquerror()</code> function from the <code>data_fitting.py</code> file (original work copyright 2026) to obtain the cumulative LS2 error. This file is available via <a href="https://github.com/GrandSlamVanDamme/math_283_U03_collab">public github repo</a>.</p></li>
 <li><p>We’ll plot the original data against the lines of fit for a visual comparison.</p></li>
 </ol>
+<p># import the packages we need: import numpy as np import matplotlib.pyplot as plt from data_fitting import *</p>
 </section>
 </section>
-<section id="import-the-packages-we-need" class="level1">
-<h1>import the packages we need:</h1>
-<pre><code>import numpy as np
-import matplotlib.pyplot as plt
-from data_fitting import *
-
-# make our lists:
-
-x = np.array([1 2 3 4 5])
-y = np.array([1 1 2 2 5])
-
-#############################
-##  1. WRITE FUNCTIONS     ##
-#############################
-
-def main():
-  
-  liszt = x_lists(x y n)[-1] # last index of x_lists 
-  f = np.do
-  t(x_lists fit)
-  
-def fitfit(x y n):
-  
-  fit = np.polyfit(x y n)
-  
-  return fit
-
-
-#############################
-##   2. WRITE MODELS       ##
-#############################
+<section id="make-our-lists" class="level1">
+<h1>make our lists:</h1>
+<p>X = np.array([1,2, 3, 4, 5]) Y = np.array([1, 1, 2, 2, 5])</p>
+<section id="section" class="level29">
+<p class="heading"></p>
+</section>
+<section id="write-functions" class="level2">
+<h2 class="anchored" data-anchor-id="write-functions">1. WRITE FUNCTIONS</h2>
+<section id="section-1" class="level29">
+<p class="heading"></p>
+<p>fit2 = np.polyfit(X, Y, 2) fit1 = np.polyfit(X, Y, 1)</p>
+<p>x = np.linspace(0, 6, 1000)</p>
+<p>f2 = fit2[0]*x**2 + fit2[1]*x**1 + fit2[2]*x**0 f1 = fit1[0]*x**1 + fit1[1]*x**0</p>
+</section>
+<section id="section-2" class="level29">
+<p class="heading"></p>
+</section>
+</section>
+<section id="write-models" class="level2">
+<h2 class="anchored" data-anchor-id="write-models">2. WRITE MODELS</h2>
+<section id="section-3" class="level29">
+<p class="heading"></p>
+<p>plt.plot(x, f2) plt.scatter(X, Y)</p>
+<p>plt.plot(x, f1) plt.scatter(X, Y)</p>
+<p>error_</p>
+<p>’’’ polyfit returns an array of n+1 entries each corresponding to the coefficient of x**n. ’’’</p>
 
 
-'''
-polyfit returns an array of n+1 entries 
-each corresponding to the coefficient of
-x**n.
-'''
-
-# make an x array that will give a smooth line
-# Note that this is really x^1 and x^0
-
-
-
-# now make a y array for the fit line</code></pre>
-
-
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
