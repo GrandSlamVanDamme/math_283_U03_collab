@@ -1,0 +1,48 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"CH_3_PROB_7_example\"\n",
+        "author: \"Corey and Parker\"\n",
+        "format: html\n",
+        "jupyter: python3\n",
+        "---\n",
+        "\n",
+        "## Problem 3.7\n",
+        "\n",
+        "\"In Problems 7–10, fit the data with the models given, using least squares.\"\n",
+        "- The Textbook\n",
+        "\n",
+        "| $x$ | $1$ | $2$ | $3$ | $4$ | $5$ |\n",
+        "| $y$ | $1$ | $1$ | $2$ | $2$ | $5$ |\n",
+        "\n",
+        "a. $y = b + ax$\n",
+        "b. $y = ax^2$\n"
+      ],
+      "id": "c4152866"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import numpy as np\n"
+      ],
+      "id": "5c9b0dc8",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/Users/grandslamvandamme/opt/anaconda3/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

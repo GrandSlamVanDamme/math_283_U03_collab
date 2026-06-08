@@ -5,7 +5,6 @@
 .positai
 
 /.quarto/
-**/*.quarto_ipynb
 .venv/
 
 
