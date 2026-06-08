@@ -20,20 +20,35 @@ import scipy as sci
 import sympy as sym
 
 
-def main(x, Y, n):
+def data_fit(X, Y):
     """
     The big Huncho Grande Paparoni: fitting, error analysis, plotting.
     """
+    fit_type = input(
+        "Please enter the fit type. Is it linear, polynomial, or exponential?"
+    )
 
-    chebyshevify(x, Y, n)
+    if fit_type == "polynomial":
+        n = int(
+            input("What degree of polynomial? Please give your answer as a numeral.")
+        )
+    if fit_type == "exponential":
+        X = np.log(X)
+        Y = np.log(Y)
+        n = 1
+    else:
+        n = 1
+
+    plotter(X, Y, n)
+    error_analyzer(fit_type)
 
 
-def error_analyzer(Y, F):
+def error_analyzer(model_name):
     """
-    Takes three lists: x = [ind. data points] Y = [dep. data points], and F(x) = [func_values].
-    prints results of least squares, chebyshev, and absolute deviation analyses
+    prints results of least squares, chebyshev, and absolute deviation analyses for
+    type of model given by model_name
     """
-    print("For the model")
+    print(f"For the {model_name} model")
     print(f"We found a least squares error of {leastsquerror(Y, F)[-1]}")
     print(f"We found an absolute deviation error of {absdev_error(Y, F)[-1]}")
     print(f"We found a Chebyshev error of {cheb_error(Y, F)}")
@@ -131,18 +146,16 @@ def x_lists(X, Y, n):
 
     objective = []
 
-    x = sym.symbol("x")
-
-    for xi, Yi in zip(X, Y):
+    for Xi, Yi in zip(X, Y):
         rightrow = []
         leftrow = []
         bounds = []
         x_list = []
 
         while n > -1:
-            rightrow.append(xi**n)
-            leftrow.append(-(xi**n))
-            x_list.append(x**n)
+            rightrow.append(Xi**n)
+            leftrow.append(-(Xi**n))
+            x_list.append(Xi**n)
 
             bounds.append((None, None))
             objective.append(0)
@@ -159,7 +172,9 @@ def x_lists(X, Y, n):
     bounds[-1] = (0, None)
     objective.append(1)
 
-    return objective, mat_x, mast_y, bounds, x_list
+    barry = [objective, mat_x, mat_y, bounds, x_list]
+
+    return barry
 
 
 def chebyshevify(X, Y, n):
@@ -216,9 +231,11 @@ def chebyshevify(X, Y, n):
 
     barry = x_lists(X, Y, n)
 
-    result = linprog(objective, A_ub=mat_x, b_ub=mat_y, bounds=bounds, method="highs")
+    result = sci.linprog(
+        barry[0], A_ub=barry[1], b_ub=barry[2], bounds=barry[3], method="highs"
+    )
 
-    cheb_fit = np.dot(barry[-1], result.x)
+    cheb_fit = np.dot(barry[-1], (result.X).pop())
 
     return cheb_fit
 
@@ -232,16 +249,35 @@ def absdev_fit(X, Y, n):
     returns F(x) as an array
     """
 
-    absdev = x_lists(X, Y, n)
+    barry = x_lists(X, Y, n)
+
+    A = sum(barry[1])
+    b = sum(barry[2])
+
+    result = sci.linprog(
+        barry[0], A_ub=barry[1], b_ub=barry[2], bounds=barry[3], method="highs"
+    )
+
+    abs_dev_fit = np.dot(barry[-1], (result.X).pop())
+
+    return abs_dev_fit
 
 
-def conspiracy(x, Y, F):
+def plotter(X, Y, n):
     """
-    Plots fit function
+    Plots different fit functions for a given data fit type (linear, poly, etc)
     """
+    LS2 = np.polyfit(X, Y, n)
+    cheb = chebyshevify(X, Y, n)
+    abs_dev = absdev_fit(X, Y, n)
 
-    sym.plot(x, Y)
-    sym.plot(F, ())
+    plt.scatter(X, Y)
+    plt.plot(X, LS2)
+    plt.plot(X, cheb)
+    plt.plot(X, abs_dev)
+    plt.legend()
 
 
+if __name__ == "__data_fit__":
+    main()
 # In[ ]:
