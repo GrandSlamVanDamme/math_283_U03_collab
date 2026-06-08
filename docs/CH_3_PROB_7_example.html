@@ -240,10 +240,10 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="solution">Solution</h3>
 <ol type="1">
 <li><p>First, we’ll use the <code>numpy.polyfit()</code> method to produce least-squares optimized fits for each of the models given, because our models are already in polynomial form and that method already uses LS2 minimization to produce fitting functions.</p></li>
-<li><p>We’ll use the <code>leastsquerror()</code> function from the <code>data_fitting.py</code> file (original work copyright 2026) to obtain the cumulative LS2 error. This file is available via <a href="https://github.com/GrandSlamVanDamme/math_283_U03_collab">public github repo</a>.</p></li>
+<li><p>We’ll use the <code>error_analyzer()</code> function from the <code>data_fitting.py</code> file (original work copyright 2026) to obtain the cumulative LS2 error. This file is available via <a href="https://github.com/GrandSlamVanDamme/math_283_U03_collab">public github repo</a>.</p></li>
 <li><p>We’ll plot the original data against the lines of fit for a visual comparison.</p></li>
 </ol>
-<div id="b6c1718c" class="cell" data-execution_count="1">
+<div id="db70001c" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># import the packages we need:</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -266,39 +266,101 @@ window.Quarto = {
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>f2 <span class="op">=</span> fit2[<span class="dv">0</span>]<span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> fit2[<span class="dv">1</span>]<span class="op">*</span>x<span class="op">**</span><span class="dv">1</span> <span class="op">+</span> fit2[<span class="dv">2</span>]<span class="op">*</span>x<span class="op">**</span><span class="dv">0</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> fit1[<span class="dv">0</span>]<span class="op">*</span>x<span class="op">**</span><span class="dv">1</span> <span class="op">+</span> fit1[<span class="dv">1</span>]<span class="op">*</span>x<span class="op">**</span><span class="dv">0</span> </span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">#############################</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">##   2. WRITE MODELS       ##</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">#############################</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f2)</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>plt.scatter(X, Y)</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f1)</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>plt.scatter(X, Y)</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>F1 <span class="op">=</span> fit1[<span class="dv">0</span>]<span class="op">*</span>X<span class="op">**</span><span class="dv">1</span> <span class="op">+</span> fit1[<span class="dv">1</span>]<span class="op">*</span>X<span class="op">**</span><span class="dv">0</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>F2 <span class="op">=</span> fit2[<span class="dv">0</span>]<span class="op">*</span>X<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> fit2[<span class="dv">1</span>]<span class="op">*</span>X<span class="op">**</span><span class="dv">1</span> <span class="op">+</span> fit2[<span class="dv">2</span>]<span class="op">*</span>X<span class="op">**</span><span class="dv">0</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>E1 <span class="op">=</span> leastsquerror(Y, F1)</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>E2 <span class="op">=</span> leastsquerror(Y, F2)</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co">polyfit returns an array of n+1 entries </span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co">each corresponding to the coefficient of</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co">x**n.</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_coeffs(X, Y, n):</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">    Takes the X and Y data, applies np.polyfit() for fit of chosen order n </span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">    and prints the elements neatly in form c_n = blahblahblah. </span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">    Each statement takes a line. Returns None.</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    fit_list <span class="op">=</span> np.polyfit(X, Y, n)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    cees <span class="op">=</span> []</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> numba <span class="kw">in</span> fit_list:</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        cees.append(<span class="ss">f'c_</span><span class="sc">{</span>count<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> numba, c <span class="kw">in</span> <span class="bu">zip</span>(fit_list, cees):</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">=</span><span class="sc">{</span>numba<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co">#############################</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co">##   2. PLOTS              ##</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co">#############################</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f2)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>plt.scatter(X, Y)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'$f(x)=c_1x^2+c_2x+c_3$'</span>)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f1)</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>plt.scatter(X, Y)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'$f(x)=c_1x+c_2$'</span>)</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>F1 <span class="op">=</span> fit1[<span class="dv">0</span>]<span class="op">*</span>X<span class="op">**</span><span class="dv">1</span> <span class="op">+</span> fit1[<span class="dv">1</span>]<span class="op">*</span>X<span class="op">**</span><span class="dv">0</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>F2 <span class="op">=</span> fit2[<span class="dv">0</span>]<span class="op">*</span>X<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> fit2[<span class="dv">1</span>]<span class="op">*</span>X<span class="op">**</span><span class="dv">1</span> <span class="op">+</span> fit2[<span class="dv">2</span>]<span class="op">*</span>X<span class="op">**</span><span class="dv">0</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="co">polyfit returns an array of n+1 entries </span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="co">each corresponding to the coefficient of</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="co">x**n.</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/var/folders/ds/63b_7b1n3wx7f9wg6r78c57w0000gn/T/ipykernel_14173/2066921083.py:50: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  plt.legend()
+/var/folders/ds/63b_7b1n3wx7f9wg6r78c57w0000gn/T/ipykernel_14173/2066921083.py:56: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  plt.legend()</code></pre>
+</div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>'\npolyfit returns an array of n+1 entries \neach corresponding to the coefficient of\nx**n.\n'</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="CH_3_PROB_7_example_files/figure-html/cell-2-output-2.png" width="781" height="411" class="figure-img"></p>
+<p><img src="CH_3_PROB_7_example_files/figure-html/cell-2-output-3.png" width="781" height="434" class="figure-img"></p>
 </figure>
 </div>
+</div>
+</div>
+<p>Here are our results.</p>
+<p>First, let’s look at the linear fit <span class="math inline">\(f(x)=c_1x+c_2\)</span>.</p>
+<div id="879d8918" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'RESULTS'</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>get_coeffs(X, Y, <span class="dv">1</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>E1 <span class="op">=</span> error_analyzer(Y, F1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>RESULTS
+c_1=0.9000000000000002
+c_2=-0.5000000000000019
+
+For the model
+We found a least squares error of 2.7000000000000006 K
+We found an absolute deviation error of 3.1999999999999993 K
+We found a Chebyshev error of 1.0000000000000009 K</code></pre>
+</div>
+</div>
+<p>Now, let’s see if the quadratic fit <span class="math inline">\(f(x)=c_1x^2+c_2x+c_3\)</span> looks any better.</p>
+<div id="16f92bcb" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'RESULTS'</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>get_coeffs(X, Y, <span class="dv">2</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>E2 <span class="op">=</span> error_analyzer(Y, F2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>RESULTS
+c_1=0.3571428571428587
+c_2=-1.242857142857152
+c_3=2.0000000000000133
+
+For the model
+We found a least squares error of 0.9142857142857145 K
+We found an absolute deviation error of 1.7142857142857137 K
+We found a Chebyshev error of 0.5142857142857147 K</code></pre>
 </div>
 </div>
 

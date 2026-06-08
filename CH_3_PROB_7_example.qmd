@@ -26,7 +26,7 @@ a. $y = ax^2$
 ### Solution
 1. First, we'll use the `numpy.polyfit()` method to 
 produce least-squares optimized fits for each of the models given, because our models are already in polynomial form and that method already uses LS2 minimization to produce fitting functions.
-2. We'll use the `leastsquerror()` function from the `data_fitting.py` file (original work copyright 2026) to obtain the cumulative LS2 error. This file is available via [public github repo](https://github.com/GrandSlamVanDamme/math_283_U03_collab).
+2. We'll use the `error_analyzer()` function from the `data_fitting.py` file (original work copyright 2026) to obtain the cumulative LS2 error. This file is available via [public github repo](https://github.com/GrandSlamVanDamme/math_283_U03_collab).
 
 3. We'll plot the original data against the lines of fit for a visual comparison.
 
@@ -54,28 +54,66 @@ x = np.linspace(0, 6, 1000)
 f2 = fit2[0]*x**2 + fit2[1]*x**1 + fit2[2]*x**0
 f1 = fit1[0]*x**1 + fit1[1]*x**0 
 
+def get_coeffs(X, Y, n):
+    """
+    Takes the X and Y data, applies np.polyfit() for fit of chosen order n 
+    and prints the elements neatly in form c_n = blahblahblah. 
+    Each statement takes a line. Returns None.
+    """
+    fit_list = np.polyfit(X, Y, n)
+
+    count = 0
+    cees = []
+
+    for numba in fit_list:
+        count += 1
+        cees.append(f'c_{count}')
+    
+    for numba, c in zip(fit_list, cees):
+        print(f'{c}={numba}')
+
 #############################
-##   2. WRITE MODELS       ##
+##   2. PLOTS              ##
 #############################
 fig = plt.figure(figsize=(10,5))
 
 plt.subplot(1,2,1)
 plt.plot(x, f2)
 plt.scatter(X, Y)
+plt.title('$f(x)=c_1x^2+c_2x+c_3$')
+plt.legend()
 
 plt.subplot(1,2,2)
 plt.plot(x, f1)
 plt.scatter(X, Y)
+plt.title('$f(x)=c_1x+c_2$')
+plt.legend()
 
 F1 = fit1[0]*X**1 + fit1[1]*X**0
 F2 = fit2[0]*X**2 + fit2[1]*X**1 + fit2[2]*X**0
-
-E1 = leastsquerror(Y, F1)
-E2 = leastsquerror(Y, F2)
 
 '''
 polyfit returns an array of n+1 entries 
 each corresponding to the coefficient of
 x**n.
 '''
+```
+
+Here are our results. 
+
+First, let's look at the linear fit $f(x)=c_1x+c_2$.
+```{python}
+print('RESULTS')
+get_coeffs(X, Y, 1)
+print()
+
+E1 = error_analyzer(Y, F1)
+```
+
+Now, let's see if the quadratic fit $f(x)=c_1x^2+c_2x+c_3$ looks any better.
+```{python}
+print('RESULTS')
+get_coeffs(X, Y, 2)
+print()
+E2 = error_analyzer(Y, F2)
 ```
