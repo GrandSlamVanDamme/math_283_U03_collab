@@ -45,7 +45,6 @@ Y = np.array([1, 1, 2, 2, 5])
 #############################
 ##  1. WRITE FUNCTIONS     ##
 #############################
-
 fit2 = np.polyfit(X, Y, 2)
 fit1 = np.polyfit(X, Y, 1)
 
@@ -106,8 +105,7 @@ First, let's look at the linear fit $f(x)=c_1x+c_2$.
 print('RESULTS')
 get_coeffs(X, Y, 1)
 print()
-
-E1 = error_analyzer(Y, F1)
+print(f"We found a least squares error of {leastsquerror(Y, LS2_fit(X, Y, 1))[-1]}")
 ```
 
 Now, let's see if the quadratic fit $f(x)=c_1x^2+c_2x+c_3$ looks any better.
@@ -115,5 +113,5 @@ Now, let's see if the quadratic fit $f(x)=c_1x^2+c_2x+c_3$ looks any better.
 print('RESULTS')
 get_coeffs(X, Y, 2)
 print()
-E2 = error_analyzer(Y, F2)
+print(f"We found a least squares error of {leastsquerror(Y, LS2_fit(X, Y, 2))[-1]}")
 ```

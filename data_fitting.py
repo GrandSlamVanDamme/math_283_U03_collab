@@ -20,7 +20,7 @@ import scipy as sci
 import sympy as sym
 
 
-def data_fit(X, Y):
+def main(X, Y):
     """
     The big Huncho Grande Paparoni: fitting, error analysis, plotting.
     """
@@ -49,9 +49,11 @@ def error_analyzer(model_name):
     type of model given by model_name
     """
     print(f"For the {model_name} model")
-    print(f"We found a least squares error of {leastsquerror(Y, F)[-1]}")
-    print(f"We found an absolute deviation error of {absdev_error(Y, F)[-1]}")
-    print(f"We found a Chebyshev error of {cheb_error(Y, F)}")
+    print(f"We found a least squares error of {leastsquerror(Y, LS2_fit(X, Y, n))[-1]}")
+    print(
+        f"We found an absolute deviation error of {absdev_error(Y, absdev_fit(X, Y, n))[-1]}"
+    )
+    print(f"We found a Chebyshev error of {cheb_error(Y, chebyshevify(X, Y, n))}")
 
 
 def leastsquerror(Y, F):
@@ -134,7 +136,7 @@ def arrayer(x, Y):
     return x_array, Y_array
 
 
-def x_lists(X, Y, n):
+def objectivist(X, Y, n):
     """
     Takes two arrays, x = [data 1] and Y = [data 2].
     f(x) = c_n*x^n + c_(n-1)x^(n-1)+...c_0x^0 with n parameters
@@ -229,13 +231,13 @@ def chebyshevify(X, Y, n):
     objective.append(1)
     """
 
-    barry = x_lists(X, Y, n)
+    barry = objectivist(X, Y, n)
 
     result = sci.linprog(
         barry[0], A_ub=barry[1], b_ub=barry[2], bounds=barry[3], method="highs"
     )
 
-    cheb_fit = np.dot(barry[-1], (result.X).pop())
+    cheb_fit = np.dot(x_list(X, n), (result.X).pop())
 
     return cheb_fit
 
@@ -243,31 +245,56 @@ def chebyshevify(X, Y, n):
 def absdev_fit(X, Y, n):
     """
     Takes two arrays, x = [data 1] and Y = [data 2].
-    Using fits model function
+    fits model function
     f(x) = c_n*x^n + c_(n-1)x^(n-1)+...c_0x^0 with n parameters
     such that (sum|Yi-Fi|, i ϵ NN) is minimized.
-    returns F(x) as an array
+    returns f(x) as an array
     """
 
-    barry = x_lists(X, Y, n)
+    barry = objectivist(X, Y, n)
 
     A = sum(barry[1])
     b = sum(barry[2])
 
-    result = sci.linprog(
-        barry[0], A_ub=barry[1], b_ub=barry[2], bounds=barry[3], method="highs"
-    )
+    result = sci.linprog(barry[0], A_ub=A, b_ub=b, bounds=barry[3], method="highs")
 
-    abs_dev_fit = np.dot(barry[-1], (result.X).pop())
+    abs_dev_fit = np.dot(x_list(X, n), (result.X).pop())
 
     return abs_dev_fit
+
+
+def LS2_fit(X, Y, n):
+    """
+    Takes two arrays, x = [data 1] and Y = [data 2].
+    fits model function
+    f(x) = c_n*x^n + c_(n-1)x^(n-1)+...c_0x^0 with n parameters
+    such that (sum|Yi-Fi|^2, i ϵ NN) is minimized.
+    returns f(x) as an array
+    """
+    LS2 = np.dot(np.polyfit(X, Y, n), x_list(X, n))
+
+    return LS2
+
+
+def x_list(X, n):
+    """
+    takes X data and a polynomial degree n, returns linspaced list of X-powers
+    from X^n to X^0.
+    """
+    X = np.linspace(X[0], X[-1] + np.mean(X), 1000)
+
+    exes = []
+    while n > -1:
+        exes.append(X**n)
+
+    return exes
 
 
 def plotter(X, Y, n):
     """
     Plots different fit functions for a given data fit type (linear, poly, etc)
     """
-    LS2 = np.polyfit(X, Y, n)
+    LS2 = LS2_fit(X, Y, n)
     cheb = chebyshevify(X, Y, n)
     abs_dev = absdev_fit(X, Y, n)
 
@@ -278,6 +305,4 @@ def plotter(X, Y, n):
     plt.legend()
 
 
-if __name__ == "__data_fit__":
-    main()
 # In[ ]:
