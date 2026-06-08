@@ -1,0 +1,54 @@
+/* Override modern fonts with 1998 defaults */
+/* Generated with google gemini, no copyright on anything, opensource everything forever */
+
+body, h1, h2, h3, h4, p, div {
+    font-family: "Times New Roman", Serif, Monospace !important;
+    background-color: #800000 !important; /* Classic Windows gray background */
+    color: #E6A300 !important;
+}
+
+/* Authentic Web 1.0 Hyperlinks */
+a {
+    color: #C0C0C0 !important;
+    text-decoration: underline !important;
+}
+a:visited {
+    color: #388557 !important; /* The classic purple visited link */
+}
+
+/* Chunky, archaic navigation bar */
+.navbar {
+    font-family: "Comic Sans MS", Cursive, Monospace !important;
+    background-color: #C0C0C0 !important; /* Navy blue */
+    border-bottom: 5px ridge #ffffff !important;
+}
+.navbar a {
+    color: #C0C0C0 !important;
+}
+
+/* Harsh, unrounded image borders */
+img {
+    border: 3px solid #C0C0C0 !important;
+    border-radius: 0px !important; 
+}
+
+/* Eradicate modern grey image captions */
+figcaption, .figure-caption {
+    color: #E6A300 !important;
+    font-family: "Courier New", Courier, Monospace !important;
+    font-size: 12px !important;
+    font-style: italic !important;
+}
+pre {
+  background: #000000!important;
+  color: #00FF00!important;
+  font-family: "Courier", Courier, Monospace !important;
+}
+
+code, pre {
+  background: #000000!important;
+  color: #00FF00!important;
+  font-size: 16px;
+  font-family: "Courier", Courier, Monospace !important;
+  padding: 10px;    
+}
