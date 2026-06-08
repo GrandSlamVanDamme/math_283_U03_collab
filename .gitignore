@@ -7,3 +7,5 @@
 /.quarto/
 .venv/
 
+
+**/*.quarto_ipynb

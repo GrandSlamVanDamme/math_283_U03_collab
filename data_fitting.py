@@ -271,7 +271,7 @@ def LS2_fit(X, Y, n):
     such that (sum|Yi-Fi|^2, i ϵ NN) is minimized.
     returns f(x) as an array
     """
-    LS2 = np.dot(np.polyfit(X, Y, n), x_list(X, n))
+    LS2 = np.linalg.multi_dot(np.polyfit(X, Y, n), x_list(X, n))
 
     return LS2
 
