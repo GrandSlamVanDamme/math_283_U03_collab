@@ -33,7 +33,7 @@ def error_analyzer(Y, F):
     Takes three lists: x = [ind. data points] Y = [dep. data points], and F(x) = [func_values].
     prints results of least squares, chebyshev, and absolute deviation analyses
     """
-    print(f"For the model")
+    print("For the model")
     print(f"We found a least squares error of {leastsquerror(Y, F)[-1]}")
     print(f"We found an absolute deviation error of {absdev_error(Y, F)[-1]}")
     print(f"We found a Chebyshev error of {cheb_error(Y, F)}")
