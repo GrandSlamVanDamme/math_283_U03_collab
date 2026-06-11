@@ -5,3 +5,29 @@ jupyter: python3
 highlight-style: default
 code-block-bg: "#000000"
 ---
+
+# I'm still not clear on what these brainstorming assignments are supposed to contain or what purpose they serve and at this point it's on me for not asking earlier.
+
+## Step 5: Analysis and Optimization.
+
+Writing a python function to perform analysis and optimization. 
+
+```{python}
+
+import numpy as num
+import scipy as sci
+import matplotlib.pyplot as plt
+from data_fitting import *
+
+X = [1,2,4,8,12,18]
+Y = [580, 510, 430, 340, 290, 230]
+
+main(X, Y)
+
+
+```
+
+
+## Step 6: Prediction
+
+After 24 hours, the 

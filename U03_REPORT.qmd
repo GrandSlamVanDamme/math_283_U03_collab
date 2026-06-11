@@ -5,3 +5,10 @@ jupyter: python3
 highlight-style: default
 code-block-bg: "#000000"
 ---
+
+
+## Bibliography (wip):
+
+1. Dawkins, Paul. "The Heat Equation." Paul's Online Notes, Lamar University, tutorial.math.lamar.edu/classes/de/theheatequation.aspx. Accessed 26 May 2026.
+
+1. "File:Maine Yankee Nuclear Power Plant.jpg." Wikimedia Commons. 12 Dec 2024, 03:31 UTC. <https://commons.wikimedia.org/w/index.php?title=File:Maine_Yankee_Nuclear_Power_Plant.jpg&oldid=969140195> 3 Jun 2026, 05:02. 

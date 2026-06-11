@@ -25,12 +25,12 @@ def main(X, Y):
     """
     The big Huncho Grande Paparoni: fitting, error analysis, plotting.
     """
-    """
+
     fit_type = input(
         "Please enter the fit type. Is it linear, polynomial, or exponential?"
     )
-    """
-    fit_type = "linear"
+
+    # fit_type = "linear"
     if fit_type == "polynomial":
         n = int(
             input("What degree of polynomial? Please give your answer as a numeral.")
@@ -42,8 +42,18 @@ def main(X, Y):
         Y = np.log(Y)
         X = np.log(X)
         n = 1
-    else:
+    if fit_type == "linear":
         n = 1
+    else:
+        print("Request cannot be completed, defaulting to rat")
+        import matplotlib.image as mpimg
+
+        img = mpimg.imread("fat_rats/Joanna_Servaes_wikimedia_commons.webp")
+        plt.imshow(img)
+        plt.axis("off")
+        plt.show()
+
+        break
 
     plotter(X, Y, n)
     error_analyzer(fit_type, X, Y, n)
@@ -390,10 +400,5 @@ def plotter(X, Y, n):
     ax3.set_ylabel(ylab, rotation=0, labelpad=(225))
     ax3.set_title("Absolute Deviation Fit")
 
-
-X = [1, 2, 3]
-Y = [1, 2, 3]
-
-main(X, Y)
 
 # %%

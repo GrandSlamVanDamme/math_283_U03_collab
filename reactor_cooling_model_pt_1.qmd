@@ -69,17 +69,4 @@ We'll linearize this so that it can be optimized with linear programming. taking
 
 $\ln[T(t)]=c_1t+c_2$
 
-## Step 5: Analysis and Optimization.
 
-Writing a python function to peform analysis and optimization. 
-
-
-## Step 6: Prediction
-
-After 24 hours, the 
-
-## Bibliography (wip):
-
-1. Dawkins, Paul. "The Heat Equation." Paul's Online Notes, Lamar University, tutorial.math.lamar.edu/classes/de/theheatequation.aspx. Accessed 26 May 2026.
-
-1. "File:Maine Yankee Nuclear Power Plant.jpg." Wikimedia Commons. 12 Dec 2024, 03:31 UTC. <https://commons.wikimedia.org/w/index.php?title=File:Maine_Yankee_Nuclear_Power_Plant.jpg&oldid=969140195> 3 Jun 2026, 05:02. 
