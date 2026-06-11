@@ -9,7 +9,13 @@ website:
       - href: index.qmd
         text: Home
       - href: reactor_cooling_model_pt_1.qmd
-        text: Report Draft 1
+        text: Brainstorm 1
+      - href: brainstorm_2.qmd
+        text: Brainstorm 2
+      - href: brainstorm_3.qmd
+        text: Brainstorm 3
+      - href: U03_REPORT.qmd
+        text: U03_REPORT
       - href: CH_3_PROB_7_example.qmd
         text: Chapter Three, Problem Seven (HW Presentation)
   page-footer: 

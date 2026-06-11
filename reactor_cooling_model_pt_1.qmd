@@ -71,7 +71,7 @@ $\ln[T(t)]=c_1t+c_2$
 
 ## Step 5: Analysis and Optimization.
 
-Writing a python function to peform analysis and optimization. If you 
+Writing a python function to peform analysis and optimization. 
 
 ## Step 6: Prediction
 

@@ -352,8 +352,8 @@ def plotter(X, Y, n):
     exes = x_list(X, n)
 
     print(f"Least squares fitting coeffs: {LS2_coeffs}")
-    print(f" Chebyshev fit coeffs: {cheb_coeffs}")
-    print(f" Absolute deviation fit coeffs: {abs_dev_coeffs}")
+    print(f"Chebyshev fit coeffs: {cheb_coeffs}")
+    print(f"Absolute deviation fit coeffs: {abs_dev_coeffs}")
 
     LS2 = np.polyval(LS2_coeffs, exes)
     cheb = np.polyval(cheb_coeffs, exes)
@@ -364,28 +364,31 @@ def plotter(X, Y, n):
     xlab = "Hours passed from Reactor Shutdown"
     ylab = "Reactor temperature in $^{\\circ} C$"
 
-    plt.figure(figsize=(10, 20))
+    fig = plt.figure(figsize=(20, 40))
 
-    plt.subplot(3, 1, 1)
-    plt.scatter(X, Y)
-    plt.plot(exes, LS2, color="r")
-    plt.title("Least-Squares Fit")
-    plt.x_label = xlab
-    plt.ylabel = ylab
+    plt.rcParams["font.size"] = 32
+    # plt.rcParams["axes.labelpad"] = 4
 
-    plt.subplot(3, 1, 2)
-    plt.scatter(X, Y)
-    plt.plot(exes, cheb, color="y")
-    plt.title("Chebyshev Fit")
-    plt.xlabel = xlab
-    plt.ylabel = ylab
+    ax1 = plt.subplot(3, 1, 1)
+    ax1.scatter(X, Y)
+    ax1.plot(exes, LS2, color="r")
+    ax1.set_xlabel(xlab)
+    ax1.set_ylabel(ylab, rotation=0, labelpad=(225))
+    ax1.set_title("Least-Squares Fit")
 
-    plt.subplot(3, 1, 3)
+    ax2 = plt.subplot(3, 1, 2)
+    ax2.scatter(X, Y)
+    ax2.plot(exes, cheb, color="y")
+    ax2.set_xlabel(xlab)
+    ax2.set_ylabel(ylab, rotation=0, labelpad=(225))
+    ax2.set_title("Chebyshev Fit")
+
+    ax3 = plt.subplot(3, 1, 3)
     plt.scatter(X, Y)
     plt.plot(exes, absdev, color="b")
-    plt.title("Absolute Deviation Fit")
-    plt.xlabel = xlab
-    plt.ylabel = ylab
+    ax3.set_xlabel(xlab)
+    ax3.set_ylabel(ylab, rotation=0, labelpad=(225))
+    ax3.set_title("Absolute Deviation Fit")
 
 
 X = [1, 2, 3]

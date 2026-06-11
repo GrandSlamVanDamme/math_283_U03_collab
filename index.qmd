@@ -1,6 +1,6 @@
 ## Corey and Parker's Unit 3 Project 
 ### MATH283 Spring '26
-#### v.0.2
+#### v.0.8
 
 This is the homepage for the U03 project. We'll be modelling the cooling rate of a nuclear reactor. Use the directory above to navigate to different sections of the project. 
 

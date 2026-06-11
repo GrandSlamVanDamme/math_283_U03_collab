@@ -1,0 +1,7 @@
+---
+title: "Brainstorm 3"
+format: html
+jupyter: python3
+highlight-style: default
+code-block-bg: "#000000"
+---
