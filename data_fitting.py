@@ -21,7 +21,7 @@ import numpy as np
 import scipy as sci
 
 
-def main(X, Y, fit_type):
+def main(X, Y, func_type):
     """
     The big Huncho Grande Paparoni: fitting, error analysis, plotting.
     """
@@ -30,6 +30,8 @@ def main(X, Y, fit_type):
         "Please enter the fit type. Is it linear, polynomial, or exponential?"
     )
     """
+    fit_type = func_type
+
     # fit_type = "linear"
     if fit_type == "polynomial":
         n = int(
@@ -49,6 +51,10 @@ def main(X, Y, fit_type):
         import matplotlib.image as mpimg
 
         img = mpimg.imread("fat_rats/Joanna_Servaes_wikimedia_commons.webp")
+        plt.imshow(img)
+        plt.axis("off")
+        plt.imshow(img)
+        plt.axis("off")
         plt.imshow(img)
         plt.axis("off")
         plt.show()
