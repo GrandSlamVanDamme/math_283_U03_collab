@@ -12,48 +12,59 @@ author: Corey Silver
 date: 3/6/26 (Yuro Style)
 
 functions require numpy, scipy, matplotlib, sympy libraries
+
+debugging suggestions (frequently wrong) from gemini: https://gemini.google.com/share/de2be7b1f7ee
 """
 
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy as sci
-import sympy as sym
 
 
 def main(X, Y):
     """
     The big Huncho Grande Paparoni: fitting, error analysis, plotting.
     """
+    """
     fit_type = input(
         "Please enter the fit type. Is it linear, polynomial, or exponential?"
     )
-
+    """
+    fit_type = "linear"
     if fit_type == "polynomial":
         n = int(
             input("What degree of polynomial? Please give your answer as a numeral.")
         )
     if fit_type == "exponential":
-        X = np.log(X)
         Y = np.log(Y)
+        n = 1
+    if fit_type == "power":
+        Y = np.log(Y)
+        X = np.log(X)
         n = 1
     else:
         n = 1
 
     plotter(X, Y, n)
-    error_analyzer(fit_type)
+    error_analyzer(fit_type, X, Y, n)
 
 
-def error_analyzer(model_name):
+def error_analyzer(model_name, X, Y, n, k=-1):
     """
     prints results of least squares, chebyshev, and absolute deviation analyses for
-    type of model given by model_name
+    type of model given by model_name and degree given by n. For error up to an arbitrary point, edit indices
+    of the individual error functions. Default value of k is -1.
     """
     print(f"For the {model_name} model")
-    print(f"We found a least squares error of {leastsquerror(Y, LS2_fit(X, Y, n))[-1]}")
     print(
-        f"We found an absolute deviation error of {absdev_error(Y, absdev_fit(X, Y, n))[-1]}"
+        f"We found a least squares error of {leastsquerror(Y, np.polyval(LS2_fit(X, Y, n), X))[k]}"
     )
-    print(f"We found a Chebyshev error of {cheb_error(Y, chebyshevify(X, Y, n))}")
+    print(
+        f"We found an absolute deviation error of {absdev_error(Y, np.polyval(absdev_fit(X, Y, n), X))[k]}"
+    )
+    print(
+        f"We found a Chebyshev error of {cheb_error(Y, np.polyval(chebyshevify(X, Y, n), X))}"
+    )
 
 
 def leastsquerror(Y, F):
@@ -145,24 +156,24 @@ def objectivist(X, Y, n):
 
     mat_x = []
     mat_y = []
-
-    objective = []
+    x_list = []
 
     for Xi, Yi in zip(X, Y):
+        i = n
+
         rightrow = []
         leftrow = []
+        objective = []
         bounds = []
-        x_list = []
 
-        while n > -1:
-            rightrow.append(Xi**n)
-            leftrow.append(-(Xi**n))
-            x_list.append(Xi**n)
-
+        while i > -1:
             bounds.append((None, None))
             objective.append(0)
+            rightrow.append(Xi**i)
+            leftrow.append(-(Xi**i))
+            x_list.append(Xi**i)
 
-            n -= 1
+            i -= 1
 
         rightrow.append(-1)
         leftrow.append(-1)
@@ -171,11 +182,10 @@ def objectivist(X, Y, n):
         mat_y.append(Yi)
         mat_y.append(-Yi)
 
-    bounds[-1] = (0, None)
+    bounds.append((0, None))
     objective.append(1)
 
     barry = [objective, mat_x, mat_y, bounds, x_list]
-
     return barry
 
 
@@ -233,34 +243,79 @@ def chebyshevify(X, Y, n):
 
     barry = objectivist(X, Y, n)
 
-    result = sci.linprog(
+    result = sci.optimize.linprog(
         barry[0], A_ub=barry[1], b_ub=barry[2], bounds=barry[3], method="highs"
     )
 
-    cheb_fit = np.dot(x_list(X, n), (result.X).pop())
+    result = np.delete(result.x, -1)
 
-    return cheb_fit
+    return result
+
+
+def sum_maker(X, Y, n):
+    """
+    Takes two arrays, x = [data 1] and Y = [data 2]
+    and desired polynomial degree n. Returns a matrix of
+    sums of x values and a matrix of sums of y values
+    """
+
+    i = n
+
+    sum_list_you_got_there = []
+    neg_sum_list = []
+
+    while i > -1:
+        power_list = []
+        neg_pow_list = []
+
+        for Xi in X:
+            it = Xi**i
+            power_list.append(it)
+            neg_pow_list.append(-it)
+
+        sum_list_you_got_there.append(sum(power_list))
+        neg_sum_list.append(sum(neg_pow_list))
+
+        i -= 1
+
+    x_mat = [sum_list_you_got_there, neg_sum_list]
+    y_mat = [sum(Y), -sum(Y)]
+
+    return [x_mat, y_mat]
 
 
 def absdev_fit(X, Y, n):
     """
-    Takes two arrays, x = [data 1] and Y = [data 2].
-    fits model function
-    f(x) = c_n*x^n + c_(n-1)x^(n-1)+...c_0x^0 with n parameters
-    such that (sum|Yi-Fi|, i ϵ NN) is minimized.
-    returns f(x) as an array
+    takes X data and makes a list of powers
+    (X^n, X^n-1...),
+    dots it with undefined params to whip up
+    a cost function that absdev_fit
+    will minimize
+
+    #####################################################################################################################
+    ##  https://stackoverflow.com/questions/51883058/l1-norm-instead-of-l2-norm-for-cost-function-in-regression-model  ##
+    #####################################################################################################################
+
+    used as guideline and partial template
     """
 
-    barry = objectivist(X, Y, n)
+    def cost_func(params):
+        # sympy removal courtesy of gemini thread listed up top
+        # SciPy will plug the current numerical guess into 'params'
+        f = np.polyval(params, X)
+        # Return the L1 norm (sum of absolute deviations)
+        return np.sum(np.abs(Y - f))
 
-    A = sum(barry[1])
-    b = sum(barry[2])
+    """
+    f = np.polyval(params, X)
+    cost_func = np.sum(np.abs(Y - f))
+    """
 
-    result = sci.linprog(barry[0], A_ub=A, b_ub=b, bounds=barry[3], method="highs")
+    guess = (n + 1) * [1.0]
 
-    abs_dev_fit = np.dot(x_list(X, n), (result.X).pop())
+    result = sci.optimize.minimize(cost_func, guess, method="Nelder-Mead")
 
-    return abs_dev_fit
+    return result.x
 
 
 def LS2_fit(X, Y, n):
@@ -271,7 +326,7 @@ def LS2_fit(X, Y, n):
     such that (sum|Yi-Fi|^2, i ϵ NN) is minimized.
     returns f(x) as an array
     """
-    LS2 = np.linalg.multi_dot(np.polyfit(X, Y, n), x_list(X, n))
+    LS2 = np.polyfit(X, Y, n)
 
     return LS2
 
@@ -281,28 +336,50 @@ def x_list(X, n):
     takes X data and a polynomial degree n, returns linspaced list of X-powers
     from X^n to X^0.
     """
-    X = np.linspace(X[0], X[-1] + np.mean(X), 1000)
+    X = np.linspace(X[0], X[-1] + np.mean(X) / 1000, 1000)
 
-    exes = []
-    while n > -1:
-        exes.append(X**n)
-
-    return exes
+    return X
 
 
 def plotter(X, Y, n):
     """
     Plots different fit functions for a given data fit type (linear, poly, etc)
     """
-    LS2 = LS2_fit(X, Y, n)
-    cheb = chebyshevify(X, Y, n)
-    abs_dev = absdev_fit(X, Y, n)
+    LS2_coeffs = LS2_fit(X, Y, n)
+    cheb_coeffs = chebyshevify(X, Y, n)
+    abs_dev_coeffs = absdev_fit(X, Y, n)
 
+    exes = x_list(X, n)
+
+    print(f"Least squares fitting coeffs: {LS2_coeffs}")
+    print(f" Chebyshev fit coeffs: {cheb_coeffs}")
+    print(f" Absolute deviation fit coeffs: {abs_dev_coeffs}")
+
+    LS2 = np.polyval(LS2_coeffs, exes)
+    cheb = np.polyval(cheb_coeffs, exes)
+    absdev = np.polyval(abs_dev_coeffs, exes)
+
+    plt.figure(figsize=(10, 20))
+
+    plt.subplot(3, 1, 1)
     plt.scatter(X, Y)
-    plt.plot(X, LS2)
-    plt.plot(X, cheb)
-    plt.plot(X, abs_dev)
-    plt.legend()
+    plt.plot(exes, LS2, color="r")
+    plt.title("Least-Squares Fit")
+
+    plt.subplot(3, 1, 2)
+    plt.scatter(X, Y)
+    plt.plot(exes, cheb, color="y")
+    plt.title("Chebyshev Fit")
+
+    plt.subplot(3, 1, 3)
+    plt.scatter(X, Y)
+    plt.plot(exes, absdev, color="b")
+    plt.title("Absolute Deviation Fit")
 
 
-# In[ ]:
+X = [1, 2, 3]
+Y = [1, 2, 3]
+
+main(X, Y)
+
+# %%

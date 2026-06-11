@@ -71,6 +71,12 @@ $\ln[T(t)]=c_1t+c_2$
 
 ## Step 5: Analysis and Optimization.
 
+Writing a python function to peform analysis and optimization. If you 
+
+## Step 6: Prediction
+
+After 24 hours, the 
+
 ## Bibliography (wip):
 
 1. Dawkins, Paul. "The Heat Equation." Paul's Online Notes, Lamar University, tutorial.math.lamar.edu/classes/de/theheatequation.aspx. Accessed 26 May 2026.
