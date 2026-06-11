@@ -73,6 +73,7 @@ $\ln[T(t)]=c_1t+c_2$
 
 Writing a python function to peform analysis and optimization. 
 
+
 ## Step 6: Prediction
 
 After 24 hours, the 
