@@ -359,22 +359,33 @@ def plotter(X, Y, n):
     cheb = np.polyval(cheb_coeffs, exes)
     absdev = np.polyval(abs_dev_coeffs, exes)
 
+    # Labels so I don't have to type them thrice
+
+    xlab = "Hours passed from Reactor Shutdown"
+    ylab = "Reactor temperature in $^{\\circ} C$"
+
     plt.figure(figsize=(10, 20))
 
     plt.subplot(3, 1, 1)
     plt.scatter(X, Y)
     plt.plot(exes, LS2, color="r")
     plt.title("Least-Squares Fit")
+    plt.x_label = xlab
+    plt.ylabel = ylab
 
     plt.subplot(3, 1, 2)
     plt.scatter(X, Y)
     plt.plot(exes, cheb, color="y")
     plt.title("Chebyshev Fit")
+    plt.xlabel = xlab
+    plt.ylabel = ylab
 
     plt.subplot(3, 1, 3)
     plt.scatter(X, Y)
     plt.plot(exes, absdev, color="b")
     plt.title("Absolute Deviation Fit")
+    plt.xlabel = xlab
+    plt.ylabel = ylab
 
 
 X = [1, 2, 3]
