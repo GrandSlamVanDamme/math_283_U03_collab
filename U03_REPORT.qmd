@@ -22,25 +22,40 @@ Engineers are studying how quickly reactor components cool following shutdown.
 |12 | 290 |
 |18 | 230 |
 
+```{python}
 
-A large prediction error could affect cooling procedures and operational decisions.
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy as sci
+import pandas as pd
+import IPython.display as ipd
+from data_fitting import *
 
-Your team has been asked to recommend the best model and fitting strategy.
+X = [1, 2, 4, 8, 12, 18]
+Y = [580, 510, 430, 340, 290, 230]
+
+```
+
+"A large prediction error could affect cooling procedures and operational decisions.
+
+Your team has been asked to recommend the best model and fitting strategy."
 
 
-# Step 1: Identify the problem
+# Identification
 
-We need to reliably predict the temperature of the reactor (in K) from the time passed since shutoff (in minutes).
+We need to reliably predict the temperature of the reactor (in K) from the time passed since shutoff (in minutes). Since this is a live nuclear reactor, criticality is a prime safety concern.
 
 
-# Step 2: Assumptions
+# Assumptions and Simplifications
 
-1. bulk cooling rate/single substance component
-2. constant external temperature
-3. No other heat sources
-4. Reactor isn't operated until cooling is complete
+1. Bulk, uniform cooling rate: no regions of greater $T$ density
+1. Single substance component: single specific heat
+1. Constant external temperature
+1. Constant external humidity, pressure: We assume no weather.
+1. We assume the absence of other heat sources, ignoring the effect of sunlight.
+1. Reactor isn't operated until cooling is complete
 
-# Step 3: Variables and Parameters
+# Variables and Parameters
 
 $T_R$ is the reactor temperature.
 
@@ -50,27 +65,46 @@ $t$ is the time from shutdown in hours.
 
 That's it! While a high-fidelity model would and could account for the specific heats of individual reactor components, the role of humidity in cooling, and the stochastic nature of thermodynamic processes, this problem is small in scope. We will start, at least, from a basic model of heat transfer. This is most appropriate for the limited data we have on the situation.
 
-
-
-# Step 4: Model Development
+# Model Development
 We'll test optimized Chebyshev, Least-Squares, and Absolute-Deviation fits of the following models: 
 ## Linear:
 
 Of form $T(t)=c_1\cdot t + c_2$.
 
+```{python}
+from data_fitting import *
+
+plotter(X, Y, 1, "linear")
+
+
+```
+
 ## Polynomial: 
 
 Of form $T(t)=c_1t^n + c_2t^{n-1} +...+c_kt^0$. 
 
-We'll limit $n$ and $k$ to three or four, at most, since we don't want to overfit.
+We'll limit $n$ and $k$ to three or four, at most, since we don't want to overfit. We'll begin with a quadratic fit.
 
 ## Exponential decay:
 
 Of form $T(t) = (c_2)e^{c_1t}$ ($c_2$ is negative).
 
-We'll linearize this so that it can be optimized with linear programming. taking the natural log of both sides give us
+We'll linearize this so that it can be optimized with linear programming. taking the natural log of both sides gives us
 
-$\ln[T(t)]=c_1t+c_2$
+$$
+\ln[T(t)]=c_1t+c_2.
+$$
+
+## Power model:
+
+Of form $T(t) = (c_2)^{c_1t}$
+
+We'll linearize this sort of model in the same way, also giving us
+
+$$
+\ln[T(t)]=c_1t+c_2.
+$$
+
 
 
 ## Bibliography (wip):
