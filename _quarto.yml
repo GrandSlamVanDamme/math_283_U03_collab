@@ -23,5 +23,8 @@ website:
     left: "Corey Silver and Parker Lee BYU-I 2026©"
 format:
   html:
-    theme: default   # This strips out Quarto's default modern themes
-    css: styles.css  # This injects your retro styling
+    toc: true
+    number-sections: true
+    number-depth: 3
+    theme: default   # This strips out the default
+    css: styles.css  

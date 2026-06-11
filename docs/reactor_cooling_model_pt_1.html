@@ -104,7 +104,7 @@ window.Quarto = {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -156,7 +156,24 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#scenario-cooling-performance-during-reactor-shutdown" id="toc-scenario-cooling-performance-during-reactor-shutdown" class="nav-link active" data-scroll-target="#scenario-cooling-performance-during-reactor-shutdown"><span class="header-section-number">0.0.1</span> Scenario: Cooling Performance During Reactor Shutdown</a></li>
+  <li><a href="#measurements" id="toc-measurements" class="nav-link" data-scroll-target="#measurements"><span class="header-section-number">1</span> Measurements:</a></li>
+  <li><a href="#step-1-identify-the-problem" id="toc-step-1-identify-the-problem" class="nav-link" data-scroll-target="#step-1-identify-the-problem"><span class="header-section-number">2</span> Step 1: Identify the problem</a></li>
+  <li><a href="#step-2-assumptions" id="toc-step-2-assumptions" class="nav-link" data-scroll-target="#step-2-assumptions"><span class="header-section-number">3</span> Step 2: Assumptions</a></li>
+  <li><a href="#step-3-variables-and-parameters" id="toc-step-3-variables-and-parameters" class="nav-link" data-scroll-target="#step-3-variables-and-parameters"><span class="header-section-number">4</span> Step 3: Variables and Parameters</a></li>
+  <li><a href="#step-4-model-development" id="toc-step-4-model-development" class="nav-link" data-scroll-target="#step-4-model-development"><span class="header-section-number">5</span> Step 4: Model Development</a>
+  <ul class="collapse">
+  <li><a href="#polynomial" id="toc-polynomial" class="nav-link" data-scroll-target="#polynomial"><span class="header-section-number">5.1</span> Polynomial:</a></li>
+  <li><a href="#exponential-decay" id="toc-exponential-decay" class="nav-link" data-scroll-target="#exponential-decay"><span class="header-section-number">5.2</span> Exponential decay:</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -180,12 +197,12 @@ window.Quarto = {
 
 
 <p>Follow the 8-step modeling process as you brainstorm with your team. When you write up your final report be sure to use section headers, well developed paragraphs, well labeled graphs, clear explanations of the mathematics, etc. Unit 03 Report will be a Team Report. For this assignment (U03 Modeling Process and Collaboration Part I) turn in your brainstorming for steps 1-4 of the process.</p>
-<section id="scenario-cooling-performance-during-reactor-shutdown" class="level3">
-<h3 class="anchored" data-anchor-id="scenario-cooling-performance-during-reactor-shutdown">Scenario: Cooling Performance During Reactor Shutdown</h3>
+<section id="scenario-cooling-performance-during-reactor-shutdown" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1" class="anchored" data-anchor-id="scenario-cooling-performance-during-reactor-shutdown"><span class="header-section-number">0.0.1</span> Scenario: Cooling Performance During Reactor Shutdown</h3>
 <p>Engineers are studying how quickly reactor components cool following shutdown.</p>
 </section>
-<section id="measurements" class="level1">
-<h1>Measurements:</h1>
+<section id="measurements" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Measurements:</h1>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -223,12 +240,12 @@ window.Quarto = {
 <p>A large prediction error could affect cooling procedures and operational decisions.</p>
 <p>Your team has been asked to recommend the best model and fitting strategy.</p>
 </section>
-<section id="step-1-identify-the-problem" class="level1">
-<h1>Step 1: Identify the problem</h1>
+<section id="step-1-identify-the-problem" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Step 1: Identify the problem</h1>
 <p>We need to reliably predict the temperature of the reactor (in K) from the time passed since shutoff (in minutes).</p>
 </section>
-<section id="step-2-assumptions" class="level1">
-<h1>Step 2: Assumptions</h1>
+<section id="step-2-assumptions" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Step 2: Assumptions</h1>
 <ol type="1">
 <li>bulk cooling rate/single substance component</li>
 <li>constant external temperature</li>
@@ -236,24 +253,24 @@ window.Quarto = {
 <li>Reactor isn’t operated until cooling is complete</li>
 </ol>
 </section>
-<section id="step-3-variables-and-parameters" class="level1">
-<h1>Step 3: Variables and Parameters</h1>
+<section id="step-3-variables-and-parameters" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Step 3: Variables and Parameters</h1>
 <p><span class="math inline">\(T_R\)</span> is the reactor temperature.</p>
 <p><span class="math inline">\(T_E\)</span> is the external tremperature</p>
 <p><span class="math inline">\(t\)</span> is the time from shutdown in hours.</p>
 <p>That’s it! While a high-fidelity model would and could account for the specific heats of individual reactor components, the role of humidity in cooling, and the stochastic nature of thermodynamic processes, this problem is small in scope. We will start, at least, from a basic model of heat transfer. This is most appropriate for the limited data we have on the situation.</p>
 </section>
-<section id="step-4-model-development" class="level1">
-<h1>Step 4: Model Development</h1>
+<section id="step-4-model-development" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Step 4: Model Development</h1>
 <p>We’ll test optimized Chebyshev, Least-Squares, and Absolute-Deviation fits of the following models: ## Linear:</p>
 <p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
-<section id="polynomial" class="level2">
-<h2 class="anchored" data-anchor-id="polynomial">Polynomial:</h2>
+<section id="polynomial" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="polynomial"><span class="header-section-number">5.1</span> Polynomial:</h2>
 <p>Of form <span class="math inline">\(T(t)=c_1t^n + c_2t^{n-1} +...+c_kt^0\)</span>.</p>
 <p>We’ll limit <span class="math inline">\(n\)</span> and <span class="math inline">\(k\)</span> to three or four, at most, since we don’t want to overfit.</p>
 </section>
-<section id="exponential-decay" class="level2">
-<h2 class="anchored" data-anchor-id="exponential-decay">Exponential decay:</h2>
+<section id="exponential-decay" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="exponential-decay"><span class="header-section-number">5.2</span> Exponential decay:</h2>
 <p>Of form <span class="math inline">\(T(t) = (c_2)e^{c_1t}\)</span> (<span class="math inline">\(c_2\)</span> is negative).</p>
 <p>We’ll linearize this so that it can be optimized with linear programming. taking the natural log of both sides give us</p>
 <p><span class="math inline">\(\ln[T(t)]=c_1t+c_2\)</span></p>
