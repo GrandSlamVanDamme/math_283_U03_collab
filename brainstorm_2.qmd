@@ -22,15 +22,14 @@ from data_fitting import *
 X = [1,2,4,8,12,18]
 Y = [580, 510, 430, 340, 290, 230]
 
-main(X, Y, "exponential")
+main(X, Y)
 ```
 
-```{python}
+From the analysis it's pretty clear that we have a power/exponential decay.
 
-main(X, Y, "linearl")
-
-```
 
 ## Step 6: Prediction
 
-After 24 hours, the 
+
+Using cheby because it's a nuclear reactor and the worst case scenario is catastrophic.
+

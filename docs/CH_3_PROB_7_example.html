@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -104,6 +104,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -255,7 +258,7 @@ window.Quarto = {
 <li><p>We’ll use the <code>error_analyzer()</code> function from the <code>data_fitting.py</code> file (original work copyright 2026) to obtain the cumulative LS2 error. This file is available via <a href="https://github.com/GrandSlamVanDamme/math_283_U03_collab">public github repo</a>.</p></li>
 <li><p>We’ll plot the original data against the lines of fit for a visual comparison.</p></li>
 </ol>
-<div id="5c71278b" class="cell" data-execution_count="1">
+<div id="24ca7fd4" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># import the packages we need:</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -320,10 +323,65 @@ window.Quarto = {
 <span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="co">each corresponding to the coefficient of</span></span>
 <span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="co">x**n.</span></span>
 <span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">ERROR TABLE FOR REACTOR COOLING MODELS</th>
+<th data-quarto-table-cell-role="th">Optimization Types</th>
+<th data-quarto-table-cell-role="th">Least Squares</th>
+<th data-quarto-table-cell-role="th">Absolute Deviation</th>
+<th data-quarto-table-cell-role="th">Chebyshev</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Fit Types (note: polynomial degree = 2)</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>linear</td>
+<td>8466.511988</td>
+<td>194.000050</td>
+<td>47.941176</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>polynomial</td>
+<td>1430.411411</td>
+<td>196.910783</td>
+<td>19.350649</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>power</td>
+<td>0.019926</td>
+<td>0.272959</td>
+<td>0.072193</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>exponential</td>
+<td>0.000719</td>
+<td>0.051744</td>
+<td>0.013584</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/ds/63b_7b1n3wx7f9wg6r78c57w0000gn/T/ipykernel_56051/1147187601.py:49: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+<pre><code>/var/folders/ds/63b_7b1n3wx7f9wg6r78c57w0000gn/T/ipykernel_62617/1147187601.py:49: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
   plt.legend()
-/var/folders/ds/63b_7b1n3wx7f9wg6r78c57w0000gn/T/ipykernel_56051/1147187601.py:55: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+/var/folders/ds/63b_7b1n3wx7f9wg6r78c57w0000gn/T/ipykernel_62617/1147187601.py:55: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
   plt.legend()</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="1">
@@ -332,14 +390,14 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="CH_3_PROB_7_example_files/figure-html/cell-2-output-3.png" width="781" height="434" class="figure-img"></p>
+<p><img src="CH_3_PROB_7_example_files/figure-html/cell-2-output-4.png" width="781" height="434" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Here are our results.</p>
 <p>First, let’s look at the linear fit <span class="math inline">\(f(x)=c_1x+c_2\)</span>.</p>
-<div id="2590b3d5" class="cell" data-execution_count="2">
+<div id="1d994c11" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'RESULTS'</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>get_coeffs(X, Y, <span class="dv">1</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
@@ -353,7 +411,7 @@ We found a least squares error of 2.7000000000000006</code></pre>
 </div>
 </div>
 <p>Now, let’s see if the quadratic fit <span class="math inline">\(f(x)=c_1x^2+c_2x+c_3\)</span> looks any better.</p>
-<div id="c6754abe" class="cell" data-execution_count="3">
+<div id="5cb7c6ca" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'RESULTS'</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>get_coeffs(X, Y, <span class="dv">2</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>

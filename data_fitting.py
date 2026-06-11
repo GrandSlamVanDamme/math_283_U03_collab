@@ -19,24 +19,62 @@ debugging suggestions (frequently wrong) from gemini: https://gemini.google.com/
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy as sci
+import pandas as pd
+import IPython.display as ipd
 
 
-def main(X, Y, func_type):
+def main(X, Y):
     """
     The big Huncho Grande Paparoni: fitting, error analysis, plotting.
     """
-    """
-    fit_type = input(
-        "Please enter the fit type. Is it linear, polynomial, or exponential?"
+    func_types = ["linear", "polynomial", "power", "exponential"]
+
+    table_list = []
+
+    for func in func_types:
+        f = functionator(X, Y, func)
+        X, Y, n, func_type = f[0:5]
+
+        # plotter(X, Y, n, func_type)
+        entry = error_analyzer(X, Y, n)
+        entry.insert(0, func_type)
+        table_list.append(entry)
+
+    table_du_fromage = pd.DataFrame(
+        table_list,
+        columns=[
+            "Optimization Types",
+            "Least Squares",
+            "Absolute Deviation",
+            "Chebyshev",
+        ],
     )
+
+    table_du_fromage.index.name = (
+        f"Fit Types (note: polynomial degree = {functionator(X, Y, 'polynomial')[2]})"
+    )
+    table_du_fromage.columns.name = "ERROR TABLE FOR REACTOR COOLING MODELS"
+    table_du_fromage.style.hide(axis="index")
+
+    display(table_du_fromage)
+
+    ipd.Markdown(table_du_fromage.to_markdown(index=False))
+
+
+def functionator(X, Y, func_type):
+    """
+    Takes X, Y, n, and func type.
+    Modifies X and Y if needed
+    returns X, Y, n, func_type as list
     """
     fit_type = func_type
 
-    # fit_type = "linear"
+    # poly_deg =  int(input("What degree of polynomial? Please give your answer as a numeral."))
+
+    poly_deg = 2
+
     if fit_type == "polynomial":
-        n = int(
-            input("What degree of polynomial? Please give your answer as a numeral.")
-        )
+        n = poly_deg
     elif fit_type == "exponential":
         Y = np.log(Y)
         n = 1
@@ -62,26 +100,34 @@ def main(X, Y, func_type):
         fit_type = None
         return
 
-    plotter(X, Y, n)
-    error_analyzer(fit_type, X, Y, n)
+    return [X, Y, n, fit_type]
 
 
-def error_analyzer(model_name, X, Y, n, k=-1):
+def error_analyzer(X, Y, n, k=-1):
     """
     prints results of least squares, chebyshev, and absolute deviation analyses for
     type of model given by model_name and degree given by n. For error up to an arbitrary point, edit indices
     of the individual error functions. Default value of k is -1.
     """
+
+    LS2 = leastsquerror(Y, np.polyval(LS2_fit(X, Y, n), X))[k]
+    AbsDev = absdev_error(Y, np.polyval(absdev_fit(X, Y, n), X))[k]
+    Cheby = cheb_error(Y, np.polyval(chebyshevify(X, Y, n), X))
+
+    """
     print(f"For the {model_name} model")
     print(
-        f"We found a least squares error of {leastsquerror(Y, np.polyval(LS2_fit(X, Y, n), X))[k]}"
+        f"We found a least squares error of {LS2}"
     )
     print(
-        f"We found an absolute deviation error of {absdev_error(Y, np.polyval(absdev_fit(X, Y, n), X))[k]}"
+        f"We found an absolute deviation error of {AbsDev}"
     )
     print(
-        f"We found a Chebyshev error of {cheb_error(Y, np.polyval(chebyshevify(X, Y, n), X))}"
+        f"We found a Chebyshev error of {Cheby}"
     )
+    """
+
+    return [LS2, AbsDev, Cheby]
 
 
 def leastsquerror(Y, F):
@@ -358,7 +404,7 @@ def x_list(X, n):
     return X
 
 
-def plotter(X, Y, n):
+def plotter(X, Y, n, func_type):
     """
     Plots different fit functions for a given data fit type (linear, poly, etc)
     """
@@ -381,7 +427,8 @@ def plotter(X, Y, n):
     xlab = "Hours passed from Reactor Shutdown"
     ylab = "Reactor temperature in $^{\\circ} C$"
 
-    fig = plt.figure(figsize=(20, 40))
+    print(f"Below are the optimizations for a {func_type} fit")
+    plt.figure(figsize=(20, 40))
 
     plt.rcParams["font.size"] = 32
     # plt.rcParams["axes.labelpad"] = 4
@@ -407,5 +454,43 @@ def plotter(X, Y, n):
     ax3.set_ylabel(ylab, rotation=0, labelpad=(225))
     ax3.set_title("Absolute Deviation Fit")
 
+
+def temp_finder(X, Y):
+    """
+    Takes X, Y, then obtains
+    user input for time since
+    reactor shutdown (Will add this feature later).
+    Returns projected temp
+    as calculated from Chebyshev-optimized
+    exponential fit
+    """
+
+    """
+    x = float(input("How many hours has it been since the reactor shut down"))
+    """
+
+    x = 24
+    X, Y, n = functionator(X, Y, "exponential")[0:3]
+
+    LS2_coeffs = LS2_fit(X, Y, n)
+    cheb_coeffs = chebyshevify(X, Y, n)
+    abs_dev_coeffs = absdev_fit(X, Y, n)
+
+    LS2 = np.polyval(LS2_coeffs, x)
+    cheb = np.polyval(cheb_coeffs, x)
+    absdev = np.polyval(abs_dev_coeffs, x)
+
+    T = f"After {x} hours, we project an estimated reactor temperature of {cheb:.3f} degrees centigrade."
+
+    return T
+
+
+X = [1, 2, 4, 8, 12, 18]
+Y = [580, 510, 430, 340, 290, 230]
+
+
+main(X, Y)
+
+temp_finder(X, Y)
 
 # %%
