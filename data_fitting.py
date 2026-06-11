@@ -37,14 +37,14 @@ def main(X, Y, func_type):
         n = int(
             input("What degree of polynomial? Please give your answer as a numeral.")
         )
-    if fit_type == "exponential":
+    elif fit_type == "exponential":
         Y = np.log(Y)
         n = 1
-    if fit_type == "power":
+    elif fit_type == "power":
         Y = np.log(Y)
         X = np.log(X)
         n = 1
-    if fit_type == "linear":
+    elif fit_type == "linear":
         n = 1
     else:
         print("Request cannot be completed, defaulting to rat")

@@ -6,7 +6,7 @@ highlight-style: default
 code-block-bg: "#000000"
 ---
 
-# I'm still not clear on what these brainstorming assignments are supposed to contain or what purpose they serve and at this point it's on me for not asking earlier.
+# I'm still not clear on what these brainstorming assignments are supposed to contain or what purpose they serve and at this point it's on me for not asking earlier- you said that they're just progress markers but they also have specific instructions that would be hard to fulfill without finishing the report first. Are we supposed to upload essentially identical assignments in two different places, but with one of them in pieces?
 
 ## Step 5: Analysis and Optimization.
 
@@ -25,6 +25,11 @@ Y = [580, 510, 430, 340, 290, 230]
 main(X, Y, "exponential")
 ```
 
+```{python}
+
+main(X, Y, "linearl")
+
+```
 
 ## Step 6: Prediction
 
