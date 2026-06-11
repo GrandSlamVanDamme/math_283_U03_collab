@@ -59,6 +59,7 @@ def main(X, Y, func_type):
         plt.axis("off")
         plt.show()
 
+        fit_type = None
         return
 
     plotter(X, Y, n)
