@@ -21,15 +21,15 @@ import numpy as np
 import scipy as sci
 
 
-def main(X, Y):
+def main(X, Y, fit_type):
     """
     The big Huncho Grande Paparoni: fitting, error analysis, plotting.
     """
-
+    """
     fit_type = input(
         "Please enter the fit type. Is it linear, polynomial, or exponential?"
     )
-
+    """
     # fit_type = "linear"
     if fit_type == "polynomial":
         n = int(
@@ -53,7 +53,7 @@ def main(X, Y):
         plt.axis("off")
         plt.show()
 
-        break
+        return
 
     plotter(X, Y, n)
     error_analyzer(fit_type, X, Y, n)

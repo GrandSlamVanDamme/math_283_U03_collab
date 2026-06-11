@@ -22,7 +22,7 @@ from data_fitting import *
 X = [1,2,4,8,12,18]
 Y = [580, 510, 430, 340, 290, 230]
 
-main(X, Y)
+main(X, Y, "rat")
 
 
 ```

@@ -255,7 +255,7 @@ window.Quarto = {
 <li><p>We’ll use the <code>error_analyzer()</code> function from the <code>data_fitting.py</code> file (original work copyright 2026) to obtain the cumulative LS2 error. This file is available via <a href="https://github.com/GrandSlamVanDamme/math_283_U03_collab">public github repo</a>.</p></li>
 <li><p>We’ll plot the original data against the lines of fit for a visual comparison.</p></li>
 </ol>
-<div id="4bc71d06" class="cell" data-execution_count="1">
+<div id="9c4d990d" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># import the packages we need:</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -320,19 +320,10 @@ window.Quarto = {
 <span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="co">each corresponding to the coefficient of</span></span>
 <span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="co">x**n.</span></span>
 <span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Least squares fitting coeffs: [1.00000000e+00 7.69185075e-16]
-Chebyshev fit coeffs: [1. 0.]
-Absolute deviation fit coeffs: [ 1.00000975e+00 -2.54998544e-05]
-For the linear model
-We found a least squares error of 8.38164711797325e-31
-We found an absolute deviation error of 2.5499854359067875e-05
-We found a Chebyshev error of 0.0</code></pre>
-</div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/ds/63b_7b1n3wx7f9wg6r78c57w0000gn/T/ipykernel_52122/1147187601.py:49: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+<pre><code>/var/folders/ds/63b_7b1n3wx7f9wg6r78c57w0000gn/T/ipykernel_53934/1147187601.py:49: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
   plt.legend()
-/var/folders/ds/63b_7b1n3wx7f9wg6r78c57w0000gn/T/ipykernel_52122/1147187601.py:55: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+/var/folders/ds/63b_7b1n3wx7f9wg6r78c57w0000gn/T/ipykernel_53934/1147187601.py:55: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
   plt.legend()</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="1">
@@ -341,25 +332,18 @@ We found a Chebyshev error of 0.0</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="CH_3_PROB_7_example_files/figure-html/cell-2-output-4.png" width="2194" height="3123" class="figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="CH_3_PROB_7_example_files/figure-html/cell-2-output-5.png" width="856" height="497" class="figure-img"></p>
+<p><img src="CH_3_PROB_7_example_files/figure-html/cell-2-output-3.png" width="781" height="434" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Here are our results.</p>
 <p>First, let’s look at the linear fit <span class="math inline">\(f(x)=c_1x+c_2\)</span>.</p>
-<div id="8e47a11c" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'RESULTS'</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>get_coeffs(X, Y, <span class="dv">1</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"We found a least squares error of </span><span class="sc">{</span>leastsquerror(Y, F1)[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="79e3a9eb" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'RESULTS'</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>get_coeffs(X, Y, <span class="dv">1</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"We found a least squares error of </span><span class="sc">{</span>leastsquerror(Y, F1)[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>RESULTS
 c_1=0.9000000000000002
@@ -369,11 +353,11 @@ We found a least squares error of 2.7000000000000006</code></pre>
 </div>
 </div>
 <p>Now, let’s see if the quadratic fit <span class="math inline">\(f(x)=c_1x^2+c_2x+c_3\)</span> looks any better.</p>
-<div id="5da82981" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'RESULTS'</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>get_coeffs(X, Y, <span class="dv">2</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"We found a least squares error of </span><span class="sc">{</span>leastsquerror(Y, F2)[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="c0234ae7" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'RESULTS'</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>get_coeffs(X, Y, <span class="dv">2</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"We found a least squares error of </span><span class="sc">{</span>leastsquerror(Y, F2)[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>RESULTS
 c_1=0.3571428571428587
