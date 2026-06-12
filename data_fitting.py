@@ -404,9 +404,11 @@ def x_list(X, n):
     return X
 
 
-def plotter(X, Y, n, func_type):
+def fitter_happier_better(X, Y, n):
     """
-    Plots different fit functions for a given data fit type (linear, poly, etc)
+    Takes X, Y, and polynomial degree n.
+    Grabs coefficients from the fit generators
+    and returns arrays of actual function output.
     """
     LS2_coeffs = LS2_fit(X, Y, n)
     cheb_coeffs = chebyshevify(X, Y, n)
@@ -421,6 +423,18 @@ def plotter(X, Y, n, func_type):
     LS2 = np.polyval(LS2_coeffs, exes)
     cheb = np.polyval(cheb_coeffs, exes)
     absdev = np.polyval(abs_dev_coeffs, exes)
+
+    return [exes, LS2, cheb, absdev]
+
+
+def plotter(X, Y, n, func_type):
+    """
+    Plots different fit functions for a given data fit type (linear, poly, etc)
+    """
+    exes = fitter_happier_better(X, Y, n)[0]
+    LS2 = fitter_happier_better(X, Y, n)[1]
+    cheb = fitter_happier_better(X, Y, n)[2]
+    absdev = fitter_happier_better(X, Y, n)[3]
 
     # Labels so I don't have to type them thrice
 
@@ -472,13 +486,13 @@ def temp_finder(X, Y):
     x = 24
     X, Y, n = functionator(X, Y, "exponential")[0:3]
 
-    LS2_coeffs = LS2_fit(X, Y, n)
+    # LS2_coeffs = LS2_fit(X, Y, n)
     cheb_coeffs = chebyshevify(X, Y, n)
-    abs_dev_coeffs = absdev_fit(X, Y, n)
+    # abs_dev_coeffs = absdev_fit(X, Y, n)
 
-    LS2 = np.polyval(LS2_coeffs, x)
+    # LS2 = np.polyval(LS2_coeffs, x)
     cheb = np.polyval(cheb_coeffs, x)
-    absdev = np.polyval(abs_dev_coeffs, x)
+    # absdev = np.polyval(abs_dev_coeffs, x)
 
     T = f"After {x} hours, we project an estimated reactor temperature of {cheb:.3f} degrees centigrade."
 
