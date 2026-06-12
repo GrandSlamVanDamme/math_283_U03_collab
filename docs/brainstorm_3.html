@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -70,6 +105,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -126,8 +190,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#histograms" id="toc-histograms" class="nav-link active" data-scroll-target="#histograms"><span class="header-section-number">1</span> 1.6 Histograms</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -151,8 +221,1141 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<div id="3fbaa1f6" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Reveal Secrets</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"hello"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>theobromine <span class="op">=</span> {<span class="st">"C"</span>: <span class="dv">7</span>, <span class="st">"H"</span>: <span class="dv">8</span>, <span class="st">"N"</span>: <span class="dv">4</span>, <span class="st">"O"</span>: <span class="dv">2</span>}</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>element_mass <span class="op">=</span> {<span class="st">"C"</span>: <span class="fl">12.011</span>, <span class="st">"H"</span>: <span class="fl">1.008</span>, <span class="st">"N"</span>: <span class="fl">14.007</span>, <span class="st">"O"</span>: <span class="fl">15.999</span>}</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>element_color <span class="op">=</span> {<span class="st">"C"</span>: <span class="st">"grey"</span>, <span class="st">"H"</span>: <span class="st">"white"</span>, <span class="st">"N"</span>: <span class="st">"blue"</span>, <span class="st">"O"</span>: <span class="st">"red"</span>}</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>masses <span class="op">=</span> {el: count <span class="op">*</span> element_mass[el] <span class="cf">for</span> el, count <span class="kw">in</span> theobromine.items()}</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>m_mass <span class="op">=</span> <span class="bu">sum</span>(masses.values())</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>symbols <span class="op">=</span> <span class="bu">list</span>(theobromine.keys())</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>sizes <span class="op">=</span> [masses[el] <span class="op">/</span> m_mass <span class="cf">for</span> el <span class="kw">in</span> symbols]</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [element_color[el] <span class="cf">for</span> el <span class="kw">in</span> symbols]</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>ax.pie(</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    sizes, labels<span class="op">=</span>symbols, colors<span class="op">=</span>colors, autopct<span class="op">=</span><span class="st">"</span><span class="sc">%.2f%%</span><span class="st">"</span>, shadow<span class="op">=</span><span class="va">True</span>, startangle<span class="op">=</span><span class="dv">140</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Mass Percent Composition of Theobromine"</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>plt.xkcd()</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>plt.show</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>hello</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="brainstorm_3_files/figure-html/cell-2-output-2.png" width="463" height="483" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="histograms" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 1.6 Histograms</h1>
+<div id="aa8a7631" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Reveal Secrets</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lab1 <span class="op">=</span> np.load(<span class="st">"../../../290R_Spring_26_grading_chem/W08_Thursday_lesson/Lab1_tests.npy"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>lab2 <span class="op">=</span> np.load(<span class="st">"../../../290R_Spring_26_grading_chem/W08_Thursday_lesson/Lab2_tests.npy"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">3</span>, figsize <span class="op">=</span> (<span class="dv">8</span>,<span class="dv">3</span>))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].hist(lab1, bins<span class="op">=</span><span class="dv">20</span>, density<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].hist(lab1, bins<span class="op">=</span><span class="dv">20</span>, density<span class="op">=</span><span class="va">True</span>, cumulative <span class="op">=</span> <span class="va">True</span>, alpha <span class="op">=</span> <span class="fl">0.3</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].hist(lab2, bins <span class="op">=</span><span class="dv">100</span>, orientation <span class="op">=</span> <span class="st">"horizontal"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].hist([lab1, lab2], bins <span class="op">=</span> <span class="dv">50</span>, label <span class="op">=</span> [<span class="st">"Lab1"</span>, <span class="st">"Lab2"</span>])</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].legend(fontsize <span class="op">=</span> <span class="dv">6</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="brainstorm_3_files/figure-html/cell-3-output-2.png" width="669" height="276" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math inline">\(3d_{x^2-y^2}=R_{n=3, l=2}(r)Y^2_2(\theta, \phi)\)</span></p>
+<p><span class="math inline">\(Y^2_2(\theta, \phi)=\sqrt{\frac{15}{16\pi}}\sin^2(\theta)\cos(2\phi)\)</span></p>
+<p>Plot is 2D bc fixing <span class="math inline">\(\theta\)</span> at <span class="math inline">\(\frac{\pi}{2}\)</span>.</p>
+<p><span class="math inline">\(Y^2_2(\theta=\frac{\pi}{2}, \phi)=\sqrt{\frac{15}{16\pi}}\sin^2(\theta)\cos(2\phi)\)</span></p>
+<div id="393ce186" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Reveal Secrets</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>phi <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span><span class="op">*</span>np.pi, <span class="dv">500</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>norm <span class="op">=</span> np.sqrt(<span class="dv">15</span><span class="op">/</span>(<span class="dv">16</span><span class="op">*</span>np.pi))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> norm <span class="op">*</span> np.cos(<span class="dv">2</span><span class="op">*</span>phi)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>y_pos <span class="op">=</span> np.where(Y<span class="op">&gt;</span><span class="dv">0</span>, Y, np.nan)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>y_neg <span class="op">=</span> np.where(Y<span class="op">&lt;</span><span class="dv">0</span>, <span class="op">-</span>Y, np.nan)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> ((<span class="dv">7</span>,<span class="dv">7</span>)))</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection <span class="op">=</span> <span class="st">"polar"</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>ax.plot(phi, y_pos, color <span class="op">=</span> <span class="st">"tab:blue"</span>, linewidth <span class="op">=</span> <span class="dv">2</span>, label <span class="op">=</span> <span class="st">"positive lobe"</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>ax.plot(phi, y_neg, color <span class="op">=</span> <span class="st">"tab:orange"</span>, linewidth <span class="op">=</span> <span class="dv">2</span>, label <span class="op">=</span> <span class="st">"negative lobe"</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"2D Polar Projection at </span><span class="dv">$</span><span class="vs">3d_{x</span><span class="dv">^</span><span class="vs">2-y</span><span class="dv">^</span><span class="vs">2}</span><span class="dv">$</span><span class="vs"> Spherical harmonic"</span>, pad <span class="op">=</span> <span class="dv">20</span>)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>ax.legend(loc <span class="op">=</span> <span class="st">"upper right"</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>ax.set_rlim((<span class="dv">0</span>, <span class="fl">0.6</span>))</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="brainstorm_3_files/figure-html/cell-4-output-2.png" width="614" height="650" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math inline">\(\psi = \sqrt{\frac{2}{a}}\sin(\frac{n\pi x}{a})\sqrt{\frac{2}{b}}\sin(\frac{n\pi x}{b})\)</span></p>
+<p>Where <span class="math inline">\(a, b\)</span> are the dimensions of the membrane and <span class="math inline">\(n,m\)</span> control the oscillation frequencies along the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> directions.</p>
+<div id="342e46f2" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Reveal Secrets</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span><span class="dv">5</span>,<span class="dv">7</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>n,m <span class="op">=</span> <span class="dv">1</span>,<span class="dv">2</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, a, <span class="dv">500</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="dv">0</span>, b, <span class="dv">500</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> np.meshgrid(x,y)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>psi <span class="op">=</span> np.sqrt(<span class="dv">2</span><span class="op">/</span>a) <span class="op">*</span> np.sin(n<span class="op">*</span>np.pi<span class="op">*</span>x<span class="op">/</span>a) <span class="op">*</span> np.sqrt(<span class="dv">2</span><span class="op">/</span>b) <span class="op">*</span> np.sin(m<span class="op">*</span>np.pi<span class="op">*</span>y<span class="op">/</span>b)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>,<span class="dv">4</span>))</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">121</span>, projection <span class="op">=</span> <span class="st">"3d"</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">122</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>surface <span class="op">=</span> ax1.plot_surface(x, y, psi, cmap <span class="op">=</span> <span class="st">"viridis"</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>contour <span class="op">=</span> ax2.contour(x,y, psi)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>fig.colorbar(surface, ax <span class="op">=</span> ax2, </span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>            location <span class="op">=</span> <span class="st">'left'</span>,</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>            aspect <span class="op">=</span> <span class="dv">10</span>,</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>            pad <span class="op">=</span> <span class="fl">.2</span>,</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>            label <span class="op">=</span> <span class="st">"Amplitude"</span>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>plt.clabel(contour, inline<span class="op">=</span><span class="va">True</span>, fontsize<span class="op">=</span> <span class="dv">6</span>)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">'a'</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">'b'</span>)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>ax1.set_zlabel(<span class="st">'wave amplitude'</span>)</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">'2D Standing Wave'</span>)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">'a'</span>)</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'b'</span>)</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">'Wave Contour Plot'</span>)</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>plt.tight_layout</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.
+findfont: Font family 'xkcd' not found.
+findfont: Font family 'xkcd Script' not found.
+findfont: Font family 'Comic Neue' not found.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="brainstorm_3_files/figure-html/cell-5-output-2.png" width="684" height="400" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
