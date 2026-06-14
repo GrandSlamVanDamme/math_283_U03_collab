@@ -492,8 +492,8 @@ def plotter(X, Y, n, func_type):
     print(f"Below are the optimizations for a {func_type} fit")
     plt.figure(figsize=(10, 20))
 
-    plt.rcParams["font.size"] = 20
-    # plt.rcParams["axes.labelpad"] = 4
+    plt.rcParams["font.size"] = 12
+    # plt.rcParams["axes.labelpad"] = 10
 
     ax1 = plt.subplot(3, 1, 1)
     ax1.scatter(X, Y)
