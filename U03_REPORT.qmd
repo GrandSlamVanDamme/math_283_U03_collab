@@ -1,6 +1,8 @@
 ---
 title: "Unit 3 Report: Nuclear Reactor Cooling Timeline"
 format: html
+filters:
+    - shinylive
 jupyter: python3
 highlight-style: default
 code-block-bg: "#000000"
@@ -29,6 +31,7 @@ import numpy as np
 import scipy as sci
 import pandas as pd
 import IPython.display as ipd
+from shinylive import *
 from data_fitting import *
 
 X = [1, 2, 4, 8, 12, 18]
@@ -72,7 +75,6 @@ We'll test optimized Chebyshev, Least-Squares, and Absolute-Deviation fits of th
 Of form $T(t)=c_1\cdot t + c_2$.
 
 ```{python}
-from data_fitting import *
 
 plotter(X, Y, 1, "linear")
 
@@ -83,7 +85,34 @@ plotter(X, Y, 1, "linear")
 
 Of form $T(t)=c_1t^n + c_2t^{n-1} +...+c_kt^0$. 
 
-We'll limit $n$ and $k$ to three or four, at most, since we don't want to overfit. We'll begin with a quadratic fit.
+We'll limit $n$ and $k$ to four or five, at most. Any higher and at that point we'd be overfitting to approximate a power curve. Please enter the desired polynomial degree below to observe the changes in parameters and optimization quality.
+
+```{shinylive-python}
+#| standalone: true
+#| viewerHeight: 500
+
+###################################################################################
+## code modified from example in docs at https://quarto-ext.github.io/shinylive/ ##
+## This gemini conversation used for debugging:                                  ##                   
+## https://gemini.google.com/share/59ac2467bf7b                                  ##
+###################################################################################
+
+import shiny as sh
+import shinywidgets as shw
+
+app_ui = sh.ui.page_fluid(
+    sh.ui.layout_columns(
+        sh.ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=10),
+        sh.ui.output_plot("conspiracy")
+    )
+)
+def server(input: Inputs, output: Outputs, session: Session):
+    @render.plot
+    def conspiracy():
+        return plotter(X, Y, input.n(), degree_list[input.n()])
+        
+app = sh.App(app_ui, server)
+```
 
 ## Exponential decay:
 

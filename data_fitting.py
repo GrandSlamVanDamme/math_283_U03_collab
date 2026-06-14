@@ -21,13 +21,24 @@ import numpy as np
 import scipy as sci
 import pandas as pd
 import IPython.display as ipd
+# import shiny as sh
+# import shinywidgets as shw
+
+func_types = ["linear", "polynomial", "power", "exponential"]
+poly_deg = 2
+"""
+poly_deg = int(
+    input("What degree of polynomial? Please give your answer as a numeral.")
+)
+"""
+degree_list = ["zeroth", "linear", "quadratic", "cubic", "quartic", "quintic"]
 
 
 def main(X, Y):
     """
     The big Huncho Grande Paparoni: fitting, error analysis, plotting.
     """
-    func_types = ["linear", "polynomial", "power", "exponential"]
+    # func_types = ["linear", "polynomial", "power", "exponential"]
 
     table_list = []
 
@@ -37,26 +48,24 @@ def main(X, Y):
 
         # plotter(X, Y, n, func_type)
         entry = error_analyzer(X, Y, n)
-        entry.insert(0, func_type)
         table_list.append(entry)
 
     table_du_fromage = pd.DataFrame(
         table_list,
-        columns=[
-            "Optimization Types",
-            "Least Squares",
-            "Absolute Deviation",
-            "Chebyshev",
-        ],
+        index=pd.MultiIndex.from_product([["Fit Type"], func_types]),
+        columns=pd.MultiIndex.from_product(
+            [
+                ["Optimization Type"],
+                [
+                    "Least Squares",
+                    "Absolute Deviation",
+                    "Chebyshev",
+                ],
+            ]
+        ),
     )
 
-    table_du_fromage.index.name = (
-        f"Fit Types (note: polynomial degree = {functionator(X, Y, 'polynomial')[2]})"
-    )
-    table_du_fromage.columns.name = "ERROR TABLE FOR REACTOR COOLING MODELS"
-    table_du_fromage.style.hide(axis="index")
-
-    display(table_du_fromage)
+    ipd.display(table_du_fromage)
 
     ipd.Markdown(table_du_fromage.to_markdown(index=False))
 
@@ -69,12 +78,9 @@ def functionator(X, Y, func_type):
     """
     fit_type = func_type
 
-    # poly_deg =  int(input("What degree of polynomial? Please give your answer as a numeral."))
-
-    poly_deg = 2
-
     if fit_type == "polynomial":
         n = poly_deg
+        fit_type = degree_list[poly_deg]
     elif fit_type == "exponential":
         Y = np.log(Y)
         n = 1
@@ -427,6 +433,48 @@ def fitter_happier_better(X, Y, n):
     return [exes, LS2, cheb, absdev]
 
 
+def coeff_table(X, Y, func_type):
+    """
+    Takes X, Y, polynomial degree n.
+    Grabs fits and returns their parameters
+    for different func_types in a table
+    format.
+    """
+
+    # for func in func_types:
+    table_list = []
+
+    f = functionator(X, Y, func_type)
+    X, Y, n, func_type = f[0:5]
+
+    LS2_coeffs = LS2_fit(X, Y, n)
+    cheb_coeffs = chebyshevify(X, Y, n)
+    abs_dev_coeffs = absdev_fit(X, Y, n)
+
+    coeffs_list = [LS2_coeffs, cheb_coeffs, abs_dev_coeffs]
+
+    c_list = [f"c{c}" for c in range(n + 1)]
+
+    for coeff in coeffs_list:
+        entry = coeff
+        table_list.append(entry)
+
+    table_du_fromage = pd.DataFrame(
+        table_list,
+        index=pd.MultiIndex.from_product(
+            [
+                ["Optimization Type"],
+                ["Least Squares", "Absolute Deviation", "Chebyshev"],
+            ]
+        ),
+        columns=pd.MultiIndex.from_product([["Function Parameters"], c_list]),
+    )
+
+    ipd.display(table_du_fromage, display_id=func_type)
+
+    ipd.Markdown(table_du_fromage.to_markdown(index=False))
+
+
 def plotter(X, Y, n, func_type):
     """
     Plots different fit functions for a given data fit type (linear, poly, etc)
@@ -504,7 +552,7 @@ Y = [580, 510, 430, 340, 290, 230]
 
 
 main(X, Y)
-
+coeff_table(X, Y, "linear")
 temp_finder(X, Y)
 
 # %%

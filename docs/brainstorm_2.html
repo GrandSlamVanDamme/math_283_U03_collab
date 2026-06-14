@@ -204,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="step-5-analysis-and-optimization." class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="step-5-analysis-and-optimization."><span class="header-section-number">1.1</span> Step 5: Analysis and Optimization.</h2>
 <p>Writing a python function to perform analysis and optimization.</p>
-<div id="539ff7bd" class="cell" data-execution_count="1">
+<div id="92d0566c" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> num</span>
@@ -224,45 +224,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th">ERROR TABLE FOR REACTOR COOLING MODELS</th>
-<th data-quarto-table-cell-role="th">Optimization Types</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th colspan="3" data-quarto-table-cell-role="th" data-halign="left">Optimization Type</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">Least Squares</th>
 <th data-quarto-table-cell-role="th">Absolute Deviation</th>
 <th data-quarto-table-cell-role="th">Chebyshev</th>
 </tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">Fit Types (note: polynomial degree = 2)</th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-</tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
-<td>linear</td>
+<th rowspan="4" data-quarto-table-cell-role="th" data-valign="top">Fit Type</th>
+<th data-quarto-table-cell-role="th">linear</th>
 <td>8466.511988</td>
 <td>194.000050</td>
 <td>47.941176</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">1</th>
-<td>polynomial</td>
+<th data-quarto-table-cell-role="th">polynomial</th>
 <td>1430.411411</td>
 <td>196.910783</td>
 <td>19.350649</td>
 </tr>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
-<td>power</td>
+<th data-quarto-table-cell-role="th">power</th>
 <td>0.019926</td>
 <td>0.272959</td>
 <td>0.072193</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">3</th>
-<td>exponential</td>
+<th data-quarto-table-cell-role="th">exponential</th>
 <td>0.000719</td>
 <td>0.051744</td>
 <td>0.013584</td>
@@ -279,45 +274,80 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th">ERROR TABLE FOR REACTOR COOLING MODELS</th>
-<th data-quarto-table-cell-role="th">Optimization Types</th>
-<th data-quarto-table-cell-role="th">Least Squares</th>
-<th data-quarto-table-cell-role="th">Absolute Deviation</th>
-<th data-quarto-table-cell-role="th">Chebyshev</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th colspan="2" data-quarto-table-cell-role="th" data-halign="left">Function Parameters</th>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">Fit Types (note: polynomial degree = 2)</th>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">c0</th>
+<th data-quarto-table-cell-role="th">c1</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
-<td>linear</td>
+<th rowspan="3" data-quarto-table-cell-role="th" data-valign="top">Optimization Type</th>
+<th data-quarto-table-cell-role="th">Least Squares</th>
+<td>-19.443155</td>
+<td>542.490333</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Absolute Deviation</th>
+<td>-20.588235</td>
+<td>552.647059</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Chebyshev</th>
+<td>-21.999983</td>
+<td>553.999846</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th colspan="3" data-quarto-table-cell-role="th" data-halign="left">Optimization Type</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Least Squares</th>
+<th data-quarto-table-cell-role="th">Absolute Deviation</th>
+<th data-quarto-table-cell-role="th">Chebyshev</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th rowspan="4" data-quarto-table-cell-role="th" data-valign="top">Fit Type</th>
+<th data-quarto-table-cell-role="th">linear</th>
 <td>8466.511988</td>
 <td>194.000050</td>
 <td>47.941176</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">1</th>
-<td>polynomial</td>
+<th data-quarto-table-cell-role="th">polynomial</th>
 <td>1430.411411</td>
 <td>196.910783</td>
 <td>19.350649</td>
 </tr>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
-<td>power</td>
+<th data-quarto-table-cell-role="th">power</th>
 <td>0.019926</td>
 <td>0.272959</td>
 <td>0.072193</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">3</th>
-<td>exponential</td>
+<th data-quarto-table-cell-role="th">exponential</th>
 <td>0.000719</td>
 <td>0.051744</td>
 <td>0.013584</td>
