@@ -124,7 +124,7 @@ app = App(app_ui, server)
 # 3. DEFINE REQUIRED PACKAGES
 # ---------------------------------------------------------
 ## file: requirements.txt
-matplotlib.pyplot
+matplotlib
 numpy
 scipy
 pandas
