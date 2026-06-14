@@ -119,15 +119,12 @@ app = App(app_ui, server)
 # 2. INJECT EXTERNAL FILE VIA SHORTCODE
 # ---------------------------------------------------------
 ## file: data_fitting.py
-
+{{< include data_fitting.py >}}
 # ---------------------------------------------------------
 # 3. DEFINE REQUIRED PACKAGES
 # ---------------------------------------------------------
 ## file: requirements.txt
-numpy
-scipy
-pandas
-matplotlib
+{{< include requirements.txt >}}
 ```
 
 ## Exponential decay:

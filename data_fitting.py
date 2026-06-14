@@ -490,7 +490,7 @@ def plotter(X, Y, n, func_type):
     ylab = "Reactor temperature in $^{\\circ} C$"
 
     print(f"Below are the optimizations for a {func_type} fit")
-    plt.figure(figsize=(20, 40))
+    plt.figure(figsize=(5, 10))
 
     plt.rcParams["font.size"] = 32
     # plt.rcParams["axes.labelpad"] = 4
