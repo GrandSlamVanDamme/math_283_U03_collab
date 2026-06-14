@@ -495,25 +495,27 @@ def plotter(X, Y, n, func_type):
     plt.rcParams["font.size"] = 12
     # plt.rcParams["axes.labelpad"] = 10
 
+    dist = 160
+
     ax1 = plt.subplot(3, 1, 1)
     ax1.scatter(X, Y)
     ax1.plot(exes, LS2, color="r")
     ax1.set_xlabel(xlab)
-    ax1.set_ylabel(ylab, rotation=0, labelpad=(225))
+    ax1.set_ylabel(ylab, rotation=0, labelpad=(dist))
     ax1.set_title("Least-Squares Fit")
 
     ax2 = plt.subplot(3, 1, 2)
     ax2.scatter(X, Y)
     ax2.plot(exes, cheb, color="y")
     ax2.set_xlabel(xlab)
-    ax2.set_ylabel(ylab, rotation=0, labelpad=(225))
+    ax2.set_ylabel(ylab, rotation=0, labelpad=(dist))
     ax2.set_title("Chebyshev Fit")
 
     ax3 = plt.subplot(3, 1, 3)
     plt.scatter(X, Y)
     plt.plot(exes, absdev, color="b")
     ax3.set_xlabel(xlab)
-    ax3.set_ylabel(ylab, rotation=0, labelpad=(225))
+    ax3.set_ylabel(ylab, rotation=0, labelpad=(dist))
     ax3.set_title("Absolute Deviation Fit")
 
 
@@ -550,9 +552,9 @@ def temp_finder(X, Y):
 X = [1, 2, 4, 8, 12, 18]
 Y = [580, 510, 430, 340, 290, 230]
 
-
-main(X, Y)
-coeff_table(X, Y, "linear")
-temp_finder(X, Y)
+if __name__ == "__main__":
+    main(X, Y)
+# coeff_table(X, Y, "linear")
+# temp_finder(X, Y)
 
 # %%
