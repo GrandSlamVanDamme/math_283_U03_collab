@@ -124,11 +124,11 @@ app = App(app_ui, server)
 # 3. DEFINE REQUIRED PACKAGES
 # ---------------------------------------------------------
 ## file: requirements.txt
-import matplotlib.pyplot as plt
-import numpy as np
-import scipy as sci
-import pandas as pd
-import IPython.display as ipd
+import matplotlib.pyplot
+import numpy
+import scipy
+import pandas
+import IPython.display
 ```
 
 ## Exponential decay:

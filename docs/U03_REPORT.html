@@ -292,7 +292,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<div id="0571e749" class="cell" data-execution_count="1">
+<div id="ee8913b4" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -428,7 +428,7 @@ window.Quarto = {
 <section id="linear" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="linear"><span class="header-section-number">6.1</span> Linear:</h2>
 <p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
-<div id="38475e15" class="cell" data-execution_count="2">
+<div id="27baedca" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>plotter(X, Y, <span class="dv">1</span>, <span class="st">"linear"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -439,7 +439,7 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="U03_REPORT_files/figure-html/cell-3-output-2.png" width="1159" height="905" class="figure-img"></p>
+<p><img src="U03_REPORT_files/figure-html/cell-3-output-2.png" width="1300" height="1597" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -952,9 +952,9 @@ def plotter(X, Y, n, func_type):
     ylab = "Reactor temperature in $^{\\circ} C$"
 
     print(f"Below are the optimizations for a {func_type} fit")
-    plt.figure(figsize=(5, 10))
+    plt.figure(figsize=(10, 20))
 
-    plt.rcParams["font.size"] = 32
+    plt.rcParams["font.size"] = 20
     # plt.rcParams["axes.labelpad"] = 4
 
     ax1 = plt.subplot(3, 1, 1)
@@ -1532,9 +1532,9 @@ def plotter(X, Y, n, func_type):
     ylab = "Reactor temperature in $^{\\circ} C$"
 
     print(f"Below are the optimizations for a {func_type} fit")
-    plt.figure(figsize=(5, 10))
+    plt.figure(figsize=(10, 20))
 
-    plt.rcParams["font.size"] = 32
+    plt.rcParams["font.size"] = 20
     # plt.rcParams["axes.labelpad"] = 4
 
     ax1 = plt.subplot(3, 1, 1)
@@ -1603,11 +1603,11 @@ temp_finder(X, Y)
 # 3. DEFINE REQUIRED PACKAGES
 # ---------------------------------------------------------
 ## file: requirements.txt
-import matplotlib.pyplot as plt
-import numpy as np
-import scipy as sci
-import pandas as pd
-import IPython.display as ipd</code></pre>
+import matplotlib.pyplot
+import numpy
+import scipy
+import pandas
+import IPython.display</code></pre>
 </section>
 <section id="exponential-decay" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="exponential-decay"><span class="header-section-number">6.3</span> Exponential decay:</h2>
