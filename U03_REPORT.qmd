@@ -128,7 +128,7 @@ matplotlib
 numpy
 scipy
 pandas
-IPython.display
+IPython
 ```
 
 ## Exponential decay:

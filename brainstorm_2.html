@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Reactor Cooling: A Toybox Engineering Safety Model – MATH283 Project Three Collab</title>
+<title>Brainstorm 2 – MATH283 Project Three Collab</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,10 +23,45 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -39,10 +74,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4bb89bd6bc671cd901110c81eeb34d81.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-59d7289823022040bed6cf724921e02d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,36 +104,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -126,11 +134,11 @@ window.Quarto = {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./reactor_cooling_model_pt_1.html" aria-current="page"> 
+    <a class="nav-link" href="./reactor_cooling_model_pt_1.html"> 
 <span class="menu-text">Brainstorm 1</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./brainstorm_2.html"> 
+    <a class="nav-link active" href="./brainstorm_2.html" aria-current="page"> 
 <span class="menu-text">Brainstorm 2</span></a>
   </li>  
   <li class="nav-item">
@@ -161,15 +169,10 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#scenario-cooling-performance-during-reactor-shutdown" id="toc-scenario-cooling-performance-during-reactor-shutdown" class="nav-link active" data-scroll-target="#scenario-cooling-performance-during-reactor-shutdown"><span class="header-section-number">0.0.1</span> Scenario: Cooling Performance During Reactor Shutdown</a></li>
-  <li><a href="#measurements" id="toc-measurements" class="nav-link" data-scroll-target="#measurements"><span class="header-section-number">1</span> Measurements:</a></li>
-  <li><a href="#step-1-identify-the-problem" id="toc-step-1-identify-the-problem" class="nav-link" data-scroll-target="#step-1-identify-the-problem"><span class="header-section-number">2</span> Step 1: Identify the problem</a></li>
-  <li><a href="#step-2-assumptions" id="toc-step-2-assumptions" class="nav-link" data-scroll-target="#step-2-assumptions"><span class="header-section-number">3</span> Step 2: Assumptions</a></li>
-  <li><a href="#step-3-variables-and-parameters" id="toc-step-3-variables-and-parameters" class="nav-link" data-scroll-target="#step-3-variables-and-parameters"><span class="header-section-number">4</span> Step 3: Variables and Parameters</a></li>
-  <li><a href="#step-4-model-development" id="toc-step-4-model-development" class="nav-link" data-scroll-target="#step-4-model-development"><span class="header-section-number">5</span> Step 4: Model Development</a>
+  <li><a href="#im-still-not-clear-on-what-these-brainstorming-assignments-are-supposed-to-contain-or-what-purpose-they-serve-and-at-this-point-its-on-me-for-not-asking-earlier--you-said-that-theyre-just-progress-markers-but-they-also-have-specific-instructions-that-would-be-hard-to-fulfill-without-finishing-the-report-first.-are-we-supposed-to-upload-essentially-identical-assignments-in-two-different-places-but-with-one-of-them-in-pieces" id="toc-im-still-not-clear-on-what-these-brainstorming-assignments-are-supposed-to-contain-or-what-purpose-they-serve-and-at-this-point-its-on-me-for-not-asking-earlier--you-said-that-theyre-just-progress-markers-but-they-also-have-specific-instructions-that-would-be-hard-to-fulfill-without-finishing-the-report-first.-are-we-supposed-to-upload-essentially-identical-assignments-in-two-different-places-but-with-one-of-them-in-pieces" class="nav-link active" data-scroll-target="#im-still-not-clear-on-what-these-brainstorming-assignments-are-supposed-to-contain-or-what-purpose-they-serve-and-at-this-point-its-on-me-for-not-asking-earlier--you-said-that-theyre-just-progress-markers-but-they-also-have-specific-instructions-that-would-be-hard-to-fulfill-without-finishing-the-report-first.-are-we-supposed-to-upload-essentially-identical-assignments-in-two-different-places-but-with-one-of-them-in-pieces"><span class="header-section-number">1</span> I’m still not clear on what these brainstorming assignments are supposed to contain or what purpose they serve and at this point it’s on me for not asking earlier- you said that they’re just progress markers but they also have specific instructions that would be hard to fulfill without finishing the report first. Are we supposed to upload essentially identical assignments in two different places, but with one of them in pieces?</a>
   <ul class="collapse">
-  <li><a href="#polynomial" id="toc-polynomial" class="nav-link" data-scroll-target="#polynomial"><span class="header-section-number">5.1</span> Polynomial:</a></li>
-  <li><a href="#exponential-decay" id="toc-exponential-decay" class="nav-link" data-scroll-target="#exponential-decay"><span class="header-section-number">5.2</span> Exponential decay:</a></li>
+  <li><a href="#step-5-analysis-and-optimization." id="toc-step-5-analysis-and-optimization." class="nav-link" data-scroll-target="#step-5-analysis-and-optimization."><span class="header-section-number">1.1</span> Step 5: Analysis and Optimization.</a></li>
+  <li><a href="#step-6-prediction" id="toc-step-6-prediction" class="nav-link" data-scroll-target="#step-6-prediction"><span class="header-section-number">1.2</span> Step 6: Prediction</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -179,7 +182,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Reactor Cooling: A Toybox Engineering Safety Model</h1>
+<h1 class="title">Brainstorm 2</h1>
 </div>
 
 
@@ -196,84 +199,170 @@ window.Quarto = {
 </header>
 
 
-<p>Follow the 8-step modeling process as you brainstorm with your team. When you write up your final report be sure to use section headers, well developed paragraphs, well labeled graphs, clear explanations of the mathematics, etc. Unit 03 Report will be a Team Report. For this assignment (U03 Modeling Process and Collaboration Part I) turn in your brainstorming for steps 1-4 of the process.</p>
-<section id="scenario-cooling-performance-during-reactor-shutdown" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1" class="anchored" data-anchor-id="scenario-cooling-performance-during-reactor-shutdown"><span class="header-section-number">0.0.1</span> Scenario: Cooling Performance During Reactor Shutdown</h3>
-<p>Engineers are studying how quickly reactor components cool following shutdown.</p>
-</section>
-<section id="measurements" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Measurements:</h1>
-<table class="caption-top table">
+<section id="im-still-not-clear-on-what-these-brainstorming-assignments-are-supposed-to-contain-or-what-purpose-they-serve-and-at-this-point-its-on-me-for-not-asking-earlier--you-said-that-theyre-just-progress-markers-but-they-also-have-specific-instructions-that-would-be-hard-to-fulfill-without-finishing-the-report-first.-are-we-supposed-to-upload-essentially-identical-assignments-in-two-different-places-but-with-one-of-them-in-pieces" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> I’m still not clear on what these brainstorming assignments are supposed to contain or what purpose they serve and at this point it’s on me for not asking earlier- you said that they’re just progress markers but they also have specific instructions that would be hard to fulfill without finishing the report first. Are we supposed to upload essentially identical assignments in two different places, but with one of them in pieces?</h1>
+<section id="step-5-analysis-and-optimization." class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="step-5-analysis-and-optimization."><span class="header-section-number">1.1</span> Step 5: Analysis and Optimization.</h2>
+<p>Writing a python function to perform analysis and optimization.</p>
+<div id="e518ad14" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Reveal Secrets</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> num</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy <span class="im">as</span> sci</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> data_fitting <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">12</span>,<span class="dv">18</span>]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> [<span class="dv">580</span>, <span class="dv">510</span>, <span class="dv">430</span>, <span class="dv">340</span>, <span class="dv">290</span>, <span class="dv">230</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>main(X, Y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
-<th>Time after Shutdown (<span class="math inline">\(\text{hr}\)</span>)</th>
-<th style="text-align: left;">Temperature <span class="math inline">\((^\circ C)\)</span></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th colspan="3" data-quarto-table-cell-role="th" data-halign="left">Optimization Type</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Least Squares</th>
+<th data-quarto-table-cell-role="th">Absolute Deviation</th>
+<th data-quarto-table-cell-role="th">Chebyshev</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
-<td style="text-align: left;">580</td>
+<th rowspan="4" data-quarto-table-cell-role="th" data-valign="top">Fit Type</th>
+<th data-quarto-table-cell-role="th">linear</th>
+<td>8466.511988</td>
+<td>194.000050</td>
+<td>47.941176</td>
 </tr>
 <tr class="even">
-<td>2</td>
-<td style="text-align: left;">510</td>
+<th data-quarto-table-cell-role="th">polynomial</th>
+<td>1430.411411</td>
+<td>196.910783</td>
+<td>19.350649</td>
 </tr>
 <tr class="odd">
-<td>4</td>
-<td style="text-align: left;">430</td>
+<th data-quarto-table-cell-role="th">power</th>
+<td>0.019926</td>
+<td>0.272959</td>
+<td>0.072193</td>
 </tr>
 <tr class="even">
-<td>8</td>
-<td style="text-align: left;">340</td>
-</tr>
-<tr class="odd">
-<td>12</td>
-<td style="text-align: left;">290</td>
-</tr>
-<tr class="even">
-<td>18</td>
-<td style="text-align: left;">230</td>
+<th data-quarto-table-cell-role="th">exponential</th>
+<td>0.000719</td>
+<td>0.051744</td>
+<td>0.013584</td>
 </tr>
 </tbody>
 </table>
-<p>A large prediction error could affect cooling procedures and operational decisions.</p>
-<p>Your team has been asked to recommend the best model and fitting strategy.</p>
+
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th colspan="2" data-quarto-table-cell-role="th" data-halign="left">Function Parameters</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">c0</th>
+<th data-quarto-table-cell-role="th">c1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th rowspan="3" data-quarto-table-cell-role="th" data-valign="top">Optimization Type</th>
+<th data-quarto-table-cell-role="th">Least Squares</th>
+<td>-19.443155</td>
+<td>542.490333</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Absolute Deviation</th>
+<td>-20.588235</td>
+<td>552.647059</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Chebyshev</th>
+<td>-21.999983</td>
+<td>553.999846</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th colspan="3" data-quarto-table-cell-role="th" data-halign="left">Optimization Type</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Least Squares</th>
+<th data-quarto-table-cell-role="th">Absolute Deviation</th>
+<th data-quarto-table-cell-role="th">Chebyshev</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th rowspan="4" data-quarto-table-cell-role="th" data-valign="top">Fit Type</th>
+<th data-quarto-table-cell-role="th">linear</th>
+<td>8466.511988</td>
+<td>194.000050</td>
+<td>47.941176</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">polynomial</th>
+<td>1430.411411</td>
+<td>196.910783</td>
+<td>19.350649</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">power</th>
+<td>0.019926</td>
+<td>0.272959</td>
+<td>0.072193</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">exponential</th>
+<td>0.000719</td>
+<td>0.051744</td>
+<td>0.013584</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>From the analysis it’s pretty clear that we have a power/exponential decay.</p>
 </section>
-<section id="step-1-identify-the-problem" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Step 1: Identify the problem</h1>
-<p>We need to reliably predict the temperature of the reactor (in K) from the time passed since shutoff (in minutes).</p>
-</section>
-<section id="step-2-assumptions" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Step 2: Assumptions</h1>
-<ol type="1">
-<li>bulk cooling rate/single substance component</li>
-<li>constant external temperature</li>
-<li>No other heat sources</li>
-<li>Reactor isn’t operated until cooling is complete</li>
-</ol>
-</section>
-<section id="step-3-variables-and-parameters" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Step 3: Variables and Parameters</h1>
-<p><span class="math inline">\(T_R\)</span> is the reactor temperature.</p>
-<p><span class="math inline">\(T_E\)</span> is the external tremperature</p>
-<p><span class="math inline">\(t\)</span> is the time from shutdown in hours.</p>
-<p>That’s it! While a high-fidelity model would and could account for the specific heats of individual reactor components, the role of humidity in cooling, and the stochastic nature of thermodynamic processes, this problem is small in scope. We will start, at least, from a basic model of heat transfer. This is most appropriate for the limited data we have on the situation.</p>
-</section>
-<section id="step-4-model-development" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Step 4: Model Development</h1>
-<p>We’ll test optimized Chebyshev, Least-Squares, and Absolute-Deviation fits of the following models: ## Linear:</p>
-<p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
-<section id="polynomial" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="polynomial"><span class="header-section-number">5.1</span> Polynomial:</h2>
-<p>Of form <span class="math inline">\(T(t)=c_1t^n + c_2t^{n-1} +...+c_kt^0\)</span>.</p>
-<p>We’ll limit <span class="math inline">\(n\)</span> and <span class="math inline">\(k\)</span> to three or four, at most, since we don’t want to overfit.</p>
-</section>
-<section id="exponential-decay" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="exponential-decay"><span class="header-section-number">5.2</span> Exponential decay:</h2>
-<p>Of form <span class="math inline">\(T(t) = (c_2)e^{c_1t}\)</span> (<span class="math inline">\(c_2\)</span> is negative).</p>
-<p>We’ll linearize this so that it can be optimized with linear programming. taking the natural log of both sides give us</p>
-<p><span class="math inline">\(\ln[T(t)]=c_1t+c_2\)</span></p>
+<section id="step-6-prediction" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="step-6-prediction"><span class="header-section-number">1.2</span> Step 6: Prediction</h2>
+<p>Using cheby because it’s a nuclear reactor and the worst case scenario is catastrophic.</p>
 
 
 </section>

@@ -1,0 +1,169 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Problem 3.7: Least-Squares Fitting\"\n",
+        "format: html\n",
+        "jupyter: python3\n",
+        "highlight-style: default\n",
+        "code-block-bg: \"#000000\"\n",
+        "---\n",
+        "\n",
+        "## Objective\n",
+        "\n",
+        "\"In Problems 7–10, fit the data with the models given, using least squares.\"\n",
+        "- The Textbook\n",
+        "\n",
+        "### Data\n",
+        "\n",
+        "| $x$ | $1$ | $2$ | $3$ | $4$ | $5$ |\n",
+        "|-----|-----|-----|-----|-----|:----|\n",
+        "| $y$ | $1$ | $1$ | $2$ | $2$ | $5$ |\n",
+        "\n",
+        "### Models\n",
+        "\n",
+        "a. $y = b + ax$ \n",
+        "\n",
+        "a. $y = ax^2$\n",
+        "\n",
+        "### Solution\n",
+        "1. First, we'll use the `numpy.polyfit()` method to \n",
+        "produce least-squares optimized fits for each of the models given, because our models are already in polynomial form and that method already uses LS2 minimization to produce fitting functions.\n",
+        "2. We'll use the `error_analyzer()` function from the `data_fitting.py` file (original work copyright 2026) to obtain the cumulative LS2 error. This file is available via [public github repo](https://github.com/GrandSlamVanDamme/math_283_U03_collab).\n",
+        "\n",
+        "3. We'll plot the original data against the lines of fit for a visual comparison."
+      ],
+      "id": "f42357f5"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        " # import the packages we need:\n",
+        "import numpy as np\n",
+        "import matplotlib.pyplot as plt\n",
+        "from data_fitting import *\n",
+        "\n",
+        "# make our lists:\n",
+        "\n",
+        "X = np.array([1,2, 3, 4, 5])\n",
+        "Y = np.array([1, 1, 2, 2, 5])\n",
+        "\n",
+        "#############################\n",
+        "##  1. WRITE FUNCTIONS     ##\n",
+        "#############################\n",
+        "fit2 = np.polyfit(X, Y, 2)\n",
+        "fit1 = np.polyfit(X, Y, 1)\n",
+        "\n",
+        "x = np.linspace(0, 6, 1000)\n",
+        "\n",
+        "f2 = fit2[0]*x**2 + fit2[1]*x**1 + fit2[2]*x**0\n",
+        "f1 = fit1[0]*x**1 + fit1[1]*x**0 \n",
+        "\n",
+        "def get_coeffs(X, Y, n):\n",
+        "    \"\"\"\n",
+        "    Takes the X and Y data, applies np.polyfit() for fit of chosen order n \n",
+        "    and prints the elements neatly in form c_n = blahblahblah. \n",
+        "    Each statement takes a line. Returns None.\n",
+        "    \"\"\"\n",
+        "    fit_list = np.polyfit(X, Y, n)\n",
+        "\n",
+        "    count = 0\n",
+        "    cees = []\n",
+        "\n",
+        "    for numba in fit_list:\n",
+        "        count += 1\n",
+        "        cees.append(f'c_{count}')\n",
+        "    \n",
+        "    for numba, c in zip(fit_list, cees):\n",
+        "        print(f'{c}={numba}')\n",
+        "\n",
+        "#############################\n",
+        "##   2. PLOTS              ##\n",
+        "#############################\n",
+        "fig = plt.figure(figsize=(10,5))\n",
+        "\n",
+        "plt.subplot(1,2,1)\n",
+        "plt.plot(x, f2)\n",
+        "plt.scatter(X, Y)\n",
+        "plt.title('$f(x)=c_1x^2+c_2x+c_3$')\n",
+        "plt.legend()\n",
+        "\n",
+        "plt.subplot(1,2,2)\n",
+        "plt.plot(x, f1)\n",
+        "plt.scatter(X, Y)\n",
+        "plt.title('$f(x)=c_1x+c_2$')\n",
+        "plt.legend()\n",
+        "\n",
+        "F1 = fit1[0]*X**1 + fit1[1]*X**0\n",
+        "F2 = fit2[0]*X**2 + fit2[1]*X**1 + fit2[2]*X**0\n",
+        "\n",
+        "'''\n",
+        "polyfit returns an array of n+1 entries \n",
+        "each corresponding to the coefficient of\n",
+        "x**n.\n",
+        "'''"
+      ],
+      "id": "8cc98209",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Here are our results. \n",
+        "\n",
+        "First, let's look at the linear fit $f(x)=c_1x+c_2$."
+      ],
+      "id": "e275403c"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print('RESULTS')\n",
+        "get_coeffs(X, Y, 1)\n",
+        "print()\n",
+        "print(f\"We found a least squares error of {leastsquerror(Y, F1)[-1]}\")"
+      ],
+      "id": "c32e6311",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Now, let's see if the quadratic fit $f(x)=c_1x^2+c_2x+c_3$ looks any better."
+      ],
+      "id": "decb92f8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print('RESULTS')\n",
+        "get_coeffs(X, Y, 2)\n",
+        "print()\n",
+        "print(f\"We found a least squares error of {leastsquerror(Y, F2)[-1]}\")"
+      ],
+      "id": "9b63f4d2",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/Users/grandslamvandamme/Documents/283_math_spring_26/U03_github_collab/math_283_U03_collab/.venv/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
