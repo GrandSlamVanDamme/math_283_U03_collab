@@ -400,9 +400,9 @@ def LS2_fit(X, Y, n):
     return LS2
 
 
-def x_list(X, n):
+def x_list(X):
     """
-    takes X data and a polynomial degree n, returns linspaced list of X-powers
+    takes X data, returns linspaced list of X-powers
     from X^n to X^0.
     """
     X = np.linspace(X[0], X[-1] + np.mean(X) / 1000, 1000)
@@ -495,7 +495,7 @@ def plotter(X, Y, n, func_type):
     plt.rcParams["font.size"] = 12
     # plt.rcParams["axes.labelpad"] = 10
 
-    dist = 160
+    dist = 110
 
     ax1 = plt.subplot(3, 1, 1)
     ax1.scatter(X, Y)
@@ -517,6 +517,8 @@ def plotter(X, Y, n, func_type):
     ax3.set_xlabel(xlab)
     ax3.set_ylabel(ylab, rotation=0, labelpad=(dist))
     ax3.set_title("Absolute Deviation Fit")
+
+    plt.tight_layout()
 
 
 def temp_finder(X, Y):
