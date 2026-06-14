@@ -97,7 +97,7 @@ code modified from example in docs at https://quarto-ext.github.io/shinylive/
 This gemini conversation used for debugging and editing:                                              
 https://gemini.google.com/share/59ac2467bf7b                                  
 """
-{{< include data_fitting.py >}}
+
 from data_fitting import *
 from shiny import *
 import shinywidgets as shw
