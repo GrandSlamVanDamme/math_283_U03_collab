@@ -420,7 +420,7 @@ def fitter_happier_better(X, Y, n):
     cheb_coeffs = chebyshevify(X, Y, n)
     abs_dev_coeffs = absdev_fit(X, Y, n)
 
-    exes = x_list(X, n)
+    exes = x_list(X)
 
     # print(f"Least squares fitting coeffs: {LS2_coeffs}")
     # print(f"Chebyshev fit coeffs: {cheb_coeffs}")
@@ -495,30 +495,31 @@ def plotter(X, Y, n, func_type):
     plt.rcParams["font.size"] = 12
     # plt.rcParams["axes.labelpad"] = 10
 
-    dist = 110
+    dist = 90
 
     ax1 = plt.subplot(3, 1, 1)
     ax1.scatter(X, Y)
     ax1.plot(exes, LS2, color="r")
     ax1.set_xlabel(xlab)
-    ax1.set_ylabel(ylab, rotation=0, labelpad=(dist))
+    ax1.set_ylabel(ylab, rotation=45, labelpad=(dist))
     ax1.set_title("Least-Squares Fit")
 
     ax2 = plt.subplot(3, 1, 2)
     ax2.scatter(X, Y)
     ax2.plot(exes, cheb, color="y")
     ax2.set_xlabel(xlab)
-    ax2.set_ylabel(ylab, rotation=0, labelpad=(dist))
+    ax2.set_ylabel(ylab, rotation=45, labelpad=(dist))
     ax2.set_title("Chebyshev Fit")
 
     ax3 = plt.subplot(3, 1, 3)
     plt.scatter(X, Y)
     plt.plot(exes, absdev, color="b")
     ax3.set_xlabel(xlab)
-    ax3.set_ylabel(ylab, rotation=0, labelpad=(dist))
+    ax3.set_ylabel(ylab, rotation=45, labelpad=(dist))
     ax3.set_title("Absolute Deviation Fit")
 
     plt.tight_layout()
+    plt.show()
 
 
 def temp_finder(X, Y):
