@@ -1,11 +1,11 @@
 ---
 title: "Unit 3 Report: Nuclear Reactor Cooling Timeline"
 format: html
-filters:
-    - shinylive
 jupyter: python3
 highlight-style: default
 code-block-bg: "#000000"
+filters:
+    - shinylive
 ---
 # Unit 3 Modeling Report
 ## Corey Silver and Parker Lee
@@ -91,19 +91,19 @@ We'll limit $n$ and $k$ to four or five, at most. Any higher and at that point w
 #| standalone: true
 #| viewerHeight: 500
 
-###################################################################################
-## code modified from example in docs at https://quarto-ext.github.io/shinylive/ ##
-## This gemini conversation used for debugging:                                  ##                   
-## https://gemini.google.com/share/59ac2467bf7b                                  ##
-###################################################################################
+"""
+code modified from example in docs at https://quarto-ext.github.io/shinylive/
+This gemini conversation used for debugging:                                              
+https://gemini.google.com/share/59ac2467bf7b                                  
+"""
 
-import shiny as sh
+from shiny import *
 import shinywidgets as shw
 
-app_ui = sh.ui.page_fluid(
-    sh.ui.layout_columns(
-        sh.ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=10),
-        sh.ui.output_plot("conspiracy")
+app_ui = ui.page_fluid(
+    ui.layout_columns(
+        ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=10, value = 2),
+        ui.output_plot("conspiracy")
     )
 )
 def server(input: Inputs, output: Outputs, session: Session):
@@ -111,7 +111,7 @@ def server(input: Inputs, output: Outputs, session: Session):
     def conspiracy():
         return plotter(X, Y, input.n(), degree_list[input.n()])
         
-app = sh.App(app_ui, server)
+app = App(app_ui, server)
 ```
 
 ## Exponential decay:
@@ -134,10 +134,4 @@ $$
 \ln[T(t)]=c_1t+c_2.
 $$
 
-
-
-## Bibliography (wip):
-
-1. Dawkins, Paul. "The Heat Equation." Paul's Online Notes, Lamar University, tutorial.math.lamar.edu/classes/de/theheatequation.aspx. Accessed 26 May 2026.
-
-1. "File:Maine Yankee Nuclear Power Plant.jpg." Wikimedia Commons. 12 Dec 2024, 03:31 UTC. <https://commons.wikimedia.org/w/index.php?title=File:Maine_Yankee_Nuclear_Power_Plant.jpg&oldid=969140195> 3 Jun 2026, 05:02. 
+`

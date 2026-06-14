@@ -422,9 +422,9 @@ def fitter_happier_better(X, Y, n):
 
     exes = x_list(X, n)
 
-    print(f"Least squares fitting coeffs: {LS2_coeffs}")
-    print(f"Chebyshev fit coeffs: {cheb_coeffs}")
-    print(f"Absolute deviation fit coeffs: {abs_dev_coeffs}")
+    # print(f"Least squares fitting coeffs: {LS2_coeffs}")
+    # print(f"Chebyshev fit coeffs: {cheb_coeffs}")
+    # print(f"Absolute deviation fit coeffs: {abs_dev_coeffs}")
 
     LS2 = np.polyval(LS2_coeffs, exes)
     cheb = np.polyval(cheb_coeffs, exes)
@@ -490,7 +490,7 @@ def plotter(X, Y, n, func_type):
     ylab = "Reactor temperature in $^{\\circ} C$"
 
     print(f"Below are the optimizations for a {func_type} fit")
-    plt.figure(figsize=(20, 40))
+    plt.figure(figsize=(50, 100))
 
     plt.rcParams["font.size"] = 32
     # plt.rcParams["axes.labelpad"] = 4
