@@ -195,11 +195,11 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#objective" id="toc-objective" class="nav-link active" data-scroll-target="#objective"><span class="header-section-number">1</span> Objective</a>
+  <li><a href="#objective" id="toc-objective" class="nav-link active" data-scroll-target="#objective">Objective</a>
   <ul class="collapse">
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">1.1</span> Data</a></li>
-  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models"><span class="header-section-number">1.2</span> Models</a></li>
-  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution"><span class="header-section-number">1.3</span> Solution</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models">Models</a></li>
+  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution">Solution</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -226,11 +226,11 @@ window.Quarto = {
 </header>
 
 
-<section id="objective" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="objective"><span class="header-section-number">1</span> Objective</h2>
+<section id="objective" class="level2">
+<h2 class="anchored" data-anchor-id="objective">Objective</h2>
 <p>“In Problems 7–10, fit the data with the models given, using least squares.” - The Textbook</p>
-<section id="data" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="data"><span class="header-section-number">1.1</span> Data</h3>
+<section id="data" class="level3">
+<h3 class="anchored" data-anchor-id="data">Data</h3>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -254,21 +254,21 @@ window.Quarto = {
 </tbody>
 </table>
 </section>
-<section id="models" class="level3" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="models"><span class="header-section-number">1.2</span> Models</h3>
+<section id="models" class="level3">
+<h3 class="anchored" data-anchor-id="models">Models</h3>
 <ol type="a">
 <li><p><span class="math inline">\(y = b + ax\)</span></p></li>
 <li><p><span class="math inline">\(y = ax^2\)</span></p></li>
 </ol>
 </section>
-<section id="solution" class="level3" data-number="1.3">
-<h3 data-number="1.3" class="anchored" data-anchor-id="solution"><span class="header-section-number">1.3</span> Solution</h3>
+<section id="solution" class="level3">
+<h3 class="anchored" data-anchor-id="solution">Solution</h3>
 <ol type="1">
 <li><p>First, we’ll use the <code>numpy.polyfit()</code> method to produce least-squares optimized fits for each of the models given, because our models are already in polynomial form and that method already uses LS2 minimization to produce fitting functions.</p></li>
 <li><p>We’ll use the <code>error_analyzer()</code> function from the <code>data_fitting.py</code> file (original work copyright 2026) to obtain the cumulative LS2 error. This file is available via <a href="https://github.com/GrandSlamVanDamme/math_283_U03_collab">public github repo</a>.</p></li>
 <li><p>We’ll plot the original data against the lines of fit for a visual comparison.</p></li>
 </ol>
-<div id="221495cc" class="cell" data-execution_count="1">
+<div id="3723a03f" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># import the packages we need:</span></span>
@@ -337,9 +337,9 @@ window.Quarto = {
 <span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/ds/63b_7b1n3wx7f9wg6r78c57w0000gn/T/ipykernel_98731/1147187601.py:49: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+<pre><code>/var/folders/ds/63b_7b1n3wx7f9wg6r78c57w0000gn/T/ipykernel_99535/1147187601.py:49: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
   plt.legend()
-/var/folders/ds/63b_7b1n3wx7f9wg6r78c57w0000gn/T/ipykernel_98731/1147187601.py:55: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+/var/folders/ds/63b_7b1n3wx7f9wg6r78c57w0000gn/T/ipykernel_99535/1147187601.py:55: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
   plt.legend()</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="1">
@@ -355,7 +355,7 @@ window.Quarto = {
 </div>
 <p>Here are our results.</p>
 <p>First, let’s look at the linear fit <span class="math inline">\(f(x)=c_1x+c_2\)</span>.</p>
-<div id="4bac028e" class="cell" data-execution_count="2">
+<div id="03f25b17" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'RESULTS'</span>)</span>
@@ -372,7 +372,7 @@ We found a least squares error of 2.7000000000000006</code></pre>
 </div>
 </div>
 <p>Now, let’s see if the quadratic fit <span class="math inline">\(f(x)=c_1x^2+c_2x+c_3\)</span> looks any better.</p>
-<div id="e2d60565" class="cell" data-execution_count="3">
+<div id="5c890f9d" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'RESULTS'</span>)</span>

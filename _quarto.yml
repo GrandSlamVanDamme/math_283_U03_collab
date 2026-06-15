@@ -24,8 +24,8 @@ website:
 format:
   html:
     toc: true
-    number-sections: true
-    number-depth: 3
+    # number-sections: true
+    # number-depth: 3
     code-fold: true
     code-summary: "Reveal Secrets"
     theme: default   # This strips out the default

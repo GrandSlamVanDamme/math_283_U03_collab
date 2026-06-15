@@ -13,7 +13,7 @@ filters:
 
 Engineers are studying how quickly reactor components cool following shutdown.
 
-# Measurements:
+# 1. Measurements:
 
 | Time after Shutdown ($\text{hr}$) | Temperature $(^\circ C)$|
 |---------|:-----|
@@ -44,12 +44,16 @@ Y = [580, 510, 430, 340, 290, 230]
 Your team has been asked to recommend the best model and fitting strategy."
 
 
-# Identification
+# 2. Objective Definition
 
 We need to reliably predict the temperature of the reactor (in K) from the time passed since shutoff (in minutes). Since this is a live nuclear reactor, criticality is a prime safety concern.
 
 
-# Assumptions and Simplifications
+# 3. Assumptions and Simplifications
+
+In any mathematical model, there are certain assumptions made and simplifications accepted. For this model, we keep in mind the sensitive nature of the system in question, which leades us to an overarching principle which we'll follow throughout this modelling process.
+
+## Our first and central assumption is that of the *worst-case scenario*: we assume the least optimal conditions, in every case, for time to cooling. For example, when we assume a constant external temperature, we assume that temperature to be the mean daily maximum for the season in which we operate.
 
 1. Bulk, uniform cooling rate: no regions of greater $T$ density
 1. Single substance component: single specific heat

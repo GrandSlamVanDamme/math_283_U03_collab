@@ -384,10 +384,7 @@ def absdev_fit(X, Y, n):
 
     result = sci.optimize.minimize(cost_func, guess, method="Nelder-Mead")
 
-    result = result.x
-    result = np.flip(result)
-
-    return result
+    return result.x
 
 
 def LS2_fit(X, Y, n):
@@ -495,7 +492,7 @@ def plotter(X, Y, func_type):
     ylab = "Reactor temperature in $^{\\circ} C$"
 
     print(f"Below are the optimizations for a {func_type} fit")
-    plt.figure(figsize=(10, 20), layout="tight")
+    plt.figure(figsize=(7, 20), layout="tight")
 
     plt.rcParams["font.size"] = 12
     # plt.rcParams["axes.labelpad"] = 10
