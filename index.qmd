@@ -4,7 +4,7 @@
 
 This is the homepage for the U03 project. We'll be modelling the cooling rate of a nuclear reactor. Use the directory above to navigate to different sections of the project. 
 
-![Maine Yankee Nuclear Plant](1280px-Maine_Yankee_Nuclear_Power_Plant.jpg)
+![Maine Yankee Nuclear Plant.jpg is licensed by the US-NRC under CC BY 2.0](1280px-Maine_Yankee_Nuclear_Power_Plant.jpg)
 
 This site is under construction. Upon completion, it will host open-source python code, relevant data, and a record of the modelling process, and a report summarizing our findings.
 

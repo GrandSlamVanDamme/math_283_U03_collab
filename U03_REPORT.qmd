@@ -35,7 +35,8 @@ from shinylive import *
 from data_fitting import *
 
 X = [1, 2, 4, 8, 12, 18]
-Y = [580, 510, 430, 340, 290, 230]
+# See section 4 for explanation of modification of T data.
+Y = [1.05*y for y in [580, 510, 430, 340, 290, 230]]
 
 ```
 
@@ -61,6 +62,7 @@ In any mathematical model, there are certain assumptions made and simplification
 1. Constant external humidity, pressure: We assume no weather.
 1. We assume the absence of other heat sources, ignoring the effect of sunlight.
 1. Reactor isn't operated until cooling is complete
+1. We assume a $+5{\%}$ margin of error with temperature measurement. This will be one in a group of safety redundancies. 
 
 # 5. Variables and Parameters
 
@@ -70,7 +72,7 @@ $T_E$ is the external tremperature
 
 $t$ is the time from shutdown in hours.
 
-That's it! While a high-fidelity model would and could account for the specific heats of individual reactor components, the role of humidity in cooling, and the stochastic nature of thermodynamic processes, this problem is simple in scope. We will start, at least, from a basic model of heat transfer. This is most appropriate for the limited data we have on the situation.
+That's it! While a high-fidelity model would and could account for the specific heats of individual reactor components, the role of humidity in cooling, and the stochastic nature of thermodynamic processes, we can simplify extensively for the purpose of this problem. First, we're supplied with cooling and time data; this means that we must assume similar external conditions throughout the cooling period in order to use this supplied data for interpolation and limited extrapolation. Second, we can justify some simplification from the safety-focused nature of the model we're designing. We do not know the external conditions for the data we're given, so the most prudent approach is to assume that these conditions are favorable to quick cooling and consider them optimized.  We will start, at least, from a basic model of heat transfer. This is most appropriate for the limited data we have on the situation.
 
 # Model Development
 We'll test optimized Chebyshev, Least-Squares, and Absolute-Deviation fits of the following models: 
@@ -115,9 +117,9 @@ app_ui = ui.page_fluid(
 def server(input: Inputs, output: Outputs, session: Session):
     @render.plot
     def conspiracy():
-        return plotter(X, Y, "polynomial", ui.input.n())
+        return plotter(X, Y, "polynomial", poly_deg)
 
-poly_deg = ui.input.n()
+poly_deg = input.n()
 
 app = App(app_ui, server)
 
@@ -157,4 +159,6 @@ $$
 \ln[T(t)]=c_1t+c_2.
 $$
 
-`
+# Bibliography
+
+1. 

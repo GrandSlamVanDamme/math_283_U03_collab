@@ -221,6 +221,7 @@ window.Quarto = {
   <li><a href="#exponential-decay" id="toc-exponential-decay" class="nav-link" data-scroll-target="#exponential-decay">Exponential decay:</a></li>
   <li><a href="#power-model" id="toc-power-model" class="nav-link" data-scroll-target="#power-model">Power model:</a></li>
   </ul></li>
+  <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography">Bibliography</a></li>
   </ul>
 </nav>
     </div>
@@ -292,7 +293,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<div id="3308bab8" class="cell" data-execution_count="1">
+<div id="aeffa03e" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -304,7 +305,8 @@ window.Quarto = {
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> data_fitting <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">12</span>, <span class="dv">18</span>]</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> [<span class="dv">580</span>, <span class="dv">510</span>, <span class="dv">430</span>, <span class="dv">340</span>, <span class="dv">290</span>, <span class="dv">230</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># See section 4 for explanation of modification of T data.</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> [<span class="fl">1.05</span><span class="op">*</span>y <span class="cf">for</span> y <span class="kw">in</span> [<span class="dv">580</span>, <span class="dv">510</span>, <span class="dv">430</span>, <span class="dv">340</span>, <span class="dv">290</span>, <span class="dv">230</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>“A large prediction error could affect cooling procedures and operational decisions.</p>
@@ -326,6 +328,7 @@ window.Quarto = {
 <li>Constant external humidity, pressure: We assume no weather.</li>
 <li>We assume the absence of other heat sources, ignoring the effect of sunlight.</li>
 <li>Reactor isn’t operated until cooling is complete</li>
+<li>We assume a <span class="math inline">\(+5{\%}\)</span> margin of error with temperature measurement. This will be one in a group of safety redundancies.</li>
 </ol>
 </section>
 </section>
@@ -334,7 +337,7 @@ window.Quarto = {
 <p><span class="math inline">\(T_R\)</span> is the reactor temperature.</p>
 <p><span class="math inline">\(T_E\)</span> is the external tremperature</p>
 <p><span class="math inline">\(t\)</span> is the time from shutdown in hours.</p>
-<p>That’s it! While a high-fidelity model would and could account for the specific heats of individual reactor components, the role of humidity in cooling, and the stochastic nature of thermodynamic processes, this problem is simple in scope. We will start, at least, from a basic model of heat transfer. This is most appropriate for the limited data we have on the situation.</p>
+<p>That’s it! While a high-fidelity model would and could account for the specific heats of individual reactor components, the role of humidity in cooling, and the stochastic nature of thermodynamic processes, we can simplify extensively for the purpose of this problem. First, we’re supplied with cooling and time data; this means that we must assume similar external conditions throughout the cooling period in order to use this supplied data for interpolation and limited extrapolation. Second, we can justify some simplification from the safety-focused nature of the model we’re designing. We do not know the external conditions for the data we’re given, so the most prudent approach is to assume that these conditions are favorable to quick cooling and consider them optimized. We will start, at least, from a basic model of heat transfer. This is most appropriate for the limited data we have on the situation.</p>
 </section>
 <section id="model-development" class="level1">
 <h1>Model Development</h1>
@@ -342,7 +345,7 @@ window.Quarto = {
 <section id="linear" class="level2">
 <h2 class="anchored" data-anchor-id="linear">Linear:</h2>
 <p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
-<div id="70f3f97d" class="cell" data-execution_count="2">
+<div id="ce2c4b56" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -387,9 +390,9 @@ app_ui = ui.page_fluid(
 def server(input: Inputs, output: Outputs, session: Session):
     @render.plot
     def conspiracy():
-        return plotter(X, Y, "polynomial", ui.input.n())
+        return plotter(X, Y, "polynomial", poly_deg)
 
-poly_deg = ui.input.n()
+poly_deg = input.n()
 
 app = App(app_ui, server)
 
@@ -986,10 +989,15 @@ IPython</code></pre>
 <p><span class="math display">\[
 \ln[T(t)]=c_1t+c_2.
 \]</span></p>
-<p>`</p>
-
-
 </section>
+</section>
+<section id="bibliography" class="level1">
+<h1>Bibliography</h1>
+<ol type="1">
+<li></li>
+</ol>
+
+
 </section>
 
 </main> <!-- /main -->
