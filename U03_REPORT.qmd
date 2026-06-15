@@ -117,8 +117,8 @@ def server(input: Inputs, output: Outputs, session: Session):
     def conspiracy():
         return plotter(X, Y, "polynomial")
 
-poly_deg = input.n()
-      
+poly_deg = ui.input_slider.n()
+
 app = App(app_ui, server)
 
 # ---------------------------------------------------------
