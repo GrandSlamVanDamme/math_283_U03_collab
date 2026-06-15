@@ -25,7 +25,7 @@ import IPython.display as ipd
 # import shinywidgets as shw
 
 func_types = ["linear", "polynomial", "power", "exponential"]
-poly_deg = 2
+poly_deg = 4
 """
 poly_deg = int(
     input("What degree of polynomial? Please give your answer as a numeral.")
@@ -72,7 +72,7 @@ def main(X, Y):
 
 def functionator(X, Y, func_type):
     """
-    Takes X, Y, n, and func type.
+    Takes X, Y, and func type.
     Modifies X and Y if needed
     returns X, Y, n, func_type as list
     """
@@ -380,7 +380,7 @@ def absdev_fit(X, Y, n):
     cost_func = np.sum(np.abs(Y - f))
     """
 
-    guess = (n + 1) * [1.0]
+    guess = (n + 1) * [0.0]
 
     result = sci.optimize.minimize(cost_func, guess, method="Nelder-Mead")
 
@@ -475,10 +475,12 @@ def coeff_table(X, Y, func_type):
     ipd.Markdown(table_du_fromage.to_markdown(index=False))
 
 
-def plotter(X, Y, n, func_type):
+def plotter(X, Y, func_type):
     """
     Plots different fit functions for a given data fit type (linear, poly, etc)
     """
+    X, Y, n, func_type = functionator(X, Y, func_type)[0:4]
+
     exes = fitter_happier_better(X, Y, n)[0]
     LS2 = fitter_happier_better(X, Y, n)[1]
     cheb = fitter_happier_better(X, Y, n)[2]
@@ -490,36 +492,34 @@ def plotter(X, Y, n, func_type):
     ylab = "Reactor temperature in $^{\\circ} C$"
 
     print(f"Below are the optimizations for a {func_type} fit")
-    plt.figure(figsize=(10, 20))
+    plt.figure(figsize=(10, 20), layout="tight")
 
     plt.rcParams["font.size"] = 12
     # plt.rcParams["axes.labelpad"] = 10
 
-    dist = 90
+    dist = 60
+    pointsize = 40
 
     ax1 = plt.subplot(3, 1, 1)
-    ax1.scatter(X, Y)
+    ax1.scatter(X, Y, s=pointsize)
     ax1.plot(exes, LS2, color="r")
     ax1.set_xlabel(xlab)
     ax1.set_ylabel(ylab, rotation=45, labelpad=(dist))
     ax1.set_title("Least-Squares Fit")
 
     ax2 = plt.subplot(3, 1, 2)
-    ax2.scatter(X, Y)
+    ax2.scatter(X, Y, s=pointsize)
     ax2.plot(exes, cheb, color="y")
     ax2.set_xlabel(xlab)
     ax2.set_ylabel(ylab, rotation=45, labelpad=(dist))
     ax2.set_title("Chebyshev Fit")
 
     ax3 = plt.subplot(3, 1, 3)
-    plt.scatter(X, Y)
+    plt.scatter(X, Y, s=pointsize)
     plt.plot(exes, absdev, color="b")
     ax3.set_xlabel(xlab)
     ax3.set_ylabel(ylab, rotation=45, labelpad=(dist))
     ax3.set_title("Absolute Deviation Fit")
-
-    plt.tight_layout()
-    plt.show()
 
 
 def temp_finder(X, Y):
@@ -559,5 +559,5 @@ if __name__ == "__main__":
     main(X, Y)
 # coeff_table(X, Y, "linear")
 # temp_finder(X, Y)
-
+plotter(X, Y, "polynomial")
 # %%
