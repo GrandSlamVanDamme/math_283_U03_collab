@@ -103,7 +103,7 @@ from shiny import *
 import shinywidgets as shw
 
 app_ui = ui.page_fluid(
-    ui.layout_columns(
+    ui.layout_rows(
         ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=6, value = 2),
         ui.output_plot("conspiracy", width = 10, height = 20), 
     )
