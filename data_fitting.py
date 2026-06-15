@@ -491,8 +491,8 @@ def plotter(X, Y, func_type):
     xlab = "Hours passed from Reactor Shutdown"
     ylab = "Reactor temperature in $^{\\circ} C$"
 
-    print(f"Below are the optimizations for a {func_type} fit")
-    plt.figure(figsize=(7, 20), layout="tight")
+    fig1 = plt.figure(figsize=(7, 20), layout="tight")
+    fig1.suptitle(f"Below are the optimizations for a {func_type} fit")
 
     plt.rcParams["font.size"] = 12
     # plt.rcParams["axes.labelpad"] = 10
