@@ -385,7 +385,7 @@ def absdev_fit(X, Y, n):
     result = sci.optimize.minimize(cost_func, guess, method="Nelder-Mead")
 
     result = result.x
-    result = result.reverse()
+    result = np.flip(result)
 
     return result
 
@@ -502,7 +502,7 @@ def plotter(X, Y, func_type):
 
     dist = 60
     pointsize = 40
-    point_color = "bl"
+    point_color = "black"
 
     ax1 = plt.subplot(3, 1, 1)
     ax1.scatter(X, Y, s=pointsize, c=point_color)
