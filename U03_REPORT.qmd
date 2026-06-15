@@ -81,9 +81,9 @@ Of form $T(t)=c_1\cdot t + c_2$.
 
 ```{python}
 
-plotter(X, Y, "linear")
+poly_deg = 1
 
-
+plotter(X, Y, "linear", 1)
 ```
 
 ## Polynomial: 
@@ -115,9 +115,9 @@ app_ui = ui.page_fluid(
 def server(input: Inputs, output: Outputs, session: Session):
     @render.plot
     def conspiracy():
-        return plotter(X, Y, "polynomial")
+        return plotter(X, Y, "polynomial", input.n())
 
-poly_deg = ui.input_slider.n()
+poly_deg = input.n()
 
 app = App(app_ui, server)
 

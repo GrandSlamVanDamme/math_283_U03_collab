@@ -25,7 +25,7 @@ import IPython.display as ipd
 # import shinywidgets as shw
 
 func_types = ["linear", "polynomial", "power", "exponential"]
-poly_deg = 2
+# poly_deg = 2
 """
 poly_deg = int(
     input("What degree of polynomial? Please give your answer as a numeral.")
@@ -34,7 +34,7 @@ poly_deg = int(
 degree_list = ["zeroth", "linear", "quadratic", "cubic", "quartic", "quintic"]
 
 
-def main(X, Y):
+def main(X, Y, n):
     """
     The big Huncho Grande Paparoni: fitting, error analysis, plotting.
     """
@@ -43,7 +43,7 @@ def main(X, Y):
     table_list = []
 
     for func in func_types:
-        f = functionator(X, Y, func)
+        f = functionator(X, Y, func, n)
         X, Y, n, func_type = f[0:5]
 
         # plotter(X, Y, n, func_type)
@@ -70,7 +70,7 @@ def main(X, Y):
     ipd.Markdown(table_du_fromage.to_markdown(index=False))
 
 
-def functionator(X, Y, func_type):
+def functionator(X, Y, func_type, n):
     """
     Takes X, Y, and func type.
     Modifies X and Y if needed
@@ -79,8 +79,7 @@ def functionator(X, Y, func_type):
     fit_type = func_type
 
     if fit_type == "polynomial":
-        n = poly_deg
-        fit_type = degree_list[poly_deg]
+        fit_type = degree_list[n]
     elif fit_type == "exponential":
         Y = np.log(Y)
         n = 1
@@ -433,7 +432,7 @@ def fitter_happier_better(X, Y, n):
     return [exes, LS2, cheb, absdev]
 
 
-def coeff_table(X, Y, func_type):
+def coeff_table(X, Y, func_type, n):
     """
     Takes X, Y, polynomial degree n.
     Grabs fits and returns their parameters
@@ -444,7 +443,7 @@ def coeff_table(X, Y, func_type):
     # for func in func_types:
     table_list = []
 
-    f = functionator(X, Y, func_type)
+    f = functionator(X, Y, func_type, n)
     X, Y, n, func_type = f[0:5]
 
     LS2_coeffs = LS2_fit(X, Y, n)
@@ -475,11 +474,11 @@ def coeff_table(X, Y, func_type):
     ipd.Markdown(table_du_fromage.to_markdown(index=False))
 
 
-def plotter(X, Y, func_type):
+def plotter(X, Y, func_type, n):
     """
     Plots different fit functions for a given data fit type (linear, poly, etc)
     """
-    X, Y, n, func_type = functionator(X, Y, func_type)[0:4]
+    X, Y, n, func_type = functionator(X, Y, func_type, n)[0:4]
 
     exes = fitter_happier_better(X, Y, n)[0]
     LS2 = fitter_happier_better(X, Y, n)[1]
@@ -505,27 +504,27 @@ def plotter(X, Y, func_type):
     ax1.scatter(X, Y, s=pointsize, c=point_color)
     ax1.plot(exes, LS2, color="r")
     ax1.set_xlabel(xlab)
-    ax1.set_ylabel(ylab, rotation=45, labelpad=(dist), fontsize=8)
+    ax1.set_ylabel(ylab, rotation=55, labelpad=(dist), fontsize=6)
     ax1.set_title("Least-Squares Fit")
 
     ax2 = plt.subplot(3, 1, 2)
     ax2.scatter(X, Y, s=pointsize, c=point_color)
     ax2.plot(exes, cheb, color="y")
     ax2.set_xlabel(xlab)
-    ax2.set_ylabel(ylab, rotation=45, labelpad=(dist), fontsize=8)
+    ax2.set_ylabel(ylab, rotation=55, labelpad=(dist), fontsize=6)
     ax2.set_title("Chebyshev Fit")
 
     ax3 = plt.subplot(3, 1, 3)
     plt.scatter(X, Y, s=pointsize, c=point_color)
     plt.plot(exes, absdev, color="b")
     ax3.set_xlabel(xlab)
-    ax3.set_ylabel(ylab, rotation=45, labelpad=(dist), fontsize=8)
+    ax3.set_ylabel(ylab, rotation=55, labelpad=(dist), fontsize=6)
     ax3.set_title("Absolute Deviation Fit")
 
 
-def temp_finder(X, Y):
+def temp_finder(X, Y, n):
     """
-    Takes X, Y, then obtains
+    Takes X, Y, n then obtains
     user input for time since
     reactor shutdown (Will add this feature later).
     Returns projected temp
@@ -538,7 +537,7 @@ def temp_finder(X, Y):
     """
 
     x = 24
-    X, Y, n = functionator(X, Y, "exponential")[0:3]
+    X, Y, n = functionator(X, Y, "exponential", n)[0:3]
 
     # LS2_coeffs = LS2_fit(X, Y, n)
     cheb_coeffs = chebyshevify(X, Y, n)
@@ -557,7 +556,7 @@ X = [1, 2, 4, 8, 12, 18]
 Y = [580, 510, 430, 340, 290, 230]
 
 if __name__ == "__main__":
-    main(X, Y)
+    main(X, Y, n=2)
 # coeff_table(X, Y, "linear")
 # temp_finder(X, Y)
 # plotter(X, Y, "polynomial")
