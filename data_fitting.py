@@ -487,16 +487,16 @@ def plotter(X, Y, func_type, n):
 
     # Labels so I don't have to type them thrice
 
-    xlab = "Hours passed from Reactor Shutdown"
+    xlab = "Hours passed since Reactor Shutdown"
     ylab = "Reactor temperature in $^{\\circ} C$"
 
     fig1 = plt.figure(figsize=(7, 20), layout="tight")
-    fig1.suptitle(f"Below are the optimizations for a {func_type} fit")
+    # fig1.suptitle(f"Below are the optimizations for a {func_type} fit")
 
     plt.rcParams["font.size"] = 12
     # plt.rcParams["axes.labelpad"] = 10
 
-    dist = 60
+    dist = 40
     pointsize = 40
     point_color = "black"
 
@@ -504,21 +504,21 @@ def plotter(X, Y, func_type, n):
     ax1.scatter(X, Y, s=pointsize, c=point_color)
     ax1.plot(exes, LS2, color="r")
     ax1.set_xlabel(xlab)
-    ax1.set_ylabel(ylab, rotation=55, labelpad=(dist), fontsize=6)
+    ax1.set_ylabel(ylab, rotation=55, labelpad=(dist), fontsize=12)
     ax1.set_title("Least-Squares Fit")
 
     ax2 = plt.subplot(3, 1, 2)
     ax2.scatter(X, Y, s=pointsize, c=point_color)
     ax2.plot(exes, cheb, color="y")
     ax2.set_xlabel(xlab)
-    ax2.set_ylabel(ylab, rotation=55, labelpad=(dist), fontsize=6)
+    ax2.set_ylabel(ylab, rotation=55, labelpad=(dist), fontsize=12)
     ax2.set_title("Chebyshev Fit")
 
     ax3 = plt.subplot(3, 1, 3)
     plt.scatter(X, Y, s=pointsize, c=point_color)
     plt.plot(exes, absdev, color="b")
     ax3.set_xlabel(xlab)
-    ax3.set_ylabel(ylab, rotation=55, labelpad=(dist), fontsize=6)
+    ax3.set_ylabel(ylab, rotation=55, labelpad=(dist), fontsize=12)
     ax3.set_title("Absolute Deviation Fit")
 
 
