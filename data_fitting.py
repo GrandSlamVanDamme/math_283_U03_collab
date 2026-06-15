@@ -25,7 +25,7 @@ import IPython.display as ipd
 # import shinywidgets as shw
 
 func_types = ["linear", "polynomial", "power", "exponential"]
-poly_deg = 4
+poly_deg = 2
 """
 poly_deg = int(
     input("What degree of polynomial? Please give your answer as a numeral.")
@@ -380,11 +380,14 @@ def absdev_fit(X, Y, n):
     cost_func = np.sum(np.abs(Y - f))
     """
 
-    guess = (n + 1) * [0.0]
+    guess = (n + 1) * [1.0]
 
     result = sci.optimize.minimize(cost_func, guess, method="Nelder-Mead")
 
-    return result.x
+    result = result.x
+    result = result.reverse()
+
+    return result
 
 
 def LS2_fit(X, Y, n):
@@ -499,26 +502,27 @@ def plotter(X, Y, func_type):
 
     dist = 60
     pointsize = 40
+    point_color = "bl"
 
     ax1 = plt.subplot(3, 1, 1)
-    ax1.scatter(X, Y, s=pointsize)
+    ax1.scatter(X, Y, s=pointsize, c=point_color)
     ax1.plot(exes, LS2, color="r")
     ax1.set_xlabel(xlab)
-    ax1.set_ylabel(ylab, rotation=45, labelpad=(dist))
+    ax1.set_ylabel(ylab, rotation=45, labelpad=(dist), fontsize=8)
     ax1.set_title("Least-Squares Fit")
 
     ax2 = plt.subplot(3, 1, 2)
-    ax2.scatter(X, Y, s=pointsize)
+    ax2.scatter(X, Y, s=pointsize, c=point_color)
     ax2.plot(exes, cheb, color="y")
     ax2.set_xlabel(xlab)
-    ax2.set_ylabel(ylab, rotation=45, labelpad=(dist))
+    ax2.set_ylabel(ylab, rotation=45, labelpad=(dist), fontsize=8)
     ax2.set_title("Chebyshev Fit")
 
     ax3 = plt.subplot(3, 1, 3)
-    plt.scatter(X, Y, s=pointsize)
+    plt.scatter(X, Y, s=pointsize, c=point_color)
     plt.plot(exes, absdev, color="b")
     ax3.set_xlabel(xlab)
-    ax3.set_ylabel(ylab, rotation=45, labelpad=(dist))
+    ax3.set_ylabel(ylab, rotation=45, labelpad=(dist), fontsize=8)
     ax3.set_title("Absolute Deviation Fit")
 
 
@@ -559,5 +563,5 @@ if __name__ == "__main__":
     main(X, Y)
 # coeff_table(X, Y, "linear")
 # temp_finder(X, Y)
-plotter(X, Y, "polynomial")
+# plotter(X, Y, "polynomial")
 # %%

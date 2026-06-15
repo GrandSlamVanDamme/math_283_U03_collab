@@ -111,7 +111,7 @@ app_ui = ui.page_fluid(
 def server(input: Inputs, output: Outputs, session: Session):
     @render.plot
     def conspiracy():
-        return plotter(X, Y, input.n(), degree_list[input.n()])
+        return plotter(X, Y, degree_list[input.n()])
         
 app = App(app_ui, server)
 
