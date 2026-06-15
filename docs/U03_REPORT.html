@@ -292,7 +292,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<div id="c2691e82" class="cell" data-execution_count="1">
+<div id="bb4a4260" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -342,18 +342,15 @@ window.Quarto = {
 <section id="linear" class="level2">
 <h2 class="anchored" data-anchor-id="linear">Linear:</h2>
 <p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
-<div id="f4cc9a3a" class="cell" data-execution_count="2">
+<div id="529cdb49" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>plotter(X, Y, <span class="st">"linear"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Below are the optimizations for a linear fit</code></pre>
-</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="U03_REPORT_files/figure-html/cell-3-output-2.png" width="657" height="1905" class="figure-img"></p>
+<p><img src="U03_REPORT_files/figure-html/cell-3-output-1.png" width="657" height="1884" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -388,7 +385,8 @@ app_ui = ui.page_fluid(
 def server(input: Inputs, output: Outputs, session: Session):
     @render.plot
     def conspiracy():
-        return plotter(X, Y, degree_list[input.n()])
+        poly_deg = input.n()
+        return plotter(X, Y, "polynomial")
         
 app = App(app_ui, server)
 
@@ -889,8 +887,8 @@ def plotter(X, Y, func_type):
     xlab = "Hours passed from Reactor Shutdown"
     ylab = "Reactor temperature in $^{\\circ} C$"
 
-    print(f"Below are the optimizations for a {func_type} fit")
-    plt.figure(figsize=(7, 20), layout="tight")
+    fig1 = plt.figure(figsize=(7, 20), layout="tight")
+    fig1.suptitle(f"Below are the optimizations for a {func_type} fit")
 
     plt.rcParams["font.size"] = 12
     # plt.rcParams["axes.labelpad"] = 10

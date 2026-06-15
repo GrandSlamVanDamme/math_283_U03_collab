@@ -115,7 +115,8 @@ app_ui = ui.page_fluid(
 def server(input: Inputs, output: Outputs, session: Session):
     @render.plot
     def conspiracy():
-        return plotter(X, Y, degree_list[input.n()])
+        poly_deg = input.n()
+        return plotter(X, Y, "polynomial")
         
 app = App(app_ui, server)
 
