@@ -62,7 +62,7 @@ In any mathematical model, there are certain assumptions made and simplification
 1. We assume the absence of other heat sources, ignoring the effect of sunlight.
 1. Reactor isn't operated until cooling is complete
 
-# Variables and Parameters
+# 5. Variables and Parameters
 
 $T_R$ is the reactor temperature.
 
@@ -70,7 +70,7 @@ $T_E$ is the external tremperature
 
 $t$ is the time from shutdown in hours.
 
-That's it! While a high-fidelity model would and could account for the specific heats of individual reactor components, the role of humidity in cooling, and the stochastic nature of thermodynamic processes, this problem is small in scope. We will start, at least, from a basic model of heat transfer. This is most appropriate for the limited data we have on the situation.
+That's it! While a high-fidelity model would and could account for the specific heats of individual reactor components, the role of humidity in cooling, and the stochastic nature of thermodynamic processes, this problem is simple in scope. We will start, at least, from a basic model of heat transfer. This is most appropriate for the limited data we have on the situation.
 
 # Model Development
 We'll test optimized Chebyshev, Least-Squares, and Absolute-Deviation fits of the following models: 
@@ -107,7 +107,7 @@ from shiny import *
 import shinywidgets as shw
 
 app_ui = ui.page_fluid(
-    ui.row(
+    ui.layout_columns(
         ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=6, value = 2),
         ui.output_plot("conspiracy", width = 10, height = 20), 
     )
@@ -115,9 +115,10 @@ app_ui = ui.page_fluid(
 def server(input: Inputs, output: Outputs, session: Session):
     @render.plot
     def conspiracy():
-        poly_deg = input.n()
         return plotter(X, Y, "polynomial")
-        
+
+poly_deg = input.n()
+      
 app = App(app_ui, server)
 
 # ---------------------------------------------------------

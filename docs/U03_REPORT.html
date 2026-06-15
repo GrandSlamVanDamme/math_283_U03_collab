@@ -213,7 +213,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#our-first-and-central-assumption-is-that-of-the-worst-case-scenario-we-assume-the-least-optimal-conditions-in-every-case-for-time-to-cooling.-for-example-when-we-assume-a-constant-external-temperature-we-assume-that-temperature-to-be-the-mean-daily-maximum-for-the-season-in-which-we-operate." id="toc-our-first-and-central-assumption-is-that-of-the-worst-case-scenario-we-assume-the-least-optimal-conditions-in-every-case-for-time-to-cooling.-for-example-when-we-assume-a-constant-external-temperature-we-assume-that-temperature-to-be-the-mean-daily-maximum-for-the-season-in-which-we-operate." class="nav-link" data-scroll-target="#our-first-and-central-assumption-is-that-of-the-worst-case-scenario-we-assume-the-least-optimal-conditions-in-every-case-for-time-to-cooling.-for-example-when-we-assume-a-constant-external-temperature-we-assume-that-temperature-to-be-the-mean-daily-maximum-for-the-season-in-which-we-operate.">Our first and central assumption is that of the <em>worst-case scenario</em>: we assume the least optimal conditions, in every case, for time to cooling. For example, when we assume a constant external temperature, we assume that temperature to be the mean daily maximum for the season in which we operate.</a></li>
   </ul></li>
-  <li><a href="#variables-and-parameters" id="toc-variables-and-parameters" class="nav-link" data-scroll-target="#variables-and-parameters">Variables and Parameters</a></li>
+  <li><a href="#variables-and-parameters" id="toc-variables-and-parameters" class="nav-link" data-scroll-target="#variables-and-parameters">5. Variables and Parameters</a></li>
   <li><a href="#model-development" id="toc-model-development" class="nav-link" data-scroll-target="#model-development">Model Development</a>
   <ul class="collapse">
   <li><a href="#linear" id="toc-linear" class="nav-link" data-scroll-target="#linear">Linear:</a></li>
@@ -292,7 +292,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<div id="bb4a4260" class="cell" data-execution_count="1">
+<div id="9d9bc067" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -330,11 +330,11 @@ window.Quarto = {
 </section>
 </section>
 <section id="variables-and-parameters" class="level1">
-<h1>Variables and Parameters</h1>
+<h1>5. Variables and Parameters</h1>
 <p><span class="math inline">\(T_R\)</span> is the reactor temperature.</p>
 <p><span class="math inline">\(T_E\)</span> is the external tremperature</p>
 <p><span class="math inline">\(t\)</span> is the time from shutdown in hours.</p>
-<p>That’s it! While a high-fidelity model would and could account for the specific heats of individual reactor components, the role of humidity in cooling, and the stochastic nature of thermodynamic processes, this problem is small in scope. We will start, at least, from a basic model of heat transfer. This is most appropriate for the limited data we have on the situation.</p>
+<p>That’s it! While a high-fidelity model would and could account for the specific heats of individual reactor components, the role of humidity in cooling, and the stochastic nature of thermodynamic processes, this problem is simple in scope. We will start, at least, from a basic model of heat transfer. This is most appropriate for the limited data we have on the situation.</p>
 </section>
 <section id="model-development" class="level1">
 <h1>Model Development</h1>
@@ -342,7 +342,7 @@ window.Quarto = {
 <section id="linear" class="level2">
 <h2 class="anchored" data-anchor-id="linear">Linear:</h2>
 <p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
-<div id="529cdb49" class="cell" data-execution_count="2">
+<div id="abc57ad5" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>plotter(X, Y, <span class="st">"linear"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -377,7 +377,7 @@ from shiny import *
 import shinywidgets as shw
 
 app_ui = ui.page_fluid(
-    ui.row(
+    ui.layout_columns(
         ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=6, value = 2),
         ui.output_plot("conspiracy", width = 10, height = 20), 
     )
@@ -385,9 +385,10 @@ app_ui = ui.page_fluid(
 def server(input: Inputs, output: Outputs, session: Session):
     @render.plot
     def conspiracy():
-        poly_deg = input.n()
         return plotter(X, Y, "polynomial")
-        
+
+poly_deg = input.n()
+      
 app = App(app_ui, server)
 
 # ---------------------------------------------------------
