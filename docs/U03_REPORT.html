@@ -293,7 +293,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<div id="e0ef41b8" class="cell" data-execution_count="1">
+<div id="3da81465" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -345,7 +345,7 @@ window.Quarto = {
 <section id="linear" class="level2">
 <h2 class="anchored" data-anchor-id="linear">Linear:</h2>
 <p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
-<div id="da226179" class="cell" data-execution_count="2">
+<div id="8ff2d832" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -387,10 +387,11 @@ app_ui = ui.page_fluid(
         ui.output_plot("conspiracy", width = 10, height = 20), 
     )
 )
-poly_deg = input.n
+
 def server(input: Inputs, output: Outputs, session: Session):
     @render.plot
     def conspiracy():
+        poly_deg = input.n()
         return plotter(X, Y, "polynomial", poly_deg)
 
 

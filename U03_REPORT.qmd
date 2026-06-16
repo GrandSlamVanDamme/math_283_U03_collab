@@ -114,10 +114,11 @@ app_ui = ui.page_fluid(
         ui.output_plot("conspiracy", width = 10, height = 20), 
     )
 )
-poly_deg = input.n
+
 def server(input: Inputs, output: Outputs, session: Session):
     @render.plot
     def conspiracy():
+        poly_deg = input.n()
         return plotter(X, Y, "polynomial", poly_deg)
 
 
