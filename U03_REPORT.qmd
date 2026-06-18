@@ -35,7 +35,7 @@ from shinylive import *
 from data_fitting import *
 
 X = [1, 2, 4, 8, 12, 18]
-# See section 4 for explanation of modification of T data.
+# See section 3 for explanation of modification of T data.
 Y = [1.05*y for y in [580, 510, 430, 340, 290, 230]]
 
 ```
@@ -54,7 +54,7 @@ We need to reliably predict the temperature of the reactor (in K) from the time 
 
 In any mathematical model, there are certain assumptions made and simplifications accepted. For this model, we keep in mind the sensitive nature of the system in question, which leades us to an overarching principle which we'll follow throughout this modelling process.
 
-## Our first and central assumption is that of the *worst-case scenario*: we assume the least optimal conditions, in every case, for time to cooling. For example, when we assume a constant external temperature, we assume that temperature to be the mean daily maximum for the season in which we operate.
+## Our first and central assumption is that of the *worst-case scenario*: we assume the least optimal conditions, in every case, for time to cooling. For example, when we assume a constant external temperature, we assume that temperature to be the mean daily maximum for the season in which we operate. We assume high humidity that will slow the cooling rate for the reactor components, etc.
 
 1. Bulk, uniform cooling rate: no regions of greater $T$ density
 1. Single substance component: single specific heat
@@ -62,9 +62,9 @@ In any mathematical model, there are certain assumptions made and simplification
 1. Constant external humidity, pressure: We assume no weather.
 1. We assume the absence of other heat sources, ignoring the effect of sunlight.
 1. Reactor isn't operated until cooling is complete
-1. We assume a $+5{\%}$ margin of error with temperature measurement. This will be one in a group of safety redundancies. 
+1. We assume a $-5{\%}$ margin of error with temperature measurement (The observed temeperatures have been increased by a factor of $1.05$). This will be one in a group of safety redundancies. 
 
-# 5. Variables and Parameters
+# 4. Variables and Parameters
 
 $T_R$ is the reactor temperature.
 
@@ -74,7 +74,7 @@ $t$ is the time from shutdown in hours.
 
 That's it! While a high-fidelity model would and could account for the specific heats of individual reactor components, the role of humidity in cooling, and the stochastic nature of thermodynamic processes, we can simplify extensively for the purpose of this problem. First, we're supplied with cooling and time data; this means that we must assume similar external conditions throughout the cooling period in order to use this supplied data for interpolation and limited extrapolation. Second, we can justify some simplification from the safety-focused nature of the model we're designing. We do not know the external conditions for the data we're given, so the most prudent approach is to assume that these conditions are favorable to quick cooling and consider them optimized.  We will start, at least, from a basic model of heat transfer. This is most appropriate for the limited data we have on the situation.
 
-# Model Development
+# 5. Model Development
 We'll test optimized Chebyshev, Least-Squares, and Absolute-Deviation fits of the following models: 
 
 ## Linear:
@@ -110,7 +110,7 @@ import shinywidgets as shw
 
 app_ui = ui.page_fluid(
     ui.layout_columns(
-        ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=6, value = 2),
+        ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=20, value = 2),
         ui.output_plot("conspiracy", width = 400, height = 800), 
     )
 )
@@ -145,6 +145,13 @@ $$
 \ln[T(t)]=c_1t+c_2.
 $$
 
+```{python}
+
+poly_deg = 1
+
+plotter(X, Y, "exponential", 1)
+```
+
 ## Power model:
 
 Of form $T(t) = (c_2)^{c_1t}$
@@ -154,6 +161,13 @@ We'll linearize this sort of model in the same way, also giving us
 $$
 \ln[T(t)]=c_1t+c_2.
 $$
+
+```{python}
+
+poly_deg = 1
+
+plotter(X, Y, "power", 1)
+```
 
 # Bibliography
 

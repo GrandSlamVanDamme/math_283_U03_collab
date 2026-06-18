@@ -32,6 +32,10 @@ poly_deg = int(
 )
 """
 degree_list = ["zeroth", "linear", "quadratic", "cubic", "quartic", "quintic"]
+k = 0
+while k < 15:
+    degree_list.append(f"{k + 6}th degree")
+    k += 1
 
 
 def main(X, Y, n):
