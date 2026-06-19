@@ -218,6 +218,7 @@ numpy
 scipy
 pandas
 IPython
+tabulate
 ```
 
 As can be seen in the table above, naïve observation looks to be correct, here. The exponential cooling model  
