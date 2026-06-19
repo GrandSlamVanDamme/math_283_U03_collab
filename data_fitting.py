@@ -192,7 +192,7 @@ def cheb_error(Y, F):
     return cheb
 
 
-def residuals(Y, F):
+def residuals(Y, F, func_type="linear"):
     """
     Takes two lists, Y = [data points] and F(x) = [func_values]
     computes their residuals
