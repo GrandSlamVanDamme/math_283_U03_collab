@@ -33,7 +33,7 @@ poly_deg = int(
 """
 degree_list = ["zeroth", "linear", "quadratic", "cubic", "quartic", "quintic"]
 k = 0
-while k < 15:
+while k < 95:
     degree_list.append(f"{k + 6}th degree")
     k += 1
 
@@ -561,7 +561,7 @@ X = [1, 2, 4, 8, 12, 18]
 Y = [580, 510, 430, 340, 290, 230]
 
 if __name__ == "__main__":
-    main(X, Y, n=2)
+    main()
 # coeff_table(X, Y, "linear")
 # temp_finder(X, Y)
 # plotter(X, Y, "polynomial")

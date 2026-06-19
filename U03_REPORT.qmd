@@ -139,7 +139,7 @@ IPython
 
 Of form $T(t) = (c_2)e^{c_1t}$ ($c_2$ is negative).
 
-We'll linearize this so that it can be optimized with linear programming. Taking the natural log of both sides gives us
+We'll linearize this for two reasons; so that this fit can be optimized with linear programming and for the sake of visual clarity. Taking the natural log of both sides gives us
 
 $$
 \ln[T(t)]=c_1t+c_2.
@@ -174,9 +174,11 @@ plotter(X, Y, "power", 1)
 Results of error analysis are given in the table below.
 
 ```{python}
+
 main(X, Y, 2)
 ```
 
+As can be seen in the table above,  
 # Bibliography
 
 1. "4.2A Newton's Law of Cooling." Ximera, The Ohio      State University, ximera.osu.edu/ode/main/lawOfCooling/lawOfCooling. Accessed 15 June 2026.

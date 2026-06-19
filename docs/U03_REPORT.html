@@ -225,7 +225,6 @@ window.Quarto = {
   <li><a href="#power-model" id="toc-power-model" class="nav-link" data-scroll-target="#power-model">Power model:</a></li>
   </ul></li>
   <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">6. Interpretation</a></li>
-  <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography">Bibliography</a></li>
   </ul>
 </nav>
     </div>
@@ -297,7 +296,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<div id="0ee394a9" class="cell" data-execution_count="1">
+<div id="79024f1b" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -349,7 +348,7 @@ window.Quarto = {
 <section id="linear" class="level2">
 <h2 class="anchored" data-anchor-id="linear">Linear:</h2>
 <p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
-<div id="05fd882c" class="cell" data-execution_count="2">
+<div id="f7702596" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -982,11 +981,11 @@ IPython</code></pre>
 <section id="exponential-decay" class="level2">
 <h2 class="anchored" data-anchor-id="exponential-decay">Exponential decay:</h2>
 <p>Of form <span class="math inline">\(T(t) = (c_2)e^{c_1t}\)</span> (<span class="math inline">\(c_2\)</span> is negative).</p>
-<p>We’ll linearize this so that it can be optimized with linear programming. Taking the natural log of both sides gives us</p>
+<p>We’ll linearize this for two reasons; so that this fit can be optimized with linear programming and for the sake of visual clarity. Taking the natural log of both sides gives us</p>
 <p><span class="math display">\[
 \ln[T(t)]=c_1t+c_2.
 \]</span></p>
-<div id="b8ef5213" class="cell" data-execution_count="3">
+<div id="fc999911" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -1009,7 +1008,7 @@ IPython</code></pre>
 <p><span class="math display">\[
 \ln[T(t)]=c_1t+c_2.
 \]</span></p>
-<div id="03287b68" class="cell" data-execution_count="4">
+<div id="09209635" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -1029,7 +1028,7 @@ IPython</code></pre>
 <section id="interpretation" class="level1">
 <h1>6. Interpretation</h1>
 <p>Results of error analysis are given in the table below.</p>
-<div id="64835f9e" class="cell" data-execution_count="5">
+<div id="e46cbb76" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>main(X, Y, <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1085,9 +1084,7 @@ IPython</code></pre>
 </div>
 </div>
 </div>
-</section>
-<section id="bibliography" class="level1">
-<h1>Bibliography</h1>
+<p>As can be seen in the table above, # Bibliography</p>
 <ol type="1">
 <li>“4.2A Newton’s Law of Cooling.” Ximera, The Ohio State University, ximera.osu.edu/ode/main/lawOfCooling/lawOfCooling. Accessed 15 June 2026.</li>
 </ol>
