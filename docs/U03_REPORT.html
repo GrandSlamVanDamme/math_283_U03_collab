@@ -296,7 +296,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<div id="79024f1b" class="cell" data-execution_count="1">
+<div id="163f6399" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -317,7 +317,7 @@ window.Quarto = {
 </section>
 <section id="objective-definition" class="level1">
 <h1>2. Objective Definition</h1>
-<p>We need to reliably predict the temperature of the reactor (in C) from the time passed since shutoff (in hours). Since this is a live nuclear reactor, criticality is a prime safety concern.</p>
+<p>We need to reliably predict the temperature of the reactor (in degrees Centigrade) from the time passed since shutoff (in hours). Since this is a live nuclear reactor, criticality is a prime safety concern.</p>
 </section>
 <section id="assumptions-and-simplifications" class="level1">
 <h1>3. Assumptions and Simplifications</h1>
@@ -348,17 +348,58 @@ window.Quarto = {
 <section id="linear" class="level2">
 <h2 class="anchored" data-anchor-id="linear">Linear:</h2>
 <p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
-<div id="f7702596" class="cell" data-execution_count="2">
+<div id="203b4855" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>plotter(X, Y, <span class="st">"linear"</span>, <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>plotter(X, Y, <span class="st">"linear"</span>, <span class="dv">1</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>coeff_table(X, Y, <span class="st">"linear"</span>, <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th colspan="2" data-quarto-table-cell-role="th" data-halign="left">Function Parameters</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">c0</th>
+<th data-quarto-table-cell-role="th">c1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th rowspan="3" data-quarto-table-cell-role="th" data-valign="top">Optimization Type</th>
+<th data-quarto-table-cell-role="th">Least Squares</th>
+<td>-20.415313</td>
+<td>569.614849</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Absolute Deviation</th>
+<td>-21.617647</td>
+<td>580.279412</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Chebyshev</th>
+<td>-23.099990</td>
+<td>581.699903</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
 <figure class="figure">
-<p><img src="U03_REPORT_files/figure-html/cell-3-output-1.png" width="657" height="1905" class="figure-img"></p>
+<p><img src="U03_REPORT_files/figure-html/cell-3-output-2.png" width="657" height="1905" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -396,6 +437,11 @@ def server(input: Inputs, output: Outputs, session: Session):
     def conspiracy():
         poly_deg = input.n()
         return plotter(X, Y, "polynomial", poly_deg)
+    @render.text
+    def coefficients():
+        poly_deg = input.n()
+        return coeff_table(X, Y, "polynomial", poly_deg)
+
 
 
 app = App(app_ui, server)
@@ -436,7 +482,7 @@ poly_deg = int(
 """
 degree_list = ["zeroth", "linear", "quadratic", "cubic", "quartic", "quintic"]
 k = 0
-while k &lt; 15:
+while k &lt; 95:
     degree_list.append(f"{k + 6}th degree")
     k += 1
 
@@ -964,7 +1010,7 @@ X = [1, 2, 4, 8, 12, 18]
 Y = [580, 510, 430, 340, 290, 230]
 
 if __name__ == "__main__":
-    main(X, Y, n=2)
+    main()
 # coeff_table(X, Y, "linear")
 # temp_finder(X, Y)
 # plotter(X, Y, "polynomial")
@@ -985,7 +1031,8 @@ IPython</code></pre>
 <p><span class="math display">\[
 \ln[T(t)]=c_1t+c_2.
 \]</span></p>
-<div id="fc999911" class="cell" data-execution_count="3">
+<p>Simple inspection of the plots makes it look as though the exponential model fits the data most closely. We cannot confirm this hunch, however, until we do some analysis on the error of the various plots.</p>
+<div id="34f129e8" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -1004,11 +1051,11 @@ IPython</code></pre>
 <section id="power-model" class="level2">
 <h2 class="anchored" data-anchor-id="power-model">Power model:</h2>
 <p>Of form <span class="math inline">\(T(t) = (c_2)^{c_1t}\)</span></p>
-<p>We’ll linearize this sort of model in the same way, also giving us</p>
+<p>We’ll linearize this sort of model in the same way, also giving us what looks like a strong candidate for a predictive and interpolative fit.</p>
 <p><span class="math display">\[
 \ln[T(t)]=c_1t+c_2.
 \]</span></p>
-<div id="09209635" class="cell" data-execution_count="4">
+<div id="336c8ba2" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -1028,7 +1075,7 @@ IPython</code></pre>
 <section id="interpretation" class="level1">
 <h1>6. Interpretation</h1>
 <p>Results of error analysis are given in the table below.</p>
-<div id="e46cbb76" class="cell" data-execution_count="5">
+<div id="b72b9059" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>main(X, Y, <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1084,7 +1131,8 @@ IPython</code></pre>
 </div>
 </div>
 </div>
-<p>As can be seen in the table above, # Bibliography</p>
+<p>As can be seen in the table above, naive observation looks to be correct, here. The exponential cooling model<br>
+# Bibliography</p>
 <ol type="1">
 <li>“4.2A Newton’s Law of Cooling.” Ximera, The Ohio State University, ximera.osu.edu/ode/main/lawOfCooling/lawOfCooling. Accessed 15 June 2026.</li>
 </ol>

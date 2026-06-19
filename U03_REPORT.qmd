@@ -47,7 +47,7 @@ Your team has been asked to recommend the best model and fitting strategy."
 
 # 2. Objective Definition
 
-We need to reliably predict the temperature of the reactor (in C) from the time passed since shutoff (in hours). Since this is a live nuclear reactor, criticality is a prime safety concern.
+We need to reliably predict the temperature of the reactor (in degrees Centigrade) from the time passed since shutoff (in hours). Since this is a live nuclear reactor, criticality is a prime safety concern.
 
 
 # 3. Assumptions and Simplifications
@@ -86,6 +86,7 @@ Of form $T(t)=c_1\cdot t + c_2$.
 poly_deg = 1
 
 plotter(X, Y, "linear", 1)
+coeff_table(X, Y, "linear", 1)
 ```
 
 ## Polynomial: 
@@ -120,6 +121,11 @@ def server(input: Inputs, output: Outputs, session: Session):
     def conspiracy():
         poly_deg = input.n()
         return plotter(X, Y, "polynomial", poly_deg)
+    @render.text
+    def coefficients():
+        poly_deg = input.n()
+        return coeff_table(X, Y, "polynomial", poly_deg)
+
 
 
 app = App(app_ui, server)
@@ -145,6 +151,7 @@ $$
 \ln[T(t)]=c_1t+c_2.
 $$
 
+Simple inspection of the plots makes it look as though the exponential model fits the data most closely. We cannot confirm this hunch, however, until we do some analysis on the error of the various plots.
 ```{python}
 
 poly_deg = 1
@@ -156,7 +163,7 @@ plotter(X, Y, "exponential", 1)
 
 Of form $T(t) = (c_2)^{c_1t}$
 
-We'll linearize this sort of model in the same way, also giving us
+We'll linearize this sort of model in the same way, also giving us what looks like a strong candidate for a predictive and interpolative fit.
 
 $$
 \ln[T(t)]=c_1t+c_2.
@@ -178,7 +185,7 @@ Results of error analysis are given in the table below.
 main(X, Y, 2)
 ```
 
-As can be seen in the table above,  
+As can be seen in the table above, naive observation looks to be correct, here. The exponential cooling model  
 # Bibliography
 
 1. "4.2A Newton's Law of Cooling." Ximera, The Ohio      State University, ximera.osu.edu/ode/main/lawOfCooling/lawOfCooling. Accessed 15 June 2026.
