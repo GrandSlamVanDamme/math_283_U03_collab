@@ -53,6 +53,7 @@ def main(X, Y, n):
         # plotter(X, Y, n, func_type)
         entry = error_analyzer(X, Y, n)
         table_list.append(entry)
+    func_types[1] = degree_list[n]
 
     table_du_fromage = pd.DataFrame(
         table_list,

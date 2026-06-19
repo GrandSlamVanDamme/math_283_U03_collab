@@ -297,7 +297,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<div id="8206df75" class="cell" data-execution_count="1">
+<div id="0ee394a9" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -349,7 +349,7 @@ window.Quarto = {
 <section id="linear" class="level2">
 <h2 class="anchored" data-anchor-id="linear">Linear:</h2>
 <p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
-<div id="7c14825c" class="cell" data-execution_count="2">
+<div id="05fd882c" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -457,6 +457,7 @@ def main(X, Y, n):
         # plotter(X, Y, n, func_type)
         entry = error_analyzer(X, Y, n)
         table_list.append(entry)
+    func_types[1] = degree_list[n]
 
     table_du_fromage = pd.DataFrame(
         table_list,
@@ -985,7 +986,7 @@ IPython</code></pre>
 <p><span class="math display">\[
 \ln[T(t)]=c_1t+c_2.
 \]</span></p>
-<div id="573ce9bb" class="cell" data-execution_count="3">
+<div id="b8ef5213" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -1008,7 +1009,7 @@ IPython</code></pre>
 <p><span class="math display">\[
 \ln[T(t)]=c_1t+c_2.
 \]</span></p>
-<div id="7d022dc4" class="cell" data-execution_count="4">
+<div id="03287b68" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -1028,7 +1029,7 @@ IPython</code></pre>
 <section id="interpretation" class="level1">
 <h1>6. Interpretation</h1>
 <p>Results of error analysis are given in the table below.</p>
-<div id="234b949c" class="cell" data-execution_count="5">
+<div id="64835f9e" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>main(X, Y, <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1061,7 +1062,7 @@ IPython</code></pre>
 <td>50.338235</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">polynomial</th>
+<th data-quarto-table-cell-role="th">linear</th>
 <td>9334.329466</td>
 <td>203.700029</td>
 <td>50.338235</td>
