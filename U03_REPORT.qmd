@@ -47,7 +47,7 @@ Your team has been asked to recommend the best model and fitting strategy."
 
 # 2. Objective Definition
 
-We need to reliably predict the temperature of the reactor (in K) from the time passed since shutoff (in minutes). Since this is a live nuclear reactor, criticality is a prime safety concern.
+We need to reliably predict the temperature of the reactor (in C) from the time passed since shutoff (in hours). Since this is a live nuclear reactor, criticality is a prime safety concern.
 
 
 # 3. Assumptions and Simplifications
@@ -139,7 +139,7 @@ IPython
 
 Of form $T(t) = (c_2)e^{c_1t}$ ($c_2$ is negative).
 
-We'll linearize this so that it can be optimized with linear programming. taking the natural log of both sides gives us
+We'll linearize this so that it can be optimized with linear programming. Taking the natural log of both sides gives us
 
 $$
 \ln[T(t)]=c_1t+c_2.
@@ -167,6 +167,14 @@ $$
 poly_deg = 1
 
 plotter(X, Y, "power", 1)
+```
+
+# 6. Interpretation
+
+Results of error analysis are given in the table below.
+
+```{python}
+main(X, Y, 2)
 ```
 
 # Bibliography
