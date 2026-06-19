@@ -180,12 +180,47 @@ plotter(X, Y, "power", 1)
 
 Results of error analysis are given in the table below.
 
-```{python}
+```{shinylive-python}
+#| standalone: true
+#| viewerHeight: 500
 
-main(X, Y, 2)
+"""
+code modified from example in docs at https://quarto-ext.github.io/shinylive/
+This gemini conversation used for debugging and editing:                                              
+https://gemini.google.com/share/59ac2467bf7b                                  
+"""
+
+from data_fitting import *
+from shiny import *
+import shinywidgets as shw
+
+app_ui = ui.page_fluid(
+    ui.layout_columns(
+        ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=20, value = 2),
+        ui.output_plot("conspiracy", width = 400, height = 800), 
+    )
+)
+
+def server(input: Inputs, output: Outputs, session: Session):
+    @render.table
+    def conspiracy():
+        poly_deg = input.n()
+        return main(X, Y, poly_deg)
+
+app = App(app_ui, server)
+
+## file: data_fitting.py
+{{< include data_fitting.py >}}
+
+## file: requirements.txt
+matplotlib
+numpy
+scipy
+pandas
+IPython
 ```
 
-As can be seen in the table above, naive observation looks to be correct, here. The exponential cooling model  
+As can be seen in the table above, naïve observation looks to be correct, here. The exponential cooling model  
 # Bibliography
 
 1. "4.2A Newton's Law of Cooling." Ximera, The Ohio      State University, ximera.osu.edu/ode/main/lawOfCooling/lawOfCooling. Accessed 15 June 2026.

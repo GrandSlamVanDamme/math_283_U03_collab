@@ -38,7 +38,7 @@ while k < 95:
     k += 1
 
 
-def main(X, Y, n):
+def main(X, Y, n=2):
     """
     The big Huncho Grande Paparoni: fitting, error analysis, plotting.
     """
@@ -201,6 +201,8 @@ def residuals(Y, F, func_type="linear"):
     """
 
     resid = []
+    if func_type == "exponential" or func_type == "power":
+        Y = [np.e**y for y in Y]
 
     for f, y in zip(F, Y):
         resid.append(y - f)
@@ -561,7 +563,7 @@ X = [1, 2, 4, 8, 12, 18]
 Y = [580, 510, 430, 340, 290, 230]
 
 if __name__ == "__main__":
-    main()
+    main(X, Y)
 # coeff_table(X, Y, "linear")
 # temp_finder(X, Y)
 # plotter(X, Y, "polynomial")
