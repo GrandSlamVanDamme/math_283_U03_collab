@@ -221,7 +221,14 @@ IPython
 tabulate
 ```
 
-As can be seen in the table above, naïve observation looks to be correct, here. The exponential cooling model even after correcting for linearization shows less error
+As can be seen in the table above, naïve observation looks to be correct, here. The exponential cooling model shows a much lower error across the dataset than do any of the polynomial models.
+
+Since the exponential model shows the lowest error, we'll use it for extrapolation. We make a prediction for the bulk temperature of the reactor components after $24$ hours of coooling:
+```{python}
+temp_finder(X, Y, 1)
+```
+
+
 # Bibliography
 
 1. "4.2A Newton's Law of Cooling." Ximera, The Ohio      State University, ximera.osu.edu/ode/main/lawOfCooling/lawOfCooling. Accessed 15 June 2026.
