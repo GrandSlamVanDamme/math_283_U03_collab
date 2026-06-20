@@ -200,6 +200,8 @@ def residuals(Y, F, func_type="linear"):
     resid = []
     if func_type == "exponential" or func_type == "power":
         Y = [np.e**y for y in Y]
+    else:
+        pass
 
     for f, y in zip(F, Y):
         resid.append(y - f)
@@ -480,7 +482,7 @@ def coeff_table(X, Y, func_type, n):
     return table_du_fromage
 
 
-def plotter(X, Y, func_type, n):
+def plotter(X, Y, func_type, n, font_size=12):
     """
     Plots different fit functions for a given data fit type (linear, poly, etc)
     """
@@ -499,7 +501,7 @@ def plotter(X, Y, func_type, n):
     fig1 = plt.figure(figsize=(7, 20), layout="tight")
     # fig1.suptitle(f"Below are the optimizations for a {func_type} fit")
 
-    plt.rcParams["font.size"] = 12
+    plt.rcParams["font.size"] = font_size
     # plt.rcParams["axes.labelpad"] = 10
 
     dist = 40

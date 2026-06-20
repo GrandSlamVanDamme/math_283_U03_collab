@@ -113,12 +113,20 @@ from shiny import *
 import shinywidgets as shw
 
 app_ui = ui.page_sidebar(
-    ui.sidebar(
-        ui.h4("Poly-fitter"),
-        ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=20, value=2),
-        bg="#C0C0C0"
-    ),
     ui.layout_columns(
+        ui.div(
+        ui.sidebar(
+           ui.h4("Poly-fitter"),
+           ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=20, value=2),
+           bg="#C0C0C0"
+        ),
+
+        ui.card(
+            ui.card_header("Fit Parameters"),
+            ui.output_table("coefficients"),
+            style="overflow-x: auto;"  # Keeps wide tables behaving cleanly
+        )
+        ),
         # Visual Card for the Plot
         ui.card(
             ui.card_header("Optimization-type Comparison"),
@@ -127,11 +135,6 @@ app_ui = ui.page_sidebar(
         ),
         
         # Visual Card for the Data Table
-        ui.card(
-            ui.card_header("Fit Parameters by Opt. Type"),
-            ui.output_table("coefficients"),
-            style="overflow-x: auto;"  # Keeps wide tables behaving cleanly
-        ),
         col_widths=[7, 5]  # Allocates 7/12ths of width to plot, 5/12ths to table
     ),
     title = "Degree Comparison for Polynomial Fits"
