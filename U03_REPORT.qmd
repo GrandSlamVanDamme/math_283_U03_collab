@@ -222,12 +222,22 @@ IPython
 tabulate
 ```
 
-As can be seen in the table above, naïve observation looks to be correct, here. The exponential cooling model shows a much lower error across the dataset than do any of the polynomial models.
+As can be seen in the table above, naïve observation looks to be correct, here. The exponential cooling model shows a much lower error across the dataset than do any of the polynomial models. Our model requires a focus on safety, so we'll use a Chebyshev optimization of the exponential fit. See the following section for a more thorough explanation of these choices.
 
-Since the exponential model shows the lowest error, we'll use it for extrapolation. We make a prediction for the bulk temperature of the reactor components after $24$ hours of coooling:
+Since the exponential model shows the lowest error, we'll use it for extrapolation. We make a prediction for the bulk temperature of the reactor components after $24$ hours of cooling.
 ```{python}
 temp_finder(X, Y, 1)
 ```
+
+# 7. Validation
+
+We chose a Chebyshev error-optimized exponential fit to model the cooling rate of this nuclear plant reactor.
+This is because the worst case scenario (the largest single residual) is minimized through Chebyshev optimization. We need to account not just for a comprehensive overview of error, but for the Murphy's Law example where the air is hot and humid, the cooling pool circulator is broken, and all other systems operate at minimal effectiveness. We must work under these assumptions because an overly optimistic prediction could have unacceptable consequences to the plant and its environs. We chose the exponential fit because it minimized the Chebyshev error most effectively and did so with the least over-fitting of any model.
+
+# 8. Revisions and
+
+
+
 
 
 # Bibliography
