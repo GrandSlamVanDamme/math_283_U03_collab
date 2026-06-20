@@ -299,7 +299,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<div id="a467ac29" class="cell" data-execution_count="1">
+<div id="73db297a" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -352,7 +352,7 @@ window.Quarto = {
 <section id="linear" class="level2">
 <h2 class="anchored" data-anchor-id="linear">Linear:</h2>
 <p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
-<div id="6c0dc35a" class="cell" data-execution_count="2">
+<div id="c2f2c229" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -1038,7 +1038,7 @@ IPython</code></pre>
 \ln[T(t)]=c_1t+c_2.
 \]</span></p>
 <p>Simple inspection of the plots makes it look as though the exponential model fits the data most closely. We cannot confirm this hunch, however, until we do some analysis on the error of the various plots.</p>
-<div id="d767f13e" class="cell" data-execution_count="3">
+<div id="24bb6774" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -1102,7 +1102,7 @@ IPython</code></pre>
 <p><span class="math display">\[
 \ln[T(t)]=c_1t+c_2.
 \]</span></p>
-<div id="02ab54b2" class="cell" data-execution_count="4">
+<div id="6bb5b27e" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -1198,7 +1198,7 @@ def server(input: Inputs, output: Outputs, session: Session):
     @render.table
     def error_table():
         poly_deg = input.n()
-        return main(X, Y, n=poly_deg), 
+        return main(X, Y, n=poly_deg)
           
 
 app = App(app_ui, server)
@@ -1783,7 +1783,7 @@ pandas
 tabulate</code></pre>
 <p>As can be seen in the table above, naïve observation looks to be correct, here. The exponential cooling model shows a much lower error across the dataset than do any of the polynomial models. Our model requires a focus on safety, so we’ll use a Chebyshev optimization of the exponential fit. See the following section for a more thorough explanation of these choices.</p>
 <p>Since the exponential model shows the lowest error, we’ll use it for extrapolation. We make a prediction for the bulk temperature of the reactor components after <span class="math inline">\(24\)</span> hours of cooling.</p>
-<div id="ef90a949" class="cell" data-execution_count="5">
+<div id="c66b5883" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>temp_finder(X, Y, <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1797,53 +1797,14 @@ tabulate</code></pre>
 <h1>7. Validation</h1>
 <p>We chose a Chebyshev error-optimized exponential fit to model the cooling rate of this nuclear plant reactor. This is because the worst case scenario (the largest single residual) is minimized through Chebyshev optimization. We need to account not just for a comprehensive overview of error, but for the Murphy’s Law example where the air is hot and humid, the cooling pool circulator is broken, and all other systems operate at minimal effectiveness. We must work under these assumptions because an overly optimistic prediction could have unacceptable consequences to the plant and its environs. We chose the exponential fit because it minimized the Chebyshev error most effectively and did so with the least over-fitting of any model. This model for the cooling rate is backed up empirically. It’s a barely-modified form of Newton’s Law of cooling: <span class="math display">\[
     T(t) = T_R + (T_E - T_R)e^{-kt}
-\]</span> Where <span class="math inline">\(T_R\)</span> is the reactor temperature and <span class="math inline">\(T_E\)</span> is the external temperature, substituted for <span class="math inline">\(T_0\)</span> due to our assumption that the external/surrounding air temperature is constant across the range of observation. Examine again the coefficients for our exponential model:</p>
-<div id="f31a4501" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>Reveal Secrets</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>coeff_table(X, Y, <span class="st">"exponential"</span>, <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th colspan="2" data-quarto-table-cell-role="th" data-halign="left">Function Parameters</th>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">c0</th>
-<th data-quarto-table-cell-role="th">c1</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th rowspan="3" data-quarto-table-cell-role="th" data-valign="top">Optimization Type</th>
-<th data-quarto-table-cell-role="th">Least Squares</th>
-<td>-0.052638</td>
-<td>6.376594</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">Absolute Deviation</th>
-<td>-0.054409</td>
-<td>6.389616</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">Chebyshev</th>
-<td>-0.056442</td>
-<td>6.395988</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
+\]</span> We are only concerned with the medium, that is the reactor itself, so we don’t include the <span class="math inline">\(T(t)\)</span> term, instead letting the reactor temperature take its place.</p>
+<span class="math display">\[\begin{aligned}
+T_R(t) &amp; = (T_E - T_R)e^{-kt} \\
+\ln(T_R(t)) &amp; = \ln[(T_E-T_R)e^{-kt}] \\
+\ln(T_R(t)) &amp; = \ln(T_E - T_R) &amp; - kt \\
+\ln(T_R(t)) &amp; = c_2 &amp; -c_1t \\
+\end{aligned}\]</span>
+<p>Where <span class="math inline">\(T_R\)</span> is the reactor temperature and <span class="math inline">\(T_E\)</span> is the external temperature, substituted for <span class="math inline">\(T_0\)</span> due to our assumption that the external/surrounding air temperature is constant across the range of observation.</p>
 </section>
 <section id="re-evaluation-and-improvement" class="level1">
 <h1>8. Re-evaluation and Improvement</h1>

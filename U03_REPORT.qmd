@@ -218,7 +218,7 @@ def server(input: Inputs, output: Outputs, session: Session):
     @render.table
     def error_table():
         poly_deg = input.n()
-        return main(X, Y, n=poly_deg), 
+        return main(X, Y, n=poly_deg)
           
 
 app = App(app_ui, server)
@@ -249,13 +249,16 @@ This model for the cooling rate is backed up empirically. It's a barely-modified
 $$
     T(t) = T_R + (T_E - T_R)e^{-kt}
 $$
+We are only concerned with the medium, that is the reactor itself, so we don't include the $T(t)$ term, instead letting the reactor temperature take its place.
+
+\begin{aligned}
+T_R(t) & = (T_E - T_R)e^{-kt} \\
+ \ln(T_R(t)) & = \ln[(T_E-T_R)e^{-kt}] \\
+ \ln(T_R(t)) & = \ln(T_E - T_R) & - kt \\
+ \ln(T_R(t)) & = c_2 & -c_1t \\
+\end{aligned}
+
 Where $T_R$ is the reactor temperature and $T_E$ is the external temperature, substituted for $T_0$ due to our assumption that the external/surrounding air temperature is constant across the range of observation.
-Examine again the coefficients for our exponential model:
-
-```{python}
-coeff_table(X, Y, "exponential", 1)
-```
-
 
 
 # 8. Re-evaluation and Improvement
