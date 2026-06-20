@@ -53,7 +53,6 @@ def main(X, Y, n=2):
         # plotter(X, Y, n, func_type)
         entry = error_analyzer(X, Y, n)
         table_list.append(entry)
-    func_types[1] = degree_list[n]
 
     table_du_fromage = pd.DataFrame(
         table_list,
@@ -564,7 +563,7 @@ X = [1, 2, 4, 8, 12, 18]
 Y = [580, 510, 430, 340, 290, 230]
 
 if __name__ == "__main__":
-    main(X, Y)
+    main()
 coeff_table(X, Y, "linear", 1)
 # temp_finder(X, Y)
 # plotter(X, Y, "polynomial")
