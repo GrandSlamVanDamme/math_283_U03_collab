@@ -73,7 +73,7 @@ def main(X, Y, n=2):
     # ipd.display(table_du_fromage)
 
     # ipd.Markdown(table_du_fromage.to_markdown(index=False))
-    print(table_du_fromage)
+    return table_du_fromage
 
 
 def functionator(X, Y, func_type, n):
@@ -477,9 +477,11 @@ def coeff_table(X, Y, func_type, n):
         columns=pd.MultiIndex.from_product([["Function Parameters"], c_list]),
     )
 
-    ipd.display(table_du_fromage, display_id=func_type)
+    # ipd.display(table_du_fromage, display_id=func_type)
 
-    ipd.Markdown(table_du_fromage.to_markdown(index=False))
+    # ipd.Markdown(table_du_fromage.to_markdown(index=False))
+
+    return table_du_fromage
 
 
 def plotter(X, Y, func_type, n):
