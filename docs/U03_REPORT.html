@@ -226,7 +226,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">6. Interpretation</a></li>
   <li><a href="#validation" id="toc-validation" class="nav-link" data-scroll-target="#validation">7. Validation</a></li>
-  <li><a href="#revisions-and" id="toc-revisions-and" class="nav-link" data-scroll-target="#revisions-and">8. Revisions and</a></li>
+  <li><a href="#re-evaluation-and-improvement" id="toc-re-evaluation-and-improvement" class="nav-link" data-scroll-target="#re-evaluation-and-improvement">8. Re-evaluation and Improvement</a></li>
   <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography">Bibliography</a></li>
   </ul>
 </nav>
@@ -299,7 +299,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<div id="a5f25a62" class="cell" data-execution_count="1">
+<div id="879a1b2e" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -351,7 +351,7 @@ window.Quarto = {
 <section id="linear" class="level2">
 <h2 class="anchored" data-anchor-id="linear">Linear:</h2>
 <p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
-<div id="b08e759a" class="cell" data-execution_count="2">
+<div id="596c7e6d" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -411,7 +411,7 @@ window.Quarto = {
 <section id="polynomial" class="level2">
 <h2 class="anchored" data-anchor-id="polynomial">Polynomial:</h2>
 <p>Of form <span class="math inline">\(T(t)=c_1t^n + c_2t^{n-1} +...+c_kt^0\)</span>.</p>
-<p>We’ll limit <span class="math inline">\(n\)</span> and <span class="math inline">\(k\)</span> to four or five, at most. Any higher and at that point we’d be overfitting to approximate a power curve. Please use the slider below to observe the effect of polynomial degree on fit parameters and optimization quality</p>
+<p>We’ll limit <span class="math inline">\(n\)</span> and <span class="math inline">\(k\)</span> to four or five, at most. Any higher and at that point we’d be overfitting to approximate a power curve. Overfitting can introduce enormous spikes in a polynomial fit due to the Gibbs Phenomenon (I think). Please use the slider below to observe the effect of polynomial degree on fit parameters and optimization quality.</p>
 <pre class="shinylive-python" data-engine="python"><code>#| '!! shinylive warning !!': |
 #|   shinylive does not work in self-contained HTML documents.
 #|   Please set `embed-resources: false` in your metadata.
@@ -432,6 +432,7 @@ app_ui = ui.page_fluid(
     ui.layout_columns(
         ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=20, value = 2),
         ui.output_plot("conspiracy", width = 400, height = 800), 
+        ui.output_data_frame("coefficients")
     )
 )
 
@@ -1038,7 +1039,7 @@ IPython</code></pre>
 \ln[T(t)]=c_1t+c_2.
 \]</span></p>
 <p>Simple inspection of the plots makes it look as though the exponential model fits the data most closely. We cannot confirm this hunch, however, until we do some analysis on the error of the various plots.</p>
-<div id="13a92514" class="cell" data-execution_count="3">
+<div id="c3af5e70" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -1061,7 +1062,7 @@ IPython</code></pre>
 <p><span class="math display">\[
 \ln[T(t)]=c_1t+c_2.
 \]</span></p>
-<div id="dd77c1fa" class="cell" data-execution_count="4">
+<div id="ac77a8b6" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -1141,15 +1142,29 @@ import shinywidgets as shw
 app_ui = ui.page_fluid(
     ui.layout_columns(
         ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=20, value = 2),
-        ui.output_data_frame("conspiracy") 
+        ui.output_data_frame("error_table") 
     )
 )
 
+
 def server(input: Inputs, output: Outputs, session: Session):
+    
+    """
     @render.data_frame
-    def conspiracy():
+    def error_table():
         poly_deg = input.n()
         return main(X, Y, poly_deg)
+    """
+    
+    @render.data_frame
+    def error_table():
+        poly_deg = input.n()
+        return render.DataGrid(
+            main(X, Y, poly_deg), 
+            filters=True, 
+            editable=False,
+            height="350px"
+        )
 
 app = App(app_ui, server)
 
@@ -1736,7 +1751,7 @@ IPython
 tabulate</code></pre>
 <p>As can be seen in the table above, naïve observation looks to be correct, here. The exponential cooling model shows a much lower error across the dataset than do any of the polynomial models. Our model requires a focus on safety, so we’ll use a Chebyshev optimization of the exponential fit. See the following section for a more thorough explanation of these choices.</p>
 <p>Since the exponential model shows the lowest error, we’ll use it for extrapolation. We make a prediction for the bulk temperature of the reactor components after <span class="math inline">\(24\)</span> hours of cooling.</p>
-<div id="7b791b72" class="cell" data-execution_count="5">
+<div id="967aadd8" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>temp_finder(X, Y, <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1748,15 +1763,70 @@ tabulate</code></pre>
 </section>
 <section id="validation" class="level1">
 <h1>7. Validation</h1>
-<p>We chose a Chebyshev error-optimized exponential fit to model the cooling rate of this nuclear plant reactor. This is because the worst case scenario (the largest single residual) is minimized through Chebyshev optimization. We need to account not just for a comprehensive overview of error, but for the Murphy’s Law example where the air is hot and humid, the cooling pool circulator is broken, and all other systems operate at minimal effectiveness. We must work under these assumptions because an overly optimistic prediction could have unacceptable consequences to the plant and its environs. We chose the exponential fit because it minimized the Chebyshev error most effectively and did so with the least over-fitting of any model.</p>
+<p>We chose a Chebyshev error-optimized exponential fit to model the cooling rate of this nuclear plant reactor. This is because the worst case scenario (the largest single residual) is minimized through Chebyshev optimization. We need to account not just for a comprehensive overview of error, but for the Murphy’s Law example where the air is hot and humid, the cooling pool circulator is broken, and all other systems operate at minimal effectiveness. We must work under these assumptions because an overly optimistic prediction could have unacceptable consequences to the plant and its environs. We chose the exponential fit because it minimized the Chebyshev error most effectively and did so with the least over-fitting of any model. This model for the cooling rate is backed up empirically. It’s a barely-modified form of Newton’s Law of cooling: <span class="math display">\[
+    T(t) = T_R + (T_E - T_R)e^{-kt}
+\]</span> Where <span class="math inline">\(T_R\)</span> is the reactor temperature and <span class="math inline">\(T_E\)</span> is the external temperature, substituted for <span class="math inline">\(T_0\)</span> due to our assumption that the external/surrounding air temperature is constant across the range of observation. Examine again the coefficients for our exponential model:</p>
+<div id="076a88de" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Reveal Secrets</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>coeff_table(X, Y, <span class="st">"exponential"</span>, <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th colspan="2" data-quarto-table-cell-role="th" data-halign="left">Function Parameters</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">c0</th>
+<th data-quarto-table-cell-role="th">c1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th rowspan="3" data-quarto-table-cell-role="th" data-valign="top">Optimization Type</th>
+<th data-quarto-table-cell-role="th">Least Squares</th>
+<td>-0.052638</td>
+<td>6.376594</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Absolute Deviation</th>
+<td>-0.054409</td>
+<td>6.389616</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Chebyshev</th>
+<td>-0.056442</td>
+<td>6.395988</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 </section>
-<section id="revisions-and" class="level1">
-<h1>8. Revisions and</h1>
+<section id="re-evaluation-and-improvement" class="level1">
+<h1>8. Re-evaluation and Improvement</h1>
+<p>This model has a major weakness in that it approaches the problem deterministically. In reality, we would benefit from introducing randomness into our analysis, since that could provide closer estimates of daily temperature, humidity, and component failure rates while retaining this model’s emphasis on multi-system error. That would enable a more efficient response to uncertainty than the chosen model where all predictions are made according to an edge case.</p>
+<p>Additionally, we assumed bulk cooling, here. Further consideration of this problem as a stochastic process would involve the treatment of heat density within the reactor. This would allow for a more accurate thermodynamical analysis and enable response to uneven coooling rates; we should be equally concerned with a single region of retained heat as with a higher temperature across the bulk. This more accurate treatment would involve solving the PDE version of the heat equation</p>
+<p><span class="math display">\[
+\frac{\partial u}{\partial t} = k \nabla^2 u + \frac{Q(x, t)}{c\rho}
+\]</span></p>
+<p>And using what data we have to narrow down the resultant Fourier series family of solutions into a range of particular solutions. For the scope of the problem as presented, a simpler solution is valid as long as it overcorrects enough to preserve safety requirements.</p>
 </section>
 <section id="bibliography" class="level1">
 <h1>Bibliography</h1>
 <ol type="1">
 <li>“4.2A Newton’s Law of Cooling.” Ximera, The Ohio State University, ximera.osu.edu/ode/main/lawOfCooling/lawOfCooling. Accessed 15 June 2026.</li>
+<li></li>
 </ol>
 
 

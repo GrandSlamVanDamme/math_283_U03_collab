@@ -93,7 +93,7 @@ coeff_table(X, Y, "linear", 1)
 
 Of form $T(t)=c_1t^n + c_2t^{n-1} +...+c_kt^0$. 
 
-We'll limit $n$ and $k$ to four or five, at most. Any higher and at that point we'd be overfitting to approximate a power curve. Please use the slider below to observe the effect of polynomial degree on fit parameters and optimization quality
+We'll limit $n$ and $k$ to four or five, at most. Any higher and at that point we'd be overfitting to approximate a power curve. Overfitting can introduce enormous spikes in a polynomial fit due to the Gibbs Phenomenon (I think). Please use the slider below to observe the effect of polynomial degree on fit parameters and optimization quality.
 
 ```{shinylive-python}
 #| standalone: true
@@ -113,6 +113,7 @@ app_ui = ui.page_fluid(
     ui.layout_columns(
         ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=20, value = 2),
         ui.output_plot("conspiracy", width = 400, height = 800), 
+        ui.output_data_frame("coefficients")
     )
 )
 
@@ -198,15 +199,29 @@ import shinywidgets as shw
 app_ui = ui.page_fluid(
     ui.layout_columns(
         ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=20, value = 2),
-        ui.output_data_frame("conspiracy") 
+        ui.output_data_frame("error_table") 
     )
 )
 
+
 def server(input: Inputs, output: Outputs, session: Session):
+    
+    """
     @render.data_frame
-    def conspiracy():
+    def error_table():
         poly_deg = input.n()
         return main(X, Y, poly_deg)
+    """
+    
+    @render.data_frame
+    def error_table():
+        poly_deg = input.n()
+        return render.DataGrid(
+            main(X, Y, poly_deg), 
+            filters=True, 
+            editable=False,
+            height="350px"
+        )
 
 app = App(app_ui, server)
 
@@ -233,13 +248,30 @@ temp_finder(X, Y, 1)
 
 We chose a Chebyshev error-optimized exponential fit to model the cooling rate of this nuclear plant reactor.
 This is because the worst case scenario (the largest single residual) is minimized through Chebyshev optimization. We need to account not just for a comprehensive overview of error, but for the Murphy's Law example where the air is hot and humid, the cooling pool circulator is broken, and all other systems operate at minimal effectiveness. We must work under these assumptions because an overly optimistic prediction could have unacceptable consequences to the plant and its environs. We chose the exponential fit because it minimized the Chebyshev error most effectively and did so with the least over-fitting of any model.
+This model for the cooling rate is backed up empirically. It's a barely-modified form of Newton's Law of cooling:
+$$
+    T(t) = T_R + (T_E - T_R)e^{-kt}
+$$
+Where $T_R$ is the reactor temperature and $T_E$ is the external temperature, substituted for $T_0$ due to our assumption that the external/surrounding air temperature is constant across the range of observation.
+Examine again the coefficients for our exponential model:
 
-# 8. Revisions and
+```{python}
+coeff_table(X, Y, "exponential", 1)
+```
 
+# 8. Re-evaluation and Improvement
 
+This model has a major weakness in that it approaches the problem deterministically. In reality, we would benefit from introducing randomness into our analysis, since that could provide closer estimates of daily temperature, humidity, and component failure rates while retaining this model's emphasis on multi-system error. That would enable a more efficient response to uncertainty than the chosen model where all predictions are made according to an edge case.
 
+Additionally, we assumed bulk cooling, here. Further consideration of this problem as a stochastic process would involve the treatment of heat density within the reactor. This would allow for a more accurate thermodynamical analysis and enable response to uneven coooling rates; we should be equally concerned with a single region of retained heat as with a higher temperature across the bulk. This more accurate treatment would involve solving the PDE version of the heat equation
 
+$$
+\frac{\partial u}{\partial t} = k \nabla^2 u + \frac{Q(x, t)}{c\rho}
+$$
+
+And using what data we have to narrow down the resultant Fourier series family of solutions into a range of particular solutions. For the scope of the problem as presented, a simpler solution is valid as long as it overcorrects enough to preserve safety requirements.
 
 # Bibliography
 
 1. "4.2A Newton's Law of Cooling." Ximera, The Ohio State University, ximera.osu.edu/ode/main/lawOfCooling/lawOfCooling. Accessed 15 June 2026.
+1. 
