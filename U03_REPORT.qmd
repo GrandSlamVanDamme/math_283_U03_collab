@@ -217,12 +217,8 @@ def server(input: Inputs, output: Outputs, session: Session):
     @render.data_frame
     def error_table():
         poly_deg = input.n()
-        return render.DataGrid(
-            main(X, Y, poly_deg), 
-            filters=True, 
-            editable=False,
-            height="350px"
-        )
+        return main(X, Y, poly_deg), 
+          
 
 app = App(app_ui, server)
 
@@ -234,7 +230,6 @@ matplotlib
 numpy
 scipy
 pandas
-IPython
 tabulate
 ```
 
