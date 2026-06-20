@@ -218,7 +218,7 @@ def server(input: Inputs, output: Outputs, session: Session):
     @render.table
     def error_table():
         poly_deg = input.n()
-        return main(X, Y, poly_deg), 
+        return main(X, Y, n=poly_deg), 
           
 
 app = App(app_ui, server)
