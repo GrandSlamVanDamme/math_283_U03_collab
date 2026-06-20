@@ -68,11 +68,13 @@ In any mathematical model, there are certain assumptions made and simplification
 
 $T_R$ is the reactor temperature.
 
-$T_E$ is the external tremperature
+$T_E$ is the external temperature
 
 $t$ is the time from shutdown in hours.
 
-That's it! While a high-fidelity model would and could account for the specific heats of individual reactor components, the role of humidity in cooling, and the stochastic nature of thermodynamic processes, we can simplify extensively for the purpose of this problem. First, we're supplied with cooling and time data; this means that we must assume similar external conditions throughout the cooling period in order to use this supplied data for interpolation and limited extrapolation. Second, we can justify some simplification from the safety-focused nature of the model we're designing. We do not know the external conditions for the data we're given, so the most prudent approach is to assume that these conditions are favorable to quick cooling and consider them optimized.  We will start, at least, from a basic model of heat transfer. This is most appropriate for the limited data we have on the situation.
+That's it! While a high-fidelity model would and could account for the specific heats of individual reactor components, the role of humidity in cooling, and the stochastic nature of thermodynamic processes, we can simplify extensively for the purpose of this problem. Furthermore, we're not supplied with external temperature data. Therefore, we'll leave out the external temperature as an explicit variable and **we'll model the cooling rate exclusively in terms of the reactor temperature and time passed.** 
+
+First, we're supplied with cooling and time data; this means that we must assume similar external conditions throughout the cooling period in order to use this supplied data for interpolation and limited extrapolation. Second, we can justify some simplification from the safety-focused nature of the model we're designing. We do not know the external conditions for the data we're given, so the most prudent approach is to assume that these conditions are favorable to quick cooling and consider them optimized.  We will start, at least, from a basic model of heat transfer. This is most appropriate for the limited data we have on the situation.
 
 # 5. Model Development
 We'll test optimized Chebyshev, Least-Squares, and Absolute-Deviation fits of the following models: 
@@ -122,7 +124,7 @@ def server(input: Inputs, output: Outputs, session: Session):
     def conspiracy():
         poly_deg = input.n()
         return plotter(X, Y, "polynomial", poly_deg)
-    @render.text
+    @render.data_frame
     def coefficients():
         poly_deg = input.n()
         return coeff_table(X, Y, "polynomial", poly_deg)
@@ -205,7 +207,6 @@ app_ui = ui.page_fluid(
 
 
 def server(input: Inputs, output: Outputs, session: Session):
-    
     """
     @render.data_frame
     def error_table():
@@ -259,6 +260,8 @@ Examine again the coefficients for our exponential model:
 coeff_table(X, Y, "exponential", 1)
 ```
 
+
+
 # 8. Re-evaluation and Improvement
 
 This model has a major weakness in that it approaches the problem deterministically. In reality, we would benefit from introducing randomness into our analysis, since that could provide closer estimates of daily temperature, humidity, and component failure rates while retaining this model's emphasis on multi-system error. That would enable a more efficient response to uncertainty than the chosen model where all predictions are made according to an edge case.
@@ -274,4 +277,4 @@ And using what data we have to narrow down the resultant Fourier series family o
 # Bibliography
 
 1. "4.2A Newton's Law of Cooling." Ximera, The Ohio State University, ximera.osu.edu/ode/main/lawOfCooling/lawOfCooling. Accessed 15 June 2026.
-1. 
+1. Dawkins, Paul. "The Heat Equation." Paul's Online Math Notes: Differential Equations, Lamar University, tutorial.math.lamar.edu/Classes/DE/TheHeatEquation.aspx. Accessed 19 June 2026.
