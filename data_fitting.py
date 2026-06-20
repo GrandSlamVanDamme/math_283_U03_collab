@@ -61,11 +61,7 @@ def main(X, Y, n=2):
         columns=pd.MultiIndex.from_product(
             [
                 ["Optimization Type"],
-                [
-                    "Least Squares",
-                    "Absolute Deviation",
-                    "Chebyshev",
-                ],
+                ["Least Squares", "Absolute Deviation", "Chebyshev"],
             ]
         ),
     )
@@ -567,7 +563,7 @@ Y = [580, 510, 430, 340, 290, 230]
 
 if __name__ == "__main__":
     main(X, Y)
-# coeff_table(X, Y, "linear")
+coeff_table(X, Y, "linear", 1)
 # temp_finder(X, Y)
 # plotter(X, Y, "polynomial")
 # %%

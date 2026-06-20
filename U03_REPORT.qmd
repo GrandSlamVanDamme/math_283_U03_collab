@@ -115,7 +115,7 @@ app_ui = ui.page_fluid(
     ui.layout_columns(
         ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=20, value = 2),
         ui.output_plot("conspiracy", width = 400, height = 800), 
-        ui.output_data_frame("coefficients")
+        ui.output_table("coefficients")
     )
 )
 
@@ -124,7 +124,7 @@ def server(input: Inputs, output: Outputs, session: Session):
     def conspiracy():
         poly_deg = input.n()
         return plotter(X, Y, "polynomial", poly_deg)
-    @render.data_frame
+    @render.table
     def coefficients():
         poly_deg = input.n()
         return coeff_table(X, Y, "polynomial", poly_deg)
@@ -160,6 +160,7 @@ Simple inspection of the plots makes it look as though the exponential model fit
 poly_deg = 1
 
 plotter(X, Y, "exponential", 1)
+coeff_table(X, Y, "exponential", 1)
 ```
 
 ## Power model:
@@ -201,7 +202,7 @@ import shinywidgets as shw
 app_ui = ui.page_fluid(
     ui.layout_columns(
         ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=20, value = 2),
-        ui.output_data_frame("error_table") 
+        ui.output_table("error_table") 
     )
 )
 
@@ -214,7 +215,7 @@ def server(input: Inputs, output: Outputs, session: Session):
         return main(X, Y, poly_deg)
     """
     
-    @render.data_frame
+    @render.table
     def error_table():
         poly_deg = input.n()
         return main(X, Y, poly_deg), 
