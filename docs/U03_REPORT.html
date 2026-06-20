@@ -296,7 +296,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<div id="1beaea9b" class="cell" data-execution_count="1">
+<div id="29243059" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -348,7 +348,7 @@ window.Quarto = {
 <section id="linear" class="level2">
 <h2 class="anchored" data-anchor-id="linear">Linear:</h2>
 <p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
-<div id="c2c4aa3f" class="cell" data-execution_count="2">
+<div id="9310af2f" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -1034,7 +1034,7 @@ IPython</code></pre>
 \ln[T(t)]=c_1t+c_2.
 \]</span></p>
 <p>Simple inspection of the plots makes it look as though the exponential model fits the data most closely. We cannot confirm this hunch, however, until we do some analysis on the error of the various plots.</p>
-<div id="6c838a6e" class="cell" data-execution_count="3">
+<div id="39babc95" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -1057,7 +1057,7 @@ IPython</code></pre>
 <p><span class="math display">\[
 \ln[T(t)]=c_1t+c_2.
 \]</span></p>
-<div id="d9547506" class="cell" data-execution_count="4">
+<div id="0d3f78eb" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -1096,7 +1096,7 @@ import shinywidgets as shw
 app_ui = ui.page_fluid(
     ui.layout_columns(
         ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=20, value = 2),
-        ui.output_dataframe("conspiracy", width = 400, height = 800), 
+        ui.output_data_frame("conspiracy") 
     )
 )
 
@@ -1688,8 +1688,7 @@ scipy
 pandas
 IPython
 tabulate</code></pre>
-<p>As can be seen in the table above, naïve observation looks to be correct, here. The exponential cooling model<br>
-# Bibliography</p>
+<p>As can be seen in the table above, naïve observation looks to be correct, here. The exponential cooling model even after correcting for linearization shows less error # Bibliography</p>
 <ol type="1">
 <li>“4.2A Newton’s Law of Cooling.” Ximera, The Ohio State University, ximera.osu.edu/ode/main/lawOfCooling/lawOfCooling. Accessed 15 June 2026.</li>
 </ol>
