@@ -28,6 +28,7 @@ Engineers are studying how quickly reactor components cool following shutdown.
 
 import matplotlib.pyplot as plt
 import numpy as np
+from htmltools.svg import title
 import scipy as sci
 import pandas as pd
 import IPython.display as ipd
@@ -111,12 +112,29 @@ from data_fitting import *
 from shiny import *
 import shinywidgets as shw
 
-app_ui = ui.page_fluid(
+app_ui = ui.page_sidebar(
+    ui.sidebar(
+        ui.h4("Poly-fitter"),
+        ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=20, value=2),
+        bg="#C0C0C0"
+    ),
     ui.layout_columns(
-        ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=20, value = 2),
-        ui.output_plot("conspiracy", width = 400, height = 800), 
-        ui.output_table("coefficients")
-    )
+        # Visual Card for the Plot
+        ui.card(
+            ui.card_header("Optimization-type Comparison"),
+            ui.output_plot("conspiracy"),
+            full_screen=True  # Adds a neat zoom button for the user
+        ),
+        
+        # Visual Card for the Data Table
+        ui.card(
+            ui.card_header("Fit Parameters by Opt. Type"),
+            ui.output_table("coefficients"),
+            style="overflow-x: auto;"  # Keeps wide tables behaving cleanly
+        ),
+        col_widths=[7, 5]  # Allocates 7/12ths of width to plot, 5/12ths to table
+    ),
+    title = "Degree Comparison for Polynomial Fits"
 )
 
 def server(input: Inputs, output: Outputs, session: Session):
