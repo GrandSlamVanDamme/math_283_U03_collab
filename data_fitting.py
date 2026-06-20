@@ -70,9 +70,9 @@ def main(X, Y, n=2):
         ),
     )
 
-    ipd.display(table_du_fromage)
+    # ipd.display(table_du_fromage)
 
-    ipd.Markdown(table_du_fromage.to_markdown(index=False))
+    # ipd.Markdown(table_du_fromage.to_markdown(index=False))
 
 
 def functionator(X, Y, func_type, n):

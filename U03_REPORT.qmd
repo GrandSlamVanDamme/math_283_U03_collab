@@ -231,4 +231,4 @@ temp_finder(X, Y, 1)
 
 # Bibliography
 
-1. "4.2A Newton's Law of Cooling." Ximera, The Ohio      State University, ximera.osu.edu/ode/main/lawOfCooling/lawOfCooling. Accessed 15 June 2026.
+1. "4.2A Newton's Law of Cooling." Ximera, The Ohio State University, ximera.osu.edu/ode/main/lawOfCooling/lawOfCooling. Accessed 15 June 2026.
