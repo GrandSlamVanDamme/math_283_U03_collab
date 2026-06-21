@@ -48,15 +48,17 @@ def main(X, Y, n=2):
 
     for func in func_types:
         f = functionator(X, Y, func, n)
-        X, Y, n, func_type = f[0:5]
+        X, Y, k, func_type = f[0:5]
 
         # plotter(X, Y, n, func_type)
-        entry = error_analyzer(X, Y, n)
+        entry = error_analyzer(X, Y, k)
         table_list.append(entry)
 
     table_du_fromage = pd.DataFrame(
         table_list,
-        index=pd.MultiIndex.from_product([["Fit Type"], func_types]),
+        index=pd.MultiIndex.from_product(
+            [["Fit Type"], ["linear", degree_list[n], "power", "exponential"]]
+        ),
         columns=pd.MultiIndex.from_product(
             [
                 ["Optimization Type"],
@@ -78,18 +80,19 @@ def functionator(X, Y, func_type, n):
     returns X, Y, n, func_type as list
     """
     fit_type = func_type
+    k = n
 
     if fit_type == "polynomial":
         fit_type = degree_list[n]
     elif fit_type == "exponential":
         Y = np.log(Y)
-        n = 1
+        k = 1
     elif fit_type == "power":
         Y = np.log(Y)
         X = np.log(X)
-        n = 1
+        k = 1
     elif fit_type == "linear":
-        n = 1
+        k = 1
     else:
         print("Request cannot be completed, defaulting to rat")
         import matplotlib.image as mpimg
@@ -106,7 +109,7 @@ def functionator(X, Y, func_type, n):
         fit_type = None
         return
 
-    return [X, Y, n, fit_type]
+    return [X, Y, k, fit_type]
 
 
 def error_analyzer(X, Y, n, k=-1):
@@ -563,7 +566,7 @@ X = [1, 2, 4, 8, 12, 18]
 Y = [580, 510, 430, 340, 290, 230]
 
 if __name__ == "__main__":
-    main()
+    main(X, Y)
 coeff_table(X, Y, "linear", 1)
 # temp_finder(X, Y)
 # plotter(X, Y, "polynomial")

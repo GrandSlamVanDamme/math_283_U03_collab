@@ -299,7 +299,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<div id="58faf5e3" class="cell" data-execution_count="1">
+<div id="02f3b0c2" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -353,7 +353,7 @@ window.Quarto = {
 <section id="linear" class="level2">
 <h2 class="anchored" data-anchor-id="linear">Linear:</h2>
 <p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
-<div id="57775c85" class="cell" data-execution_count="2">
+<div id="76e1f7d7" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -523,15 +523,17 @@ def main(X, Y, n=2):
 
     for func in func_types:
         f = functionator(X, Y, func, n)
-        X, Y, n, func_type = f[0:5]
+        X, Y, k, func_type = f[0:5]
 
         # plotter(X, Y, n, func_type)
-        entry = error_analyzer(X, Y, n)
+        entry = error_analyzer(X, Y, k)
         table_list.append(entry)
 
     table_du_fromage = pd.DataFrame(
         table_list,
-        index=pd.MultiIndex.from_product([["Fit Type"], func_types]),
+        index=pd.MultiIndex.from_product(
+            [["Fit Type"], ["linear", degree_list[n], "power", "exponential"]]
+        ),
         columns=pd.MultiIndex.from_product(
             [
                 ["Optimization Type"],
@@ -553,18 +555,19 @@ def functionator(X, Y, func_type, n):
     returns X, Y, n, func_type as list
     """
     fit_type = func_type
+    k = n
 
     if fit_type == "polynomial":
         fit_type = degree_list[n]
     elif fit_type == "exponential":
         Y = np.log(Y)
-        n = 1
+        k = 1
     elif fit_type == "power":
         Y = np.log(Y)
         X = np.log(X)
-        n = 1
+        k = 1
     elif fit_type == "linear":
-        n = 1
+        k = 1
     else:
         print("Request cannot be completed, defaulting to rat")
         import matplotlib.image as mpimg
@@ -581,7 +584,7 @@ def functionator(X, Y, func_type, n):
         fit_type = None
         return
 
-    return [X, Y, n, fit_type]
+    return [X, Y, k, fit_type]
 
 
 def error_analyzer(X, Y, n, k=-1):
@@ -1038,7 +1041,7 @@ X = [1, 2, 4, 8, 12, 18]
 Y = [580, 510, 430, 340, 290, 230]
 
 if __name__ == "__main__":
-    main()
+    main(X, Y)
 coeff_table(X, Y, "linear", 1)
 # temp_finder(X, Y)
 # plotter(X, Y, "polynomial")
@@ -1060,7 +1063,7 @@ IPython</code></pre>
 \ln[T(t)]=c_1t+c_2.
 \]</span></p>
 <p>Simple inspection of the plots makes it look as though the exponential model fits the data most closely. We cannot confirm this hunch, however, until we do some analysis on the error of the various plots.</p>
-<div id="2eba2934" class="cell" data-execution_count="3">
+<div id="d0110897" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -1124,7 +1127,7 @@ IPython</code></pre>
 <p><span class="math display">\[
 \ln[T(t)]=c_1t+c_2.
 \]</span></p>
-<div id="6c4956bf" class="cell" data-execution_count="4">
+<div id="1cae3645" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -1277,15 +1280,17 @@ def main(X, Y, n=2):
 
     for func in func_types:
         f = functionator(X, Y, func, n)
-        X, Y, n, func_type = f[0:5]
+        X, Y, k, func_type = f[0:5]
 
         # plotter(X, Y, n, func_type)
-        entry = error_analyzer(X, Y, n)
+        entry = error_analyzer(X, Y, k)
         table_list.append(entry)
 
     table_du_fromage = pd.DataFrame(
         table_list,
-        index=pd.MultiIndex.from_product([["Fit Type"], func_types]),
+        index=pd.MultiIndex.from_product(
+            [["Fit Type"], ["linear", degree_list[n], "power", "exponential"]]
+        ),
         columns=pd.MultiIndex.from_product(
             [
                 ["Optimization Type"],
@@ -1307,18 +1312,19 @@ def functionator(X, Y, func_type, n):
     returns X, Y, n, func_type as list
     """
     fit_type = func_type
+    k = n
 
     if fit_type == "polynomial":
         fit_type = degree_list[n]
     elif fit_type == "exponential":
         Y = np.log(Y)
-        n = 1
+        k = 1
     elif fit_type == "power":
         Y = np.log(Y)
         X = np.log(X)
-        n = 1
+        k = 1
     elif fit_type == "linear":
-        n = 1
+        k = 1
     else:
         print("Request cannot be completed, defaulting to rat")
         import matplotlib.image as mpimg
@@ -1335,7 +1341,7 @@ def functionator(X, Y, func_type, n):
         fit_type = None
         return
 
-    return [X, Y, n, fit_type]
+    return [X, Y, k, fit_type]
 
 
 def error_analyzer(X, Y, n, k=-1):
@@ -1792,7 +1798,7 @@ X = [1, 2, 4, 8, 12, 18]
 Y = [580, 510, 430, 340, 290, 230]
 
 if __name__ == "__main__":
-    main()
+    main(X, Y)
 coeff_table(X, Y, "linear", 1)
 # temp_finder(X, Y)
 # plotter(X, Y, "polynomial")
@@ -1807,7 +1813,7 @@ pandas
 tabulate</code></pre>
 <p>As can be seen in the table above, naïve observation looks to be correct, here. The exponential cooling model shows a much lower error across the dataset than do any of the polynomial models. Our model requires a focus on safety, so we’ll use a Chebyshev optimization of the exponential fit. See the following section for a more thorough explanation of these choices.</p>
 <p>Since the exponential model shows the lowest error, we’ll use it for extrapolation. We make a prediction for the bulk temperature of the reactor components after <span class="math inline">\(24\)</span> hours of cooling.</p>
-<div id="d68116a5" class="cell" data-execution_count="5">
+<div id="96c60ad8" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>temp_finder(X, Y, <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1826,7 +1832,7 @@ tabulate</code></pre>
 T_R(t) &amp; = (T_E - T_R)e^{-kt} \\
 \ln(T_R(t)) &amp; = \ln[(T_E-T_R)e^{-kt}] \\
 \ln(T_R(t)) &amp; = \ln(T_E - T_R) &amp; - kt \\
-\ln(T_R(t)) &amp; = c_2 &amp; -c_1t \\
+\ln(T_R(t)) &amp; = c_1 &amp; -c_0t \\
 \end{aligned}\]</span>
 <p>Where <span class="math inline">\(T_R\)</span> is the reactor temperature and <span class="math inline">\(T_E\)</span> is the external temperature, substituted for <span class="math inline">\(T_0\)</span> due to our assumption that the external/surrounding air temperature is constant across the range of observation.</p>
 </section>
@@ -1845,62 +1851,6 @@ T_R(t) &amp; = (T_E - T_R)e^{-kt} \\
 <li>“4.2A Newton’s Law of Cooling.” Ximera, The Ohio State University, ximera.osu.edu/ode/main/lawOfCooling/lawOfCooling. Accessed 15 June 2026.</li>
 <li>Dawkins, Paul. “The Heat Equation.” Paul’s Online Math Notes: Differential Equations, Lamar University, tutorial.math.lamar.edu/Classes/DE/TheHeatEquation.aspx. Accessed 19 June 2026.</li>
 </ol>
-<div id="651c8107" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>Reveal Secrets</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>main(X, Y, n<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th colspan="3" data-quarto-table-cell-role="th" data-halign="left">Optimization Type</th>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Least Squares</th>
-<th data-quarto-table-cell-role="th">Absolute Deviation</th>
-<th data-quarto-table-cell-role="th">Chebyshev</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th rowspan="4" data-quarto-table-cell-role="th" data-valign="top">Fit Type</th>
-<th data-quarto-table-cell-role="th">linear</th>
-<td>9334.329466</td>
-<td>203.700029</td>
-<td>50.338235</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">polynomial</th>
-<td>9334.329466</td>
-<td>203.700029</td>
-<td>50.338235</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">power</th>
-<td>0.019926</td>
-<td>0.272916</td>
-<td>0.072193</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">exponential</th>
-<td>0.000706</td>
-<td>0.051287</td>
-<td>0.013462</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
 
 
 </section>

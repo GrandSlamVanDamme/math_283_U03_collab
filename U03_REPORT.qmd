@@ -277,7 +277,7 @@ We are only concerned with the medium, that is the reactor itself, so we don't i
 T_R(t) & = (T_E - T_R)e^{-kt} \\
  \ln(T_R(t)) & = \ln[(T_E-T_R)e^{-kt}] \\
  \ln(T_R(t)) & = \ln(T_E - T_R) & - kt \\
- \ln(T_R(t)) & = c_2 & -c_1t \\
+ \ln(T_R(t)) & = c_1 & -c_0t \\
 \end{aligned}
 
 Where $T_R$ is the reactor temperature and $T_E$ is the external temperature, substituted for $T_0$ due to our assumption that the external/surrounding air temperature is constant across the range of observation.
@@ -300,7 +300,3 @@ And using what data we have to narrow down the resultant Fourier series family o
 1. "4.2A Newton's Law of Cooling." Ximera, The Ohio State University, ximera.osu.edu/ode/main/lawOfCooling/lawOfCooling. Accessed 15 June 2026.
 1. Dawkins, Paul. "The Heat Equation." Paul's Online Math Notes: Differential Equations, Lamar University, tutorial.math.lamar.edu/Classes/DE/TheHeatEquation.aspx. Accessed 19 June 2026.
 
-```{python}
-main(X, Y)
-
-```
