@@ -299,7 +299,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<div id="02f3b0c2" class="cell" data-execution_count="1">
+<div id="f7632e68" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -353,7 +353,7 @@ window.Quarto = {
 <section id="linear" class="level2">
 <h2 class="anchored" data-anchor-id="linear">Linear:</h2>
 <p>Of form <span class="math inline">\(T(t)=c_1\cdot t + c_2\)</span>.</p>
-<div id="76e1f7d7" class="cell" data-execution_count="2">
+<div id="e89299d9" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -430,19 +430,19 @@ from data_fitting import *
 from shiny import *
 import shinywidgets as shw
 
-app_ui = ui.page_sidebar(
+app_ui = ui.page_fluid(
     ui.layout_columns(
         ui.div(
-        ui.card(
-           ui.h4("Poly-fitter"),
-           ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=20, value=2),
-           bg="#C0C0C0"
+            ui.card(
+                ui.h4("Poly-fitter"),
+                ui.input_slider("n", "Degree of Polynomial Fit:", min=1, max=20, value=2),
+                bg="#C0C0C0"
         ),
 
-        ui.card(
-            ui.card_header("Fit Parameters"),
-            ui.output_table("coefficients"),
-            style="overflow-x: auto;"  # Keeps wide tables behaving cleanly
+            ui.card(
+                ui.card_header("Fit Parameters"),
+                ui.output_table("coefficients"),
+                style="overflow-x: auto;"  # Keeps wide tables behaving cleanly
         )
         ),
         # Visual Card for the Plot
@@ -453,9 +453,8 @@ app_ui = ui.page_sidebar(
         ),
         
         # Visual Card for the Data Table
-        col_widths=[7, 5]  # Allocates 7/12ths of width to plot, 5/12ths to table
-    ),
-    title = "Degree Comparison for Polynomial Fits"
+        col_widths=[7, 5],  # Allocates 7/12ths of width to plot, 5/12ths to table
+title = "Degree Comparison for Polynomial Fits")
 )
 
 def server(input: Inputs, output: Outputs, session: Session):
@@ -1063,7 +1062,7 @@ IPython</code></pre>
 \ln[T(t)]=c_1t+c_2.
 \]</span></p>
 <p>Simple inspection of the plots makes it look as though the exponential model fits the data most closely. We cannot confirm this hunch, however, until we do some analysis on the error of the various plots.</p>
-<div id="d0110897" class="cell" data-execution_count="3">
+<div id="80eaa803" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -1127,7 +1126,7 @@ IPython</code></pre>
 <p><span class="math display">\[
 \ln[T(t)]=c_1t+c_2.
 \]</span></p>
-<div id="1cae3645" class="cell" data-execution_count="4">
+<div id="7b57b9f4" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>poly_deg <span class="op">=</span> <span class="dv">1</span></span>
@@ -1192,7 +1191,7 @@ IPython</code></pre>
 #|   shinylive does not work in self-contained HTML documents.
 #|   Please set `embed-resources: false` in your metadata.
 #| standalone: true
-#| viewerHeight: 500
+#| viewerHeight: 800
 
 """
 code modified from example in docs at https://quarto-ext.github.io/shinylive/
@@ -1813,7 +1812,7 @@ pandas
 tabulate</code></pre>
 <p>As can be seen in the table above, naïve observation looks to be correct, here. The exponential cooling model shows a much lower error across the dataset than do any of the polynomial models. Our model requires a focus on safety, so we’ll use a Chebyshev optimization of the exponential fit. See the following section for a more thorough explanation of these choices.</p>
 <p>Since the exponential model shows the lowest error, we’ll use it for extrapolation. We make a prediction for the bulk temperature of the reactor components after <span class="math inline">\(24\)</span> hours of cooling.</p>
-<div id="96c60ad8" class="cell" data-execution_count="5">
+<div id="aba7c2a0" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Reveal Secrets</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>temp_finder(X, Y, <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
